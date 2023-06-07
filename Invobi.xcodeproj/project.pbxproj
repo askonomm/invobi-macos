@@ -1,0 +1,594 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6DC74E952A30C5DF00386680 /* InvobiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC74E942A30C5DF00386680 /* InvobiApp.swift */; };
+		6DC74E972A30C5DF00386680 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC74E962A30C5DF00386680 /* ContentView.swift */; };
+		6DC74E992A30C5E000386680 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DC74E982A30C5E000386680 /* Assets.xcassets */; };
+		6DC74E9C2A30C5E000386680 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DC74E9B2A30C5E000386680 /* Preview Assets.xcassets */; };
+		6DC74E9E2A30C5E000386680 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC74E9D2A30C5E000386680 /* Persistence.swift */; };
+		6DC74EA12A30C5E000386680 /* Invobi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6DC74E9F2A30C5E000386680 /* Invobi.xcdatamodeld */; };
+		6DC74EAC2A30C5E000386680 /* InvobiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC74EAB2A30C5E000386680 /* InvobiTests.swift */; };
+		6DC74EB62A30C5E000386680 /* InvobiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC74EB52A30C5E000386680 /* InvobiUITests.swift */; };
+		6DC74EB82A30C5E000386680 /* InvobiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC74EB72A30C5E000386680 /* InvobiUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6DC74EA82A30C5E000386680 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DC74E892A30C5DF00386680 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DC74E902A30C5DF00386680;
+			remoteInfo = Invobi;
+		};
+		6DC74EB22A30C5E000386680 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DC74E892A30C5DF00386680 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DC74E902A30C5DF00386680;
+			remoteInfo = Invobi;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6DC74E912A30C5DF00386680 /* Invobi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Invobi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DC74E942A30C5DF00386680 /* InvobiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvobiApp.swift; sourceTree = "<group>"; };
+		6DC74E962A30C5DF00386680 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6DC74E982A30C5E000386680 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6DC74E9B2A30C5E000386680 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6DC74E9D2A30C5E000386680 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		6DC74EA02A30C5E000386680 /* Invobi.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Invobi.xcdatamodel; sourceTree = "<group>"; };
+		6DC74EA22A30C5E000386680 /* Invobi.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Invobi.entitlements; sourceTree = "<group>"; };
+		6DC74EA72A30C5E000386680 /* InvobiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InvobiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DC74EAB2A30C5E000386680 /* InvobiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvobiTests.swift; sourceTree = "<group>"; };
+		6DC74EB12A30C5E000386680 /* InvobiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InvobiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DC74EB52A30C5E000386680 /* InvobiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvobiUITests.swift; sourceTree = "<group>"; };
+		6DC74EB72A30C5E000386680 /* InvobiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvobiUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6DC74E8E2A30C5DF00386680 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DC74EA42A30C5E000386680 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DC74EAE2A30C5E000386680 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6DC74E882A30C5DF00386680 = {
+			isa = PBXGroup;
+			children = (
+				6DC74E932A30C5DF00386680 /* Invobi */,
+				6DC74EAA2A30C5E000386680 /* InvobiTests */,
+				6DC74EB42A30C5E000386680 /* InvobiUITests */,
+				6DC74E922A30C5DF00386680 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6DC74E922A30C5DF00386680 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6DC74E912A30C5DF00386680 /* Invobi.app */,
+				6DC74EA72A30C5E000386680 /* InvobiTests.xctest */,
+				6DC74EB12A30C5E000386680 /* InvobiUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6DC74E932A30C5DF00386680 /* Invobi */ = {
+			isa = PBXGroup;
+			children = (
+				6DC74E942A30C5DF00386680 /* InvobiApp.swift */,
+				6DC74E962A30C5DF00386680 /* ContentView.swift */,
+				6DC74E982A30C5E000386680 /* Assets.xcassets */,
+				6DC74E9D2A30C5E000386680 /* Persistence.swift */,
+				6DC74EA22A30C5E000386680 /* Invobi.entitlements */,
+				6DC74E9F2A30C5E000386680 /* Invobi.xcdatamodeld */,
+				6DC74E9A2A30C5E000386680 /* Preview Content */,
+			);
+			path = Invobi;
+			sourceTree = "<group>";
+		};
+		6DC74E9A2A30C5E000386680 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				6DC74E9B2A30C5E000386680 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6DC74EAA2A30C5E000386680 /* InvobiTests */ = {
+			isa = PBXGroup;
+			children = (
+				6DC74EAB2A30C5E000386680 /* InvobiTests.swift */,
+			);
+			path = InvobiTests;
+			sourceTree = "<group>";
+		};
+		6DC74EB42A30C5E000386680 /* InvobiUITests */ = {
+			isa = PBXGroup;
+			children = (
+				6DC74EB52A30C5E000386680 /* InvobiUITests.swift */,
+				6DC74EB72A30C5E000386680 /* InvobiUITestsLaunchTests.swift */,
+			);
+			path = InvobiUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6DC74E902A30C5DF00386680 /* Invobi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6DC74EBB2A30C5E000386680 /* Build configuration list for PBXNativeTarget "Invobi" */;
+			buildPhases = (
+				6DC74E8D2A30C5DF00386680 /* Sources */,
+				6DC74E8E2A30C5DF00386680 /* Frameworks */,
+				6DC74E8F2A30C5DF00386680 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Invobi;
+			productName = Invobi;
+			productReference = 6DC74E912A30C5DF00386680 /* Invobi.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6DC74EA62A30C5E000386680 /* InvobiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6DC74EBE2A30C5E000386680 /* Build configuration list for PBXNativeTarget "InvobiTests" */;
+			buildPhases = (
+				6DC74EA32A30C5E000386680 /* Sources */,
+				6DC74EA42A30C5E000386680 /* Frameworks */,
+				6DC74EA52A30C5E000386680 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6DC74EA92A30C5E000386680 /* PBXTargetDependency */,
+			);
+			name = InvobiTests;
+			productName = InvobiTests;
+			productReference = 6DC74EA72A30C5E000386680 /* InvobiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6DC74EB02A30C5E000386680 /* InvobiUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6DC74EC12A30C5E000386680 /* Build configuration list for PBXNativeTarget "InvobiUITests" */;
+			buildPhases = (
+				6DC74EAD2A30C5E000386680 /* Sources */,
+				6DC74EAE2A30C5E000386680 /* Frameworks */,
+				6DC74EAF2A30C5E000386680 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6DC74EB32A30C5E000386680 /* PBXTargetDependency */,
+			);
+			name = InvobiUITests;
+			productName = InvobiUITests;
+			productReference = 6DC74EB12A30C5E000386680 /* InvobiUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6DC74E892A30C5DF00386680 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					6DC74E902A30C5DF00386680 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					6DC74EA62A30C5E000386680 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 6DC74E902A30C5DF00386680;
+					};
+					6DC74EB02A30C5E000386680 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 6DC74E902A30C5DF00386680;
+					};
+				};
+			};
+			buildConfigurationList = 6DC74E8C2A30C5DF00386680 /* Build configuration list for PBXProject "Invobi" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6DC74E882A30C5DF00386680;
+			productRefGroup = 6DC74E922A30C5DF00386680 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6DC74E902A30C5DF00386680 /* Invobi */,
+				6DC74EA62A30C5E000386680 /* InvobiTests */,
+				6DC74EB02A30C5E000386680 /* InvobiUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6DC74E8F2A30C5DF00386680 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DC74E9C2A30C5E000386680 /* Preview Assets.xcassets in Resources */,
+				6DC74E992A30C5E000386680 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DC74EA52A30C5E000386680 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DC74EAF2A30C5E000386680 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6DC74E8D2A30C5DF00386680 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DC74E9E2A30C5E000386680 /* Persistence.swift in Sources */,
+				6DC74E972A30C5DF00386680 /* ContentView.swift in Sources */,
+				6DC74EA12A30C5E000386680 /* Invobi.xcdatamodeld in Sources */,
+				6DC74E952A30C5DF00386680 /* InvobiApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DC74EA32A30C5E000386680 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DC74EAC2A30C5E000386680 /* InvobiTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DC74EAD2A30C5E000386680 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DC74EB62A30C5E000386680 /* InvobiUITests.swift in Sources */,
+				6DC74EB82A30C5E000386680 /* InvobiUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6DC74EA92A30C5E000386680 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6DC74E902A30C5DF00386680 /* Invobi */;
+			targetProxy = 6DC74EA82A30C5E000386680 /* PBXContainerItemProxy */;
+		};
+		6DC74EB32A30C5E000386680 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6DC74E902A30C5DF00386680 /* Invobi */;
+			targetProxy = 6DC74EB22A30C5E000386680 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		6DC74EB92A30C5E000386680 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6DC74EBA2A30C5E000386680 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		6DC74EBC2A30C5E000386680 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Invobi/Invobi.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Invobi/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ee.repl.Invobi;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		6DC74EBD2A30C5E000386680 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Invobi/Invobi.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Invobi/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ee.repl.Invobi;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		6DC74EBF2A30C5E000386680 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ee.repl.InvobiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Invobi.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Invobi";
+			};
+			name = Debug;
+		};
+		6DC74EC02A30C5E000386680 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ee.repl.InvobiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Invobi.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Invobi";
+			};
+			name = Release;
+		};
+		6DC74EC22A30C5E000386680 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ee.repl.InvobiUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = Invobi;
+			};
+			name = Debug;
+		};
+		6DC74EC32A30C5E000386680 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ee.repl.InvobiUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = Invobi;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6DC74E8C2A30C5DF00386680 /* Build configuration list for PBXProject "Invobi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DC74EB92A30C5E000386680 /* Debug */,
+				6DC74EBA2A30C5E000386680 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6DC74EBB2A30C5E000386680 /* Build configuration list for PBXNativeTarget "Invobi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DC74EBC2A30C5E000386680 /* Debug */,
+				6DC74EBD2A30C5E000386680 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6DC74EBE2A30C5E000386680 /* Build configuration list for PBXNativeTarget "InvobiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DC74EBF2A30C5E000386680 /* Debug */,
+				6DC74EC02A30C5E000386680 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6DC74EC12A30C5E000386680 /* Build configuration list for PBXNativeTarget "InvobiUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DC74EC22A30C5E000386680 /* Debug */,
+				6DC74EC32A30C5E000386680 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6DC74E9F2A30C5E000386680 /* Invobi.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6DC74EA02A30C5E000386680 /* Invobi.xcdatamodel */,
+			);
+			currentVersion = 6DC74EA02A30C5E000386680 /* Invobi.xcdatamodel */;
+			path = Invobi.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 6DC74E892A30C5DF00386680 /* Project object */;
+}
