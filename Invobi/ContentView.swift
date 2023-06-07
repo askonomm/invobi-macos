@@ -9,21 +9,21 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.managedObjectContext) private var context
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Invoice.created_at, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Item>
+    private var invoices: FetchedResults<Invoice>
 
     var body: some View {
         NavigationView {
             List {
-                ForEach(items) { item in
+                ForEach(invoices) { invoice in
                     NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+                        InvoiceView(invoice: invoice)
                     } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+                        Text("\(invoice.nr!)")
                     }
                 }
                 .onDelete(perform: deleteItems)
@@ -31,21 +31,23 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem {
                     Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                        Label("Create Invoice", systemImage: "plus")
                     }
                 }
             }
-            Text("Select an item")
+            
+            Text("Create an invoice or select an existing one.")
         }
+        .navigationTitle("")
     }
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+            let newItem = Invoice(context: context)
+            newItem.created_at = Date()
 
             do {
-                try viewContext.save()
+                try context.save()
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -57,10 +59,10 @@ struct ContentView: View {
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
+            offsets.map { invoices[$0] }.forEach(context.delete)
 
             do {
-                try viewContext.save()
+                try context.save()
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
