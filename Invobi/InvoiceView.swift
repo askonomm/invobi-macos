@@ -48,22 +48,64 @@ struct InvoiceHeadingView: View {
     var sizeWidth: CGFloat
     @State private var fromName = ""
     @State private var toName = ""
+    @State private var dateIssued = Date.now
+    @State private var dueDate = Date.now
     
     var body: some View {
+        VStack {
+            HStack() {
+                VStack(alignment: .leading) {
+                    VStack(alignment: .leading) {
+                        Text("From")
+                            .font(.headline)
+                        
+                        TextField("Name", text: $fromName)
+                            .textFieldStyle(.roundedBorder)
+                        
+                        Button(action: {
+                            
+                        }) {
+                            Text("Add field")
+                        }
+                    }
+                    .padding(.leading, 25)
+                    .padding(.trailing, 12.5)
+                    .padding([.top, .bottom], 10)
+                }
+                .frame(width: self.sizeWidth * 0.5)
+                
+                VStack(alignment: .leading) {
+                    VStack(alignment: .leading) {
+                        Text("To")
+                            .font(.headline)
+                        
+                        TextField("Name", text: $toName)
+                            .textFieldStyle(.roundedBorder)
+                        
+                        Button(action: {
+                            
+                        }) {
+                            Text("Add field")
+                        }
+                    }
+                    .padding(.trailing, 32)
+                    .padding(.leading, 12.5)
+                    .padding([.top, .bottom], 10)
+                }
+                .frame(width: self.sizeWidth * 0.5)
+            }
+        }
+        
         HStack() {
             VStack(alignment: .leading) {
                 VStack(alignment: .leading) {
-                    Text("From")
-                    .font(.title3)
+                    Text("Date issued")
+                    .font(.headline)
                     
-                    TextField("Name", text: $fromName)
-                    .textFieldStyle(.roundedBorder)
-                    
-                    Button(action: {
-                        
-                    }) {
-                        Text("Add field")
+                    DatePicker(selection: self.$dateIssued, displayedComponents: .date) {
+                        Text("")
                     }
+                
                 }
                 .padding(.leading, 25)
                 .padding(.trailing, 12.5)
@@ -73,17 +115,12 @@ struct InvoiceHeadingView: View {
             
             VStack(alignment: .leading) {
                 VStack(alignment: .leading) {
-                    Text("To")
-                    .font(.title3)
+                    Text("Due date")
+                    .font(.headline)
                     
                     TextField("Name", text: $toName)
                     .textFieldStyle(.roundedBorder)
- 
-                    Button(action: {
-                        
-                    }) {
-                        Text("Add field")
-                    }
+
                 }
                 .padding(.trailing, 32)
                 .padding(.leading, 12.5)
@@ -99,32 +136,47 @@ struct InvoiceView: View {
     @ObservedObject var invoice: Invoice
     
     var body: some View {
-        GeometryReader { geometry in
+        HStack(alignment: .top) {
+            GeometryReader { geometry in
+                VStack {
+                    InvoiceNrView(invoice: invoice)
+                    Divider().frame(width: geometry.size.width).offset(x: -4)
+                    InvoiceHeadingView(sizeWidth: geometry.size.width)
+                    Divider().frame(width: geometry.size.width).offset(x: -4)
+                    
+                    Spacer()
+                }
+            }
+            
             VStack {
-                InvoiceNrView(invoice: invoice)
-                Divider().frame(width: geometry.size.width).offset(x: -4)
-                InvoiceHeadingView(sizeWidth: geometry.size.width)
-                Divider().frame(width: geometry.size.width).offset(x: -4)
-                
-                Spacer()
-            }.toolbar {
-                ToolbarItem(placement: .navigation) {
-                    Button(action: {
-                        context.delete(self.invoice)
-                    }) {
-                        Label("Delete Invoice", systemImage: "trash")
-                    }
+                VStack {
+                    Text("Test")
                 }
-                
-                ToolbarItem(placement: .primaryAction) {
-                    Button(action: {
-                        let view = PDFView(nr: self.invoice.nr!)
-                        self.savePDF(view: view)
-                    }) {
-                        Label("Save PDF", systemImage: "square.and.arrow.down").labelStyle(.titleAndIcon)
-                    }
+                .padding()
+            }
+            .frame(maxHeight: .infinity)
+            .frame(width: 300)
+            .background(.secondary)
+            .border(width: 1, edges: [.leading], color: .gray)
+        }
+        .background(Color.white)
+        .toolbar {
+            ToolbarItem(placement: .navigation) {
+                Button(action: {
+                    context.delete(self.invoice)
+                }) {
+                    Label("Delete Invoice", systemImage: "trash")
                 }
-            }.background(Color.white)
+            }
+            
+            ToolbarItem(placement: .primaryAction) {
+                Button(action: {
+                    let view = PDFView(nr: self.invoice.nr!)
+                    self.savePDF(view: view)
+                }) {
+                    Label("Save PDF", systemImage: "square.and.arrow.down").labelStyle(.titleAndIcon)
+                }
+            }
         }
     }
     

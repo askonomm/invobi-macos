@@ -23,7 +23,7 @@ struct ContentView: View {
                     NavigationLink {
                         InvoiceView(invoice: invoice)
                     } label: {
-                        Text("\(invoice.nr!)")
+                        Text("\(invoice.nr ?? "")")
                     }
                 }
                 .onDelete(perform: deleteItems)
@@ -44,6 +44,7 @@ struct ContentView: View {
     private func addItem() {
         withAnimation {
             let newItem = Invoice(context: context)
+            newItem.nr = "Untitled"
             newItem.created_at = Date()
 
             do {
@@ -72,13 +73,6 @@ struct ContentView: View {
         }
     }
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
