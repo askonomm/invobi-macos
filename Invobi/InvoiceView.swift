@@ -11,6 +11,7 @@ struct InvoiceNrView: View {
     @Environment(\.managedObjectContext) private var context
     @ObservedObject var invoice: Invoice
     @State private var itemNr = ""
+    @State private var disabled = true
     
     var body: some View {
         HStack {
@@ -26,6 +27,7 @@ struct InvoiceNrView: View {
             .font(.largeTitle)
             .fontWeight(.medium)
             .textFieldStyle(.plain)
+            .disabled(self.disabled)
             .offset(x: -6)
             .onDebouncedChange(of: $itemNr, debounceFor: 0.25, perform: { _ in
                 self.invoice.nr = self.itemNr
@@ -33,6 +35,9 @@ struct InvoiceNrView: View {
             })
             .onAppear {
                 self.itemNr = self.invoice.nr != nil ? "\(self.invoice.nr!)" : ""
+                DispatchQueue.main.async {
+                    self.disabled = false
+                }
             }
             .onDisappear {
                 self.invoice.nr = self.itemNr
@@ -95,38 +100,75 @@ struct InvoiceHeadingView: View {
                 .frame(width: self.sizeWidth * 0.5)
             }
         }
-        
-        HStack() {
-            VStack(alignment: .leading) {
-                VStack(alignment: .leading) {
-                    Text("Date issued")
-                    .font(.headline)
-                    
-                    DatePicker(selection: self.$dateIssued, displayedComponents: .date) {
-                        Text("")
-                    }
-                
-                }
-                .padding(.leading, 25)
-                .padding(.trailing, 12.5)
-                .padding([.top, .bottom], 10)
-            }
-            .frame(width: self.sizeWidth * 0.5)
-            
-            VStack(alignment: .leading) {
-                VStack(alignment: .leading) {
-                    Text("Due date")
-                    .font(.headline)
-                    
-                    TextField("Name", text: $toName)
-                    .textFieldStyle(.roundedBorder)
+    }
+}
 
+struct InvoiceSidebarView: View {
+    @Environment(\.managedObjectContext) private var context
+    @ObservedObject var invoice: Invoice
+    @State private var dateIssued = Date.now
+    @State private var dueDate = Date.now
+    private let currencies = ["EUR", "USD"]
+    @State private var currency = "EUR"
+    
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            // Date issued
+            Text("Date issued")
+                .font(.caption2)
+                .textCase(.uppercase)
+            
+            DatePicker("Select date issued", selection: self.$dateIssued, displayedComponents: .date)
+                .onChange(of: self.dateIssued, perform: { value in
+                    self.invoice.dateIssued = value
+                    try? self.context.save()
+                })
+                .onAppear {
+                    self.dateIssued = self.invoice.dateIssued != nil ? self.invoice.dateIssued! : Date.now
                 }
-                .padding(.trailing, 32)
-                .padding(.leading, 12.5)
-                .padding([.top, .bottom], 10)
+                .labelsHidden()
+            
+            Spacer().frame(height:25)
+            
+            // Due date
+            Text("Due date")
+                .font(.caption2)
+                .textCase(.uppercase)
+            
+            DatePicker("Select due date", selection: self.$dueDate, displayedComponents: .date)
+                .onChange(of: self.dueDate, perform: { value in
+                    self.invoice.dueDate = value
+                    try? self.context.save()
+                })
+                .onAppear {
+                    self.dueDate = self.invoice.dueDate != nil ? self.invoice.dueDate! : Date.now
+                }
+                .labelsHidden()
+            
+            Spacer().frame(height:25)
+            
+            // Currency
+            Text("Currency")
+                .font(.caption2)
+                .textCase(.uppercase)
+            
+            Picker("Select currency", selection: self.$currency) {
+                ForEach(currencies, id: \.self) {
+                    Text($0)
+                }
             }
-            .frame(width: self.sizeWidth * 0.5)
+                .onChange(of: self.currency, perform: { value in
+                    self.invoice.currency = value
+                    try? self.context.save()
+                })
+                .onAppear {
+                    self.currency = self.invoice.currency != nil ? self.invoice.currency! : "EUR"
+                }
+                .pickerStyle(.menu)
+                .labelsHidden()
+            
+            Spacer()
         }
     }
 }
@@ -134,6 +176,7 @@ struct InvoiceHeadingView: View {
 struct InvoiceView: View {
     @Environment(\.managedObjectContext) private var context
     @ObservedObject var invoice: Invoice
+    @Binding var navPath: NavigationPath
     
     var body: some View {
         HStack(alignment: .top) {
@@ -148,22 +191,25 @@ struct InvoiceView: View {
                 }
             }
             
-            VStack {
-                VStack {
-                    Text("Test")
+            VStack(alignment: .leading) {
+                ScrollView {
+                    InvoiceSidebarView(invoice: invoice)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 20)
                 }
-                .padding()
             }
             .frame(maxHeight: .infinity)
-            .frame(width: 300)
-            .background(.secondary)
-            .border(width: 1, edges: [.leading], color: .gray)
+            .frame(width: 170)
+            .background(Color(hex: "#f7f7f7"))
+            .border(width: 1, edges: [.leading], color: Color(hex: "#dddddd"))
         }
         .background(Color.white)
         .toolbar {
             ToolbarItem(placement: .navigation) {
                 Button(action: {
                     context.delete(self.invoice)
+                    self.navPath.removeLast(self.navPath.count)
+                    
                 }) {
                     Label("Delete Invoice", systemImage: "trash")
                 }
@@ -171,6 +217,7 @@ struct InvoiceView: View {
             
             ToolbarItem(placement: .primaryAction) {
                 Button(action: {
+                    print(self.navPath)
                     let view = PDFView(nr: self.invoice.nr!)
                     self.savePDF(view: view)
                 }) {
@@ -178,6 +225,7 @@ struct InvoiceView: View {
                 }
             }
         }
+        .navigationTitle("Edit Invoice")
     }
     
     @MainActor func savePDF(view: PDFView) {
@@ -214,6 +262,7 @@ struct InvoiceView: View {
         }
     }
 }
+
 //
 //struct InvoiceView_Previews: PreviewProvider {
 //    static var previews: some View {
