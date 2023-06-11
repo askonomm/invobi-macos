@@ -26,18 +26,18 @@ func getStatusColor(status: String?) -> Color {
     } else if status == "PAID" {
         return Color(hex:"#59CE8F")
     } else {
-        return Color(hex:"#ddd")
+        return Color(hex:"#f7f7f7")
     }
 }
 
-func getStatusTextColor(status: String?) -> Color {
+func getStatusAltColor(status: String?) -> Color {
     if status == "UNPAID" {
-        return Color(hex:"#f77f00")
+        return Color(hex:"#fff")
     } else if status == "OVERDUE" {
-        return Color(hex:"#DD1A00")
+        return Color(hex:"#fff")
     } else if status == "PAID" {
-        return Color(hex:"#30A265")
+        return Color(hex:"#fff")
     } else {
-        return Color(hex:"#777")
+        return Color(hex:"#444")
     }
 }

@@ -25,7 +25,6 @@ struct ContentView: View {
     var body: some View {
         NavigationStack(path: self.$navPath) {
             ScrollView {
-                
                 LazyVGrid(columns: columns, spacing: 10) {
                     ForEach(invoices) { invoice in
                         if filteredStatus != "ALL" && ((invoice.status == filteredStatus) || (invoice.status == nil && filteredStatus == "DRAFT")) {
@@ -36,7 +35,7 @@ struct ContentView: View {
                             ListInvoiceItemView(invoice: invoice, navPath: self.$navPath)
                         }
                     }
-                }.frame(maxWidth: .infinity).padding(20)
+                }.frame(maxWidth: .infinity).padding(40)
             }
             .background(Color.white)
                 .navigationDestination(for: Invoice.self) { invoice in
@@ -69,6 +68,7 @@ struct ContentView: View {
 
     private func addInvoice() -> Invoice {
         let newItem = Invoice(context: context)
+        newItem.id = UUID.init()
         newItem.nr = ""
         newItem.createdAt = Date()
 

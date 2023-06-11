@@ -7,233 +7,20 @@
 
 import SwiftUI
 
-struct InvoiceNrView: View {
-    @Environment(\.managedObjectContext) private var context
-    @ObservedObject var invoice: Invoice
-    @State private var itemNr = ""
-    @State private var disabled = true
-    
-    var body: some View {
-        HStack {
-            Text("Invoice #")
-            .font(.largeTitle)
-            .foregroundColor(Color.gray)
-            .fontWeight(.light)
-            
-            TextField("Invoice number", text: $itemNr, onCommit: {
-                self.invoice.nr = self.itemNr
-                try? self.context.save()
-            })
-            .font(.largeTitle)
-            .fontWeight(.medium)
-            .textFieldStyle(.plain)
-            .disabled(self.disabled)
-            .offset(x: -6)
-            .onDebouncedChange(of: $itemNr, debounceFor: 0.25, perform: { _ in
-                self.invoice.nr = self.itemNr
-                try? self.context.save()
-            })
-            .onAppear {
-                self.itemNr = self.invoice.nr != nil ? "\(self.invoice.nr!)" : ""
-                DispatchQueue.main.async {
-                    self.disabled = false
-                }
-            }
-            .onDisappear {
-                self.invoice.nr = self.itemNr
-                try? self.context.save()
-            }
-        }
-        .padding(.horizontal, 20)
-        .padding(.top, 12)
-    }
-}
-
-struct InvoiceHeadingView: View {
-    var sizeWidth: CGFloat
-    @State private var fromName = ""
-    @State private var toName = ""
-    @State private var dateIssued = Date.now
-    @State private var dueDate = Date.now
-    
-    var body: some View {
-        VStack {
-            HStack() {
-                VStack(alignment: .leading) {
-                    VStack(alignment: .leading) {
-                        Text("From")
-                            .font(.headline)
-                        
-                        TextField("Name", text: $fromName)
-                            .textFieldStyle(.roundedBorder)
-                        
-                        Button(action: {
-                            
-                        }) {
-                            Text("Add field")
-                        }
-                    }
-                    .padding(.leading, 25)
-                    .padding(.trailing, 12.5)
-                    .padding([.top, .bottom], 10)
-                }
-                .frame(width: self.sizeWidth * 0.5)
-                
-                VStack(alignment: .leading) {
-                    VStack(alignment: .leading) {
-                        Text("To")
-                            .font(.headline)
-                        
-                        TextField("Name", text: $toName)
-                            .textFieldStyle(.roundedBorder)
-                        
-                        Button(action: {
-                            
-                        }) {
-                            Text("Add field")
-                        }
-                    }
-                    .padding(.trailing, 32)
-                    .padding(.leading, 12.5)
-                    .padding([.top, .bottom], 10)
-                }
-                .frame(width: self.sizeWidth * 0.5)
-            }
-        }
-    }
-}
-
-struct InvoiceSidebarView: View {
-    @Environment(\.managedObjectContext) private var context
-    @ObservedObject var invoice: Invoice
-    @State private var dateIssued = Date.now
-    @State private var dueDate = Date.now
-    private let currencies = ["EUR", "USD"]
-    @State private var currency = "EUR"
-    private let statuses = ["DRAFT", "UNPAID", "PAID", "OVERDUE"]
-    @State private var status = "DRAFT"
-    
-
-    var body: some View {
-        VStack(alignment: .leading) {
-            // Date issued
-            Group {
-                Text("Date issued")
-                    .font(.caption2)
-                    .textCase(.uppercase)
-                
-                DatePicker("Select date issued", selection: self.$dateIssued, displayedComponents: .date)
-                    .onChange(of: self.dateIssued, perform: { value in
-                        self.invoice.dateIssued = value
-                        try? self.context.save()
-                    })
-                    .onAppear {
-                        self.dateIssued = self.invoice.dateIssued != nil ? self.invoice.dateIssued! : Date.now
-                    }
-                    .labelsHidden()
-            }
-                
-            Spacer().frame(height:25)
-            
-            // Due date
-            Group {
-                Text("Due date")
-                    .font(.caption2)
-                    .textCase(.uppercase)
-                
-                DatePicker("Select due date", selection: self.$dueDate, displayedComponents: .date)
-                    .onChange(of: self.dueDate, perform: { value in
-                        self.invoice.dueDate = value
-                        try? self.context.save()
-                    })
-                    .onAppear {
-                        self.dueDate = self.invoice.dueDate != nil ? self.invoice.dueDate! : Date.now
-                    }
-                    .labelsHidden()
-            }
-            
-            Spacer().frame(height:25)
-            
-            // Currency
-            Group {
-                Text("Currency")
-                    .font(.caption2)
-                    .textCase(.uppercase)
-                
-                Picker("Select currency", selection: self.$currency) {
-                    ForEach(currencies, id: \.self) {
-                        Text($0)
-                    }
-                }
-                .onChange(of: self.currency, perform: { value in
-                    self.invoice.currency = value
-                    try? self.context.save()
-                })
-                .onAppear {
-                    self.currency = self.invoice.currency != nil ? self.invoice.currency! : "EUR"
-                }
-                .pickerStyle(.menu)
-                .labelsHidden()
-            }
-            
-            Spacer().frame(height:25)
-            
-            // Status
-            Group {
-                Text("Status")
-                    .font(.caption2)
-                    .textCase(.uppercase)
-                
-                Picker("Select status", selection: self.$status) {
-                    ForEach(statuses, id: \.self) {
-                        Text($0.capitalized)
-                    }
-                }
-                .onChange(of: self.status, perform: { value in
-                    self.invoice.status = value
-                    try? self.context.save()
-                })
-                .onAppear {
-                    self.status = self.invoice.status != nil ? self.invoice.status! : "DRAFT"
-                }
-                .pickerStyle(.menu)
-                .labelsHidden()
-            }
-            
-            Spacer()
-        }
-    }
-}
-
 struct InvoiceView: View {
     @Environment(\.managedObjectContext) private var context
     @ObservedObject var invoice: Invoice
     @Binding var navPath: NavigationPath
+    @State private var showConfig = false
     
     var body: some View {
-        HStack(alignment: .top) {
-            GeometryReader { geometry in
-                VStack {
-                    InvoiceNrView(invoice: invoice)
-                    Divider().frame(width: geometry.size.width)
-                    InvoiceHeadingView(sizeWidth: geometry.size.width)
-                    Divider().frame(width: geometry.size.width)
-                    
-                    Spacer()
-                }
+        VStack {
+            ScrollView {
+                InvoiceNrView(invoice: invoice)
+                InvoiceHeadingView(invoice: invoice)
+
+                Spacer()
             }
-            
-            VStack(alignment: .leading) {
-                ScrollView {
-                    InvoiceSidebarView(invoice: invoice)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 20)
-                }
-            }
-            .frame(maxHeight: .infinity)
-            .frame(width: 170)
-            .background(Color(hex: "#f7f7f7"))
-            .border(width: 1, edges: [.leading], color: Color(hex: "#dddddd"))
         }
         .background(Color.white)
         .toolbar {
@@ -244,6 +31,17 @@ struct InvoiceView: View {
                     
                 }) {
                     Label("Delete Invoice", systemImage: "trash")
+                }
+            }
+            
+            ToolbarItem(placement: .primaryAction) {
+                Button(action: {
+                    showConfig = true
+                }) {
+                    Label("X", systemImage: "gear")
+                }.popover(isPresented: $showConfig) {
+                    InvoiceSidebarView(invoice: invoice)
+                    .padding(20)
                 }
             }
             

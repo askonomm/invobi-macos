@@ -8,11 +8,13 @@ struct ListInvoiceItemViewHeadingView: View {
             Text("Invoice #")
                 .font(.title3)
                 .fontWeight(.light)
-                .foregroundColor(Color(hex: "#777"))
+                .foregroundColor(getStatusAltColor(status: self.invoice.status))
+                .opacity(0.8)
             Text("\(invoice.nr != nil ? invoice.nr! : "")")
                 .font(.title3)
                 .offset(x: -7)
                 .lineLimit(1)
+                .foregroundColor(getStatusAltColor(status: self.invoice.status))
             Spacer()
         }.frame(maxWidth: .infinity)
     }
@@ -24,12 +26,14 @@ struct ListInvoiceItemViewFooterView: View {
     var body: some View {
         HStack(alignment: .top) {
             Text("$500")
+            .foregroundColor(getStatusAltColor(status: self.invoice.status))
+            
             Spacer()
            
             if self.invoice.status != nil && self.invoice.dueDate != nil && (self.invoice.status == "UNPAID" || self.invoice.status == "OVERDUE") {
                 Text(getDueInText(date: self.invoice.dueDate!).uppercased())
                     .font(.caption)
-                    .foregroundColor(Color(hex: "#878787"))
+                    .foregroundColor(getStatusAltColor(status: self.invoice.status))
                     .offset(y: 2)
                 
                 Spacer().frame(width:10)
@@ -39,9 +43,8 @@ struct ListInvoiceItemViewFooterView: View {
                 .font(.caption)
                 .padding(.horizontal, 7)
                 .padding(.vertical, 3)
-                .foregroundColor(getStatusTextColor(status: self.invoice.status))
-                .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).stroke(getStatusColor(status: self.invoice.status)))
-                .shadow(color: Color(hex: "#f8f8f8"), radius: 3, x: 2)
+                .foregroundColor(getStatusAltColor(status: self.invoice.status))
+                .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).stroke(getStatusAltColor(status: self.invoice.status)))
                 .offset(y:-1)
         }.frame(maxWidth: .infinity)
     }
@@ -90,7 +93,6 @@ struct ListInvoiceItemView: View {
             .padding(.trailing, 15)
             .padding(.top, 15)
             .padding(.bottom, 13)
-            .background(Color.white)
         }
         .onAppear(perform: checkIfOverdue)
         .onDisappear(perform: checkIfOverdue)
@@ -98,7 +100,8 @@ struct ListInvoiceItemView: View {
             checkIfOverdue()
         })
         .buttonStyle(.plain)
-        .overlay(RoundedRectangle(cornerRadius: 3, style: .continuous).stroke(getStatusColor(status: self.invoice.status)))
+        .background(getStatusColor(status: self.invoice.status))
+        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
         .shadow(color: Color(hex: "#f8f8f8"), radius: 3, x: 2)
     }
     
