@@ -21,11 +21,7 @@ struct InvoiceSidebarView: View {
     var body: some View {
         VStack(alignment: .leading) {
             // Date issued
-            Group {
-                Text("Date issued")
-                    .font(.caption2)
-                    .textCase(.uppercase)
-                
+            Section("Date issued") {
                 DatePicker("Select date issued", selection: self.$dateIssued, displayedComponents: .date)
                     .onChange(of: self.dateIssued, perform: { value in
                         self.invoice.dateIssued = value
@@ -37,14 +33,10 @@ struct InvoiceSidebarView: View {
                     .labelsHidden()
             }
                 
-            Spacer().frame(height:25)
+            Spacer().frame(height: 15)
             
             // Due date
-            Group {
-                Text("Due date")
-                    .font(.caption2)
-                    .textCase(.uppercase)
-                
+            Section("Due date") {
                 DatePicker("Select due date", selection: self.$dueDate, displayedComponents: .date)
                     .onChange(of: self.dueDate, perform: { value in
                         self.invoice.dueDate = value
@@ -56,14 +48,10 @@ struct InvoiceSidebarView: View {
                     .labelsHidden()
             }
             
-            Spacer().frame(height:25)
+            Spacer().frame(height: 15)
             
             // Currency
-            Group {
-                Text("Currency")
-                    .font(.caption2)
-                    .textCase(.uppercase)
-                
+            Section("Currency") {
                 Picker("Select currency", selection: self.$currency) {
                     ForEach(currencies, id: \.self) {
                         Text($0)
@@ -80,14 +68,10 @@ struct InvoiceSidebarView: View {
                 .labelsHidden()
             }
             
-            Spacer().frame(height:25)
+            Spacer().frame(height: 15)
             
             // Status
-            Group {
-                Text("Status")
-                    .font(.caption2)
-                    .textCase(.uppercase)
-                
+            Section("Status") {
                 Picker("Select status", selection: self.$status) {
                     ForEach(statuses, id: \.self) {
                         Text($0.capitalized)
@@ -103,8 +87,7 @@ struct InvoiceSidebarView: View {
                 .pickerStyle(.menu)
                 .labelsHidden()
             }
-            
-            Spacer()
+
         }
     }
 }

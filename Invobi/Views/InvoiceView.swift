@@ -41,7 +41,7 @@ struct InvoiceView: View {
                     Label("X", systemImage: "gear")
                 }.popover(isPresented: $showConfig) {
                     InvoiceSidebarView(invoice: invoice)
-                    .padding(20)
+                    .padding(15)
                 }
             }
             

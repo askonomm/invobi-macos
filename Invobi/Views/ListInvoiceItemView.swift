@@ -102,6 +102,7 @@ struct ListInvoiceItemView: View {
         .buttonStyle(.plain)
         .background(getStatusColor(status: self.invoice.status))
         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).stroke(getStatusBorderColor(status: self.invoice.status)))
         .shadow(color: Color(hex: "#f8f8f8"), radius: 3, x: 2)
     }
     
