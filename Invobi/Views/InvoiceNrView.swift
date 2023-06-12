@@ -33,7 +33,6 @@ struct InvoiceNrView: View {
             .onDisappear(perform: save)
         }
         .padding(.horizontal, 40)
-        .padding(.vertical, 28)
     }
     
     func onAppear() {

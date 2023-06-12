@@ -26,7 +26,7 @@ func getStatusColor(status: String?) -> Color {
     } else if status == "PAID" {
         return Color(hex:"#59CE8F")
     } else {
-        return Color(hex:"#fbfbfb")
+        return Color(hex:"#fff")
     }
 }
 
@@ -50,6 +50,6 @@ func getStatusBorderColor(status: String?) -> Color {
     } else if status == "PAID" {
         return Color(hex:"#59CE8F")
     } else {
-        return Color(hex:"#eee")
+        return Color(hex:"#e5e5e5")
     }
 }
