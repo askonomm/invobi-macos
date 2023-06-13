@@ -28,42 +28,56 @@ struct ContentView: View {
                 LazyVGrid(columns: columns, spacing: 10) {
                     ForEach(invoices) { invoice in
                         if filteredStatus != "ALL" && ((invoice.status == filteredStatus) || (invoice.status == nil && filteredStatus == "DRAFT")) {
-                            ListInvoiceItemView(invoice: invoice, navPath: self.$navPath)
+                            ListInvoiceItemView(invoice: invoice, onSelect: onSelect)
                         }
                         
-                        if filteredStatus == "ALL" {
-                            ListInvoiceItemView(invoice: invoice, navPath: self.$navPath)
+                        else if filteredStatus == "ALL" {
+                            ListInvoiceItemView(invoice: invoice, onSelect: onSelect)
+                        } else {
+                            EmptyView()
                         }
                     }
                 }.frame(maxWidth: .infinity).padding(40)
             }
             .background(Color.white)
-                .navigationDestination(for: Invoice.self) { invoice in
-                    InvoiceView(invoice: invoice, navPath: self.$navPath)
-                }
-        }
-        .navigationTitle("Invoices")
-        .toolbar {
-            if self.navPath.isEmpty {
-                ToolbarItem(placement: .navigation) {
-                    Button(action: {
-                        self.navPath.append(self.addInvoice())
-                    }) {
-                        Label("Create Invoice", systemImage: "plus")
+            .navigationTitle("Invoices")
+            .navigationDestination(for: Invoice.self) { invoice in
+                InvoiceView(invoice: invoice, onDelete: onDelete)
+            }
+            .toolbar {
+                if self.navPath.isEmpty {
+                    ToolbarItem(placement: .navigation) {
+                        Button(action: {
+                            let invoice = self.addInvoice()
+                            
+                            onSelect(invoice)
+                        }) {
+                            Label("Create Invoice", systemImage: "plus")
+                        }
                     }
-                }
-                
-                ToolbarItem(placement: .secondaryAction) {
-                    Picker(selection: $filteredStatus, label: Text("Sorting options")) {
-                        Text("All").tag("ALL")
-                        Text("Unpaid").tag("UNPAID")
-                        Text("Paid").tag("PAID")
-                        Text("Overdue").tag("OVERDUE")
-                        Text("Draft").tag("DRAFT")
+                    
+                    ToolbarItem(placement: .secondaryAction) {
+                        Picker(selection: $filteredStatus, label: Text("Sorting options")) {
+                            Text("All").tag("ALL")
+                            Text("Unpaid").tag("UNPAID")
+                            Text("Paid").tag("PAID")
+                            Text("Overdue").tag("OVERDUE")
+                            Text("Draft").tag("DRAFT")
+                        }
                     }
                 }
             }
         }
+        .frame(minWidth: 900)
+    }
+    
+    private func onSelect(_ invoice: Invoice) {
+        self.navPath.append(invoice)
+    }
+    
+    private func onDelete(invoice: Invoice) {
+        self.navPath.removeLast(self.navPath.count)
+        context.delete(invoice)
     }
 
     private func addInvoice() -> Invoice {
@@ -72,15 +86,8 @@ struct ContentView: View {
         newItem.nr = ""
         newItem.createdAt = Date()
 
-        do {
-            try context.save()
-            return newItem
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
+        try? context.save()
+        return newItem
     }
 }
 

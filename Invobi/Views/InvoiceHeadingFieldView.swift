@@ -12,7 +12,6 @@ struct InvoiceHeadingFieldView: View {
     @ObservedObject var field: InvoiceField
     @State private var label = ""
     @State private var value = ""
-    @State private var disabled = true
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -22,16 +21,11 @@ struct InvoiceHeadingFieldView: View {
                     if self.field.label != nil {
                         self.label = self.field.label!
                     }
-                    
-                    DispatchQueue.main.async {
-                        self.disabled = false
-                    }
                 }
                 .onDebouncedChange(of: $label, debounceFor: 0.25, perform: { _ in
                     self.field.label = self.label
                     try? context.save()
                 })
-                .disabled(disabled)
                 .textFieldStyle(.plain)
                 .font(.callout)
                 .fontWeight(.semibold)
@@ -40,19 +34,16 @@ struct InvoiceHeadingFieldView: View {
                 
                 TextField("Value", text: $value, axis: .vertical)
                 .onAppear {
-                    if self.field.value != nil {
-                        self.value = self.field.value!
-                    }
-                    
                     DispatchQueue.main.async {
-                        self.disabled = false
+                        if self.field.value != nil {
+                            self.value = self.field.value!
+                        }
                     }
                 }
                 .onDebouncedChange(of: $value, debounceFor: 0.25, perform: { _ in
                     self.field.value = self.value
                     try? context.save()
                 })
-                .disabled(disabled)
                 .textFieldStyle(.plain)
                 .offset(y: -2)
             }

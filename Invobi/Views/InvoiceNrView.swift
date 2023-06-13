@@ -11,7 +11,6 @@ struct InvoiceNrView: View {
     @Environment(\.managedObjectContext) private var context
     @ObservedObject var invoice: Invoice
     @State private var itemNr = ""
-    @State private var disabled = true
     
     var body: some View {
         HStack {
@@ -24,26 +23,25 @@ struct InvoiceNrView: View {
             .font(.largeTitle)
             .fontWeight(.regular)
             .textFieldStyle(.plain)
-            .disabled(self.disabled)
             .offset(x: -6)
             .onDebouncedChange(of: $itemNr, debounceFor: 0.25, perform: { _ in
                 save()
             })
             .onAppear(perform: onAppear)
-            .onDisappear(perform: save)
         }
         .padding(.horizontal, 40)
     }
     
     func onAppear() {
-        self.itemNr = self.invoice.nr != nil ? "\(self.invoice.nr!)" : ""
         DispatchQueue.main.async {
-            self.disabled = false
+            self.itemNr = self.invoice.nr != nil ? "\(self.invoice.nr!)" : ""
         }
     }
     
     func save() {
-        self.invoice.nr = self.itemNr
-        try? self.context.save()
+        DispatchQueue.main.async {
+            self.invoice.nr = self.itemNr
+            try? self.context.save()
+        }
     }
 }

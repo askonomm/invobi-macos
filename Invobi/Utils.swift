@@ -53,3 +53,25 @@ func getStatusBorderColor(status: String?) -> Color {
         return Color(hex:"#e5e5e5")
     }
 }
+
+func currencySignByCode(code: String) -> String {
+    switch code {
+    case "EUR":
+        return "€"
+    case "USD":
+        return "$"
+    default:
+        return ""
+    }
+}
+
+func currencySystemImageName(_ code: String) -> String {
+    switch code {
+    case "EUR":
+        return "eurosign"
+    case "USD":
+        return "dollarsign"
+    default:
+        return ""
+    }
+}

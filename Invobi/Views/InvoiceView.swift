@@ -7,71 +7,10 @@
 
 import SwiftUI
 
-struct InvoiceItemsView: View {
-    @Environment(\.managedObjectContext) private var context
-    @ObservedObject var invoice: Invoice
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text("Items")
-            .font(.title3)
-        }
-        .frame(maxWidth: .infinity)
-    }
-}
-
-struct InvoiceMetaView: View {
-    @Environment(\.managedObjectContext) private var context
-    @ObservedObject var invoice: Invoice
-    private let statuses = ["DRAFT", "UNPAID", "PAID", "OVERDUE"]
-    @State private var status = "DRAFT"
-    
-    var body: some View {
-        HStack(alignment: .top) {
-            Menu {
-                ForEach(statuses, id: \.self) { s in
-                    Button(s.capitalized, action: {
-                        status = s
-                    })
-                }
-            } label: {
-                Text(status)
-                .foregroundColor(self.getColor(status: status))
-                .font(.callout)
-                .fontWeight(.semibold)
-                
-            }
-            .onAppear {
-                if self.invoice.status != nil {
-                    self.status = self.invoice.status!
-                }
-            }
-            .menuStyle(.borderlessButton)
-            .frame(width: 80)
-            .offset(x: -2)
-            
-            Spacer()
-        }
-        .padding(.horizontal, 40)
-    }
-    
-    func getColor(status: String?) -> Color {
-        if status == "UNPAID" {
-            return Color(hex:"#ffbe0b")
-        } else if status == "OVERDUE" {
-            return Color(hex:"#FF1E00")
-        } else if status == "PAID" {
-            return Color(hex:"#59CE8F")
-        } else {
-            return Color(hex:"#999")
-        }
-    }
-}
-
 struct InvoiceView: View {
     @Environment(\.managedObjectContext) private var context
     @ObservedObject var invoice: Invoice
-    @Binding var navPath: NavigationPath
+    var onDelete: (_ invoice: Invoice) -> Void
     @State private var showConfig = false
     private let statuses = ["DRAFT", "UNPAID", "PAID", "OVERDUE"]
     @State private var status = "DRAFT"
@@ -97,44 +36,14 @@ struct InvoiceView: View {
         .toolbar {
             ToolbarItem(placement: .navigation) {
                 Button(action: {
-                    context.delete(self.invoice)
-                    self.navPath.removeLast(self.navPath.count)
-                    
+                    onDelete(self.invoice)
                 }) {
                     Label("Delete Invoice", systemImage: "trash")
                 }
             }
-            
-            ToolbarItem(placement: .primaryAction) {
-                Picker("Select currency", selection: self.$currency) {
-                    ForEach(currencies, id: \.self) {
-                        Text($0)
-                    }
-                }
-                .onChange(of: self.currency, perform: { value in
-                    self.invoice.currency = value
-                    try? self.context.save()
-                })
-                .onAppear {
-                    self.currency = self.invoice.currency != nil ? self.invoice.currency! : "EUR"
-                }
-                .pickerStyle(.menu)
-            }
-            
+
             ToolbarItem(placement: .primaryAction) {
                 Button(action: {
-                    showConfig = true
-                }) {
-                    Label("X", systemImage: "gear")
-                }.popover(isPresented: $showConfig) {
-                    InvoiceSidebarView(invoice: invoice)
-                    .padding(15)
-                }
-            }
-            
-            ToolbarItem(placement: .primaryAction) {
-                Button(action: {
-                    print(self.navPath)
                     let view = PDFView(nr: self.invoice.nr!)
                     self.savePDF(view: view)
                 }) {

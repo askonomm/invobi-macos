@@ -1,21 +1,20 @@
 //
-//  TextFieldView.swift
+//  NumberFieldView.swift
 //  Invobi
 //
-//  Created by Asko Nomm on 11.06.2023.
+//  Created by Asko Nomm on 13.06.2023.
 //
 
 import SwiftUI
 
-struct TextFieldView: View {
+struct NumberFieldView: View {
     var label: String = ""
-    @Binding var value: String
+    @Binding var value: Decimal
     var onAppear: () -> Void
     var save: () -> Void
-    var numberField: Bool = false
-    
+
     var body: some View {
-        TextField(label, text: $value)
+        TextField(label, value: $value, format: .number)
         .onAppear(perform: {
             onAppear()
         })

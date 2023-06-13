@@ -79,7 +79,7 @@ struct ListInvoiceItemViewFooterView: View {
 struct ListInvoiceItemView: View {
     @Environment(\.managedObjectContext) private var context
     @ObservedObject var invoice: Invoice
-    @Binding var navPath: NavigationPath
+    var onSelect: (_ invoice: Invoice) -> Void
     
     var body: some View {
         Button(action: navigateToInvoice) {
@@ -93,12 +93,9 @@ struct ListInvoiceItemView: View {
             .padding(.trailing, 15)
             .padding(.top, 15)
             .padding(.bottom, 13)
+            .contentShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
         }
         .onAppear(perform: checkIfOverdue)
-        .onDisappear(perform: checkIfOverdue)
-        .onChange(of: navPath, perform: { _ in
-            checkIfOverdue()
-        })
         .buttonStyle(.plain)
         .background(getStatusColor(status: self.invoice.status))
         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
@@ -109,17 +106,20 @@ struct ListInvoiceItemView: View {
     
     // Navigate to the invoice.
     private func navigateToInvoice() {
-        self.navPath.append(self.invoice)
+        checkIfOverdue()
+        onSelect(invoice)
     }
     
     // Check if the invoice is overdue, and if it is, change the status to OVERDUE.
     private func checkIfOverdue() {
-        let status = self.invoice.status != nil ? self.invoice.status : "DRAFT"
-        
-        if self.invoice.dueDate != nil && status != "DRAFT" && status != "PAID" {
-            if getDayDiff(Date.now, self.invoice.dueDate!) < 0 {
-                self.invoice.status = "OVERDUE"
-                try? self.context.save()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            let status = self.invoice.status != nil ? self.invoice.status : "DRAFT"
+            
+            if self.invoice.dueDate != nil && status != "DRAFT" && status != "PAID" {
+                if getDayDiff(Date.now, self.invoice.dueDate!) < 0 {
+                    self.invoice.status = "OVERDUE"
+                    try? self.context.save()
+                }
             }
         }
     }
