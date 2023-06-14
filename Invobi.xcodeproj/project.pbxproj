@@ -11,7 +11,6 @@
 		6D0BE76D2A34610000B439FD /* ListInvoiceItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BE76C2A34610000B439FD /* ListInvoiceItemView.swift */; };
 		6D0BE76F2A34DAB400B439FD /* InvoiceHeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BE76E2A34DAB400B439FD /* InvoiceHeadingView.swift */; };
 		6D0BE7712A34DAD400B439FD /* InvoiceNrView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BE7702A34DAD400B439FD /* InvoiceNrView.swift */; };
-		6D0BE7732A34DAF200B439FD /* InvoiceSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BE7722A34DAF200B439FD /* InvoiceSidebarView.swift */; };
 		6D0BE7752A353C3A00B439FD /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BE7742A353C3A00B439FD /* TextFieldView.swift */; };
 		6D0BE7772A35DD8300B439FD /* InvoiceHeadingFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BE7762A35DD8300B439FD /* InvoiceHeadingFieldView.swift */; };
 		6D6196512A3779BA0015460E /* InvoiceMetaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6196502A3779BA0015460E /* InvoiceMetaView.swift */; };
@@ -31,6 +30,9 @@
 		6DC74ECD2A31445500386680 /* ViewBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC74ECC2A31445500386680 /* ViewBorder.swift */; };
 		6DC74ECF2A31CC1200386680 /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC74ECE2A31CC1200386680 /* HexColor.swift */; };
 		6DC8E5432A38C9C300EF6100 /* NumberFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC8E5422A38C9C300EF6100 /* NumberFieldView.swift */; };
+		6DC8E5452A38F76B00EF6100 /* InvoiceSubTotal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC8E5442A38F76B00EF6100 /* InvoiceSubTotal.swift */; };
+		6DC8E5472A3926EB00EF6100 /* InvoiceTaxations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC8E5462A3926EB00EF6100 /* InvoiceTaxations.swift */; };
+		6DC8E5492A3932C000EF6100 /* InvoiceTotal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC8E5482A3932C000EF6100 /* InvoiceTotal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,7 +57,6 @@
 		6D0BE76C2A34610000B439FD /* ListInvoiceItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInvoiceItemView.swift; sourceTree = "<group>"; };
 		6D0BE76E2A34DAB400B439FD /* InvoiceHeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceHeadingView.swift; sourceTree = "<group>"; };
 		6D0BE7702A34DAD400B439FD /* InvoiceNrView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceNrView.swift; sourceTree = "<group>"; };
-		6D0BE7722A34DAF200B439FD /* InvoiceSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceSidebarView.swift; sourceTree = "<group>"; };
 		6D0BE7742A353C3A00B439FD /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		6D0BE7762A35DD8300B439FD /* InvoiceHeadingFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceHeadingFieldView.swift; sourceTree = "<group>"; };
 		6D6196502A3779BA0015460E /* InvoiceMetaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceMetaView.swift; sourceTree = "<group>"; };
@@ -79,6 +80,9 @@
 		6DC74ECC2A31445500386680 /* ViewBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBorder.swift; sourceTree = "<group>"; };
 		6DC74ECE2A31CC1200386680 /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
 		6DC8E5422A38C9C300EF6100 /* NumberFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFieldView.swift; sourceTree = "<group>"; };
+		6DC8E5442A38F76B00EF6100 /* InvoiceSubTotal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceSubTotal.swift; sourceTree = "<group>"; };
+		6DC8E5462A3926EB00EF6100 /* InvoiceTaxations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceTaxations.swift; sourceTree = "<group>"; };
+		6DC8E5482A3932C000EF6100 /* InvoiceTotal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceTotal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,8 +123,10 @@
 				6D0BE76E2A34DAB400B439FD /* InvoiceHeadingView.swift */,
 				6D0BE7762A35DD8300B439FD /* InvoiceHeadingFieldView.swift */,
 				6D6196522A3779CF0015460E /* InvoiceItemsView.swift */,
-				6D0BE7722A34DAF200B439FD /* InvoiceSidebarView.swift */,
+				6DC8E5442A38F76B00EF6100 /* InvoiceSubTotal.swift */,
+				6DC8E5462A3926EB00EF6100 /* InvoiceTaxations.swift */,
 				6DC74EC62A30EE9D00386680 /* PDFView.swift */,
+				6DC8E5482A3932C000EF6100 /* InvoiceTotal.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -322,19 +328,21 @@
 				6DC74E972A30C5DF00386680 /* ContentView.swift in Sources */,
 				6DC74ECB2A3114D600386680 /* DebouncedChange.swift in Sources */,
 				6D0BE7712A34DAD400B439FD /* InvoiceNrView.swift in Sources */,
+				6DC8E5492A3932C000EF6100 /* InvoiceTotal.swift in Sources */,
 				6D0BE7772A35DD8300B439FD /* InvoiceHeadingFieldView.swift in Sources */,
+				6DC8E5472A3926EB00EF6100 /* InvoiceTaxations.swift in Sources */,
 				6D0BE76F2A34DAB400B439FD /* InvoiceHeadingView.swift in Sources */,
 				6DC74EA12A30C5E000386680 /* Invobi.xcdatamodeld in Sources */,
 				6DC8E5432A38C9C300EF6100 /* NumberFieldView.swift in Sources */,
 				6DC74ECD2A31445500386680 /* ViewBorder.swift in Sources */,
 				6D0BE76A2A33DBD700B439FD /* Utils.swift in Sources */,
 				6DC74EC72A30EE9D00386680 /* PDFView.swift in Sources */,
+				6DC8E5452A38F76B00EF6100 /* InvoiceSubTotal.swift in Sources */,
 				6DC74E952A30C5DF00386680 /* InvobiApp.swift in Sources */,
 				6D0BE76D2A34610000B439FD /* ListInvoiceItemView.swift in Sources */,
 				6D0BE7752A353C3A00B439FD /* TextFieldView.swift in Sources */,
 				6DC74ECF2A31CC1200386680 /* HexColor.swift in Sources */,
 				6DC74EC52A30EC2000386680 /* InvoiceView.swift in Sources */,
-				6D0BE7732A34DAF200B439FD /* InvoiceSidebarView.swift in Sources */,
 				6D6196512A3779BA0015460E /* InvoiceMetaView.swift in Sources */,
 				6D6196532A3779CF0015460E /* InvoiceItemsView.swift in Sources */,
 			);

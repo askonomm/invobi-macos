@@ -18,21 +18,21 @@ struct InvoiceItemRowView: View {
     
     var body: some View {
         TextFieldView(value: $itemName, onAppear: onItemNameAppear, save: saveItemName)
-        .frame(minWidth: 300, maxWidth: .infinity)
+        .frame(minWidth: 200, maxWidth: .infinity)
         Spacer().frame(width: 20)
         NumberFieldView(value: $itemQTY, onAppear: onItemQTYAppear, save: saveItemQTY)
-        .frame(minWidth: 50, maxWidth: 100)
+        .frame(width: 65)
         Spacer().frame(width: 20)
         NumberFieldView(value: $itemPrice, onAppear: onItemPriceAppear, save: saveItemPrice)
-        .frame(minWidth: 50, maxWidth: 100)
+        .frame(width: 100)
         Spacer().frame(width: 20)
         HStack {
+            Spacer()
             Text(self.itemTotal, format: .currency(code: currency))
             .fontWeight(.semibold)
-
-            Spacer()
+            .lineLimit(1)
         }
-        .frame(minWidth: 125, maxWidth: 150)
+        .frame(width: 140)
     }
     
     private func onItemNameAppear() {
@@ -115,7 +115,7 @@ struct InvoiceItemsView: View {
                         .foregroundColor(Color(hex: "#777"))
                     Spacer()
                 }
-                .frame(minWidth: 400, maxWidth: .infinity)
+                .frame(minWidth: 200, maxWidth: .infinity)
                 
                 Spacer().frame(width: 20)
                 
@@ -126,7 +126,7 @@ struct InvoiceItemsView: View {
                         .foregroundColor(Color(hex: "#777"))
                     Spacer()
                 }
-                .frame(minWidth: 50, maxWidth: 100)
+                .frame(width: 65)
                 
                 Spacer().frame(width: 20)
                 
@@ -137,18 +137,18 @@ struct InvoiceItemsView: View {
                         .foregroundColor(Color(hex: "#777"))
                     Spacer()
                 }
-                .frame(minWidth: 50, maxWidth: 100)
+                .frame(width: 100)
                 
                 Spacer().frame(width: 20)
                 
                 HStack {
+                    Spacer()
                     Text("Total".uppercased())
                         .font(.callout)
                         .fontWeight(.regular)
                         .foregroundColor(Color(hex: "#777"))
-                    Spacer()
                 }
-                .frame(minWidth: 125, maxWidth: 150)
+                .frame(width: 140)
                 
             }
             .frame(maxWidth: .infinity)
@@ -159,7 +159,6 @@ struct InvoiceItemsView: View {
                         InvoiceItemRowView(item: item, currency: invoice.currency ?? "EUR")
                     }
                     HStack {
-                        Spacer()
                         Button(action: {
                             context.delete(item)
                             try? context.save()
@@ -169,6 +168,9 @@ struct InvoiceItemsView: View {
                                 .frame(width: 15, height: 15)
                         }
                         .buttonStyle(.plain)
+                        .offset(x:-26)
+                        
+                        Spacer()
                     }
                 }
             }
@@ -178,7 +180,8 @@ struct InvoiceItemsView: View {
             }
         }
         .padding(.all, 40)
-        .background(Color(hex: "#f6f6f6"))
+        .background(Color(hex: "#fafafa"))
+        .border(width: 1, edges: [.top, .bottom], color: Color(hex: "#e5e5e5"))
     }
     
     private func getItems() -> Array<InvoiceItem> {
@@ -188,8 +191,6 @@ struct InvoiceItemsView: View {
     }
     
     private func addItem() {
-        print(self.items)
-        
         let item = InvoiceItem(context: context)
         item.id = UUID.init()
         item.invoiceId = invoice.id

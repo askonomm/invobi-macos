@@ -16,20 +16,44 @@ struct InvoiceView: View {
     @State private var status = "DRAFT"
     private let currencies = ["EUR", "USD"]
     @State private var currency = "EUR"
+    @State private var view = "edit"
     
     var body: some View {
         VStack {
-            ScrollView {
-                Spacer().frame(height: 40)
-                InvoiceMetaView(invoice: invoice)
-                Spacer().frame(height: 10)
-                InvoiceNrView(invoice: invoice)
-                Spacer().frame(height: 40)
-                InvoiceHeadingView(invoice: invoice)
-                Spacer().frame(height: 40)
-                InvoiceItemsView(invoice: invoice)
-
-                Spacer()
+            if view == "edit" {
+                ScrollView {
+                    Group {
+                        Spacer().frame(height: 40)
+                        InvoiceMetaView(invoice: invoice)
+                        Spacer().frame(height: 20)
+                        InvoiceNrView(invoice: invoice)
+                        Spacer().frame(height: 40)
+                        InvoiceHeadingView(invoice: invoice)
+                    }
+                    
+                    Group {
+                        Spacer().frame(height: 40)
+                        InvoiceItemsView(invoice: invoice)
+                        Spacer().frame(height: 40)
+                    }
+                    
+                    Group {
+                        InvoiceSubTotal(invoice: invoice)
+                        Spacer().frame(height: 20)
+                        InvoiceTaxations(invoice: invoice)
+                    }
+                    
+                    Group {
+                        Spacer().frame(height: 40)
+                        InvoiceTotal(invoice: invoice)
+                    }
+                    
+                    Spacer()
+                }
+            }
+            
+            if view == "preview" {
+                PDFView(nr: invoice.nr ?? "")
             }
         }
         .background(Color.white)
@@ -41,7 +65,15 @@ struct InvoiceView: View {
                     Label("Delete Invoice", systemImage: "trash")
                 }
             }
-
+            
+            ToolbarItem(placement: .primaryAction) {
+                Picker("", selection: $view) {
+                    Text("Edit").tag("edit")
+                    Text("Preview").tag("Preview")
+                }
+                .pickerStyle(.inline)
+            }
+            
             ToolbarItem(placement: .primaryAction) {
                 Button(action: {
                     let view = PDFView(nr: self.invoice.nr!)
@@ -88,10 +120,3 @@ struct InvoiceView: View {
         }
     }
 }
-
-//
-//struct InvoiceView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        InvoiceView()
-//    }
-//}

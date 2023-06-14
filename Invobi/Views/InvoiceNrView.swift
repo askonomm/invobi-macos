@@ -33,15 +33,11 @@ struct InvoiceNrView: View {
     }
     
     func onAppear() {
-        DispatchQueue.main.async {
-            self.itemNr = self.invoice.nr != nil ? "\(self.invoice.nr!)" : ""
-        }
+        self.itemNr = self.invoice.nr != nil ? "\(self.invoice.nr!)" : ""
     }
     
     func save() {
-        DispatchQueue.main.async {
-            self.invoice.nr = self.itemNr
-            try? self.context.save()
-        }
+        self.invoice.nr = self.itemNr
+        try? self.context.save()
     }
 }

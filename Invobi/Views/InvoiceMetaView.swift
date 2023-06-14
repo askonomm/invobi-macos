@@ -143,7 +143,7 @@ struct InvoiceMetaView: View {
                 .padding()
             }
             
-            Spacer()
+            Spacer().frame(width: 20)
             
             Button(action: {
                 showDateIssued = !showDateIssued
@@ -246,6 +246,8 @@ struct InvoiceMetaView: View {
                         .frame(maxWidth: .infinity)
                 }
             }
+            
+            Spacer()
         }
         .padding(.horizontal, 40)
     }

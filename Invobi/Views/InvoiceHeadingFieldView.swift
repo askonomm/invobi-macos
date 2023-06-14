@@ -48,11 +48,11 @@ struct InvoiceHeadingFieldView: View {
                 .offset(y: -2)
             }
             .padding(.horizontal, 10)
-            .padding(.vertical, 8)
+            .padding(.vertical, 6)
             .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).stroke(Color(hex: "#e5e5e5")))
             
             HStack(alignment: .top) {
-                Spacer()
+                
                 
                 Button(action: {
                     self.context.delete(self.field)
@@ -62,7 +62,9 @@ struct InvoiceHeadingFieldView: View {
                     .labelStyle(.iconOnly)
                 }
                 .buttonStyle(.plain)
-                .offset(x: 8, y: -8)
+                .offset(x: -8, y: -8)
+                
+                Spacer()
             }
         }
     }

@@ -68,7 +68,7 @@ struct ContentView: View {
                 }
             }
         }
-        .frame(minWidth: 900)
+        .frame(minWidth: 750)
     }
     
     private func onSelect(_ invoice: Invoice) {
@@ -81,13 +81,24 @@ struct ContentView: View {
     }
 
     private func addInvoice() -> Invoice {
-        let newItem = Invoice(context: context)
-        newItem.id = UUID.init()
-        newItem.nr = ""
-        newItem.createdAt = Date()
+        let invoice = Invoice(context: context)
+        invoice.id = UUID.init()
+        invoice.nr = ""
+        invoice.createdAt = Date()
 
         try? context.save()
-        return newItem
+        
+        let item = InvoiceItem(context: context)
+        item.id = UUID.init()
+        item.invoiceId = invoice.id
+        item.name = ""
+        item.qty = 1
+        item.price = 0
+        item.order = 0
+        
+        try? context.save()
+        
+        return invoice
     }
 }
 
