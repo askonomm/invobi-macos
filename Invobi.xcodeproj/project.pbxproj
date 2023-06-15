@@ -118,15 +118,15 @@
 				6DC74E962A30C5DF00386680 /* ContentView.swift */,
 				6D0BE76C2A34610000B439FD /* ListInvoiceItemView.swift */,
 				6DC74EC42A30EC2000386680 /* InvoiceView.swift */,
-				6D6196502A3779BA0015460E /* InvoiceMetaView.swift */,
 				6D0BE7702A34DAD400B439FD /* InvoiceNrView.swift */,
+				6D6196502A3779BA0015460E /* InvoiceMetaView.swift */,
 				6D0BE76E2A34DAB400B439FD /* InvoiceHeadingView.swift */,
 				6D0BE7762A35DD8300B439FD /* InvoiceHeadingFieldView.swift */,
 				6D6196522A3779CF0015460E /* InvoiceItemsView.swift */,
 				6DC8E5442A38F76B00EF6100 /* InvoiceSubTotal.swift */,
 				6DC8E5462A3926EB00EF6100 /* InvoiceTaxations.swift */,
-				6DC74EC62A30EE9D00386680 /* PDFView.swift */,
 				6DC8E5482A3932C000EF6100 /* InvoiceTotal.swift */,
+				6DC74EC62A30EE9D00386680 /* PDFView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
