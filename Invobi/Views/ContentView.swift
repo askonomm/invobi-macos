@@ -12,7 +12,7 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var context
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Invoice.createdAt, ascending: false)],
-        animation: .default)
+        animation: .none)
     private var invoices: FetchedResults<Invoice>
     @State private var navPath = NavigationPath()
     @State private var editInvoiceView = false

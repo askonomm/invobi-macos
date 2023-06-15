@@ -36,14 +36,14 @@ struct InvoiceView: View {
                     }
                     
                     Group {
-                        InvoiceSubTotal(invoice: invoice)
+                        InvoiceSubTotalView(invoice: invoice)
                         Spacer().frame(height: 15)
-                        InvoiceTaxations(invoice: invoice)
+                        InvoiceTaxationsView(invoice: invoice)
                     }
                     
                     Group {
                         Spacer().frame(height: 40)
-                        InvoiceTotal(invoice: invoice)
+                        InvoiceTotalView(invoice: invoice)
                         Spacer().frame(height: 40)
                     }
                     

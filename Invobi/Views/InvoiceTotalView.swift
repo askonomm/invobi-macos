@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct InvoiceTotal: View {
+struct InvoiceTotalView: View {
     @Environment(\.managedObjectContext) private var context
     @ObservedObject var invoice: Invoice
     

@@ -103,9 +103,6 @@ struct InvoiceItemsView: View {
                 
                 Spacer()
             }
-            .onAppear {
-                print(getItems())
-            }
             
             Spacer().frame(height: 15)
             

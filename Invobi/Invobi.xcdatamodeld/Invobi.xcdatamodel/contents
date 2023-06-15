@@ -11,7 +11,7 @@
         <attribute name="toName" optional="YES" attributeType="String"/>
         <relationship name="fields" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InvoiceField" inverseName="invoice" inverseEntity="InvoiceField"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InvoiceItem" inverseName="invoice" inverseEntity="InvoiceItem"/>
-        <relationship name="taxations" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InvoiceTaxation" inverseName="invoice" inverseEntity="InvoiceTaxation"/>
+        <relationship name="taxations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InvoiceTaxation" inverseName="invoice" inverseEntity="InvoiceTaxation"/>
     </entity>
     <entity name="InvoiceField" representedClassName="InvoiceField" syncable="YES" codeGenerationType="class">
         <attribute name="label" optional="YES" attributeType="String"/>
@@ -29,8 +29,9 @@
     </entity>
     <entity name="InvoiceTaxation" representedClassName="InvoiceTaxation" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="value" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
-        <attribute name="valueType" optional="YES" attributeType="String"/>
+        <attribute name="order" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="val" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="valType" optional="YES" attributeType="String"/>
         <relationship name="invoice" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Invoice" inverseName="taxations" inverseEntity="Invoice"/>
     </entity>
 </model>

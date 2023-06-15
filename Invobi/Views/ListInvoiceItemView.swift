@@ -86,7 +86,6 @@ struct ListInvoiceItemView: View {
     
     // Check if the invoice is overdue, and if it is, change the status to OVERDUE.
     private func checkIfOverdue() {
-        print(self.invoice)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             let status = self.invoice.status != nil ? self.invoice.status : "DRAFT"
             
