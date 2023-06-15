@@ -75,3 +75,29 @@ func currencySystemImageName(_ code: String) -> String {
         return ""
     }
 }
+
+func getDueInText(date: Date) -> String {
+    let dueDays = getDayDiff(Date.now, date)
+    
+    if dueDays > 1 {
+        return "Due in \(dueDays) days".uppercased()
+    }
+    
+    if dueDays == 1 {
+        return "Due tomorrow".uppercased()
+    }
+    
+    if dueDays == 0 {
+        return "Due today".uppercased()
+    }
+    
+    if dueDays == -1 {
+        return "Due yesterday".uppercased()
+    }
+    
+    if dueDays < -1 {
+        return "Due \(abs(dueDays)) days ago"
+    }
+    
+    return ""
+}

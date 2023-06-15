@@ -13,22 +13,38 @@ struct InvoiceNrView: View {
     @State private var itemNr = ""
     
     var body: some View {
-        HStack {
-            Text("Invoice #")
-            .font(.largeTitle)
-            .foregroundColor(Color.gray)
-            .fontWeight(.light)
+        VStack {
+            HStack {
+                Text("Invoice #")
+                    .font(.largeTitle)
+                    .foregroundColor(Color.gray)
+                    .fontWeight(.light)
+                
+                TextField("Invoice number", text: $itemNr, onCommit: save)
+                    .font(.largeTitle)
+                    .fontWeight(.regular)
+                    .textFieldStyle(.plain)
+                    .fixedSize()
+                    .offset(x: -6)
+                    .onDebouncedChange(of: $itemNr, debounceFor: 0.25, perform: { _ in
+                        save()
+                    })
+                    .onAppear(perform: onAppear)
+                
+                Spacer().frame(width: 10)
+                InvoiceMetaView(invoice: invoice)
+                Spacer()
+            }
             
-            TextField("Invoice number", text: $itemNr, onCommit: save)
-            .font(.largeTitle)
-            .fontWeight(.regular)
-            .textFieldStyle(.plain)
-            .offset(x: -6)
-            .onDebouncedChange(of: $itemNr, debounceFor: 0.25, perform: { _ in
-                save()
-            })
-            .onAppear(perform: onAppear)
+            Spacer().frame(height: 10)
+            
+            HStack {
+                Text(getDueInText(date: invoice.dueDate ?? Date.now))
+                    .foregroundColor(Color(hex: "#999"))
+                Spacer()
+            }
         }
+            
         .padding(.horizontal, 40)
     }
     

@@ -24,8 +24,6 @@ struct InvoiceView: View {
                 ScrollView {
                     Group {
                         Spacer().frame(height: 40)
-                        InvoiceMetaView(invoice: invoice)
-                        Spacer().frame(height: 20)
                         InvoiceNrView(invoice: invoice)
                         Spacer().frame(height: 40)
                         InvoiceHeadingView(invoice: invoice)
@@ -39,13 +37,14 @@ struct InvoiceView: View {
                     
                     Group {
                         InvoiceSubTotal(invoice: invoice)
-                        Spacer().frame(height: 20)
+                        Spacer().frame(height: 15)
                         InvoiceTaxations(invoice: invoice)
                     }
                     
                     Group {
                         Spacer().frame(height: 40)
                         InvoiceTotal(invoice: invoice)
+                        Spacer().frame(height: 40)
                     }
                     
                     Spacer()

@@ -32,7 +32,7 @@ struct InvoiceItemRowView: View {
             .fontWeight(.semibold)
             .lineLimit(1)
         }
-        .frame(width: 140)
+        .frame(width: 120)
     }
     
     private func onItemNameAppear() {
@@ -148,7 +148,7 @@ struct InvoiceItemsView: View {
                         .fontWeight(.regular)
                         .foregroundColor(Color(hex: "#777"))
                 }
-                .frame(width: 140)
+                .frame(width: 120)
                 
             }
             .frame(maxWidth: .infinity)
@@ -158,22 +158,27 @@ struct InvoiceItemsView: View {
                     HStack {
                         InvoiceItemRowView(item: item, currency: invoice.currency ?? "EUR")
                     }
+                    
                     HStack {
-                        Button(action: {
-                            context.delete(item)
-                            try? context.save()
-                        }) {
-                            Image(systemName: "minus.circle.fill")
-                                .resizable()
-                                .frame(width: 15, height: 15)
+                        if countItems() > 1 {
+                            Button(action: {
+                                context.delete(item)
+                                try? context.save()
+                            }) {
+                                Image(systemName: "minus.circle.fill")
+                                    .resizable()
+                                    .frame(width: 15, height: 15)
+                            }
+                            .buttonStyle(.plain)
+                            .offset(x:-26)
                         }
-                        .buttonStyle(.plain)
-                        .offset(x:-26)
                         
                         Spacer()
                     }
                 }
             }
+            
+            Spacer().frame(height: 15)
             
             Button(action: addItem) {
                 Text("Add item")
@@ -188,6 +193,10 @@ struct InvoiceItemsView: View {
         return items.filter { item in
             return item.invoiceId == self.invoice.id
         }
+    }
+    
+    private func countItems() -> Int {
+        return getItems().count
     }
     
     private func addItem() {

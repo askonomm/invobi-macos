@@ -10,11 +10,11 @@ struct InvoiceTotal: View {
     
     var body: some View {
         HStack {
-            Text("Total".uppercased())
-                .font(.callout)
-                .fontWeight(.semibold)
+            Text("Total")
+            .fontWeight(.semibold)
             Spacer()
             Text(calculateSubTotal(), format: .currency(code: invoice.currency ?? "EUR"))
+            .fontWeight(.semibold)
         }
         .padding(.top, 40)
         .padding(.horizontal, 40)

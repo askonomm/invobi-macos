@@ -210,6 +210,8 @@
 			dependencies = (
 			);
 			name = Invobi;
+			packageProductDependencies = (
+			);
 			productName = Invobi;
 			productReference = 6DC74E912A30C5DF00386680 /* Invobi.app */;
 			productType = "com.apple.product-type.application";
@@ -282,6 +284,8 @@
 				Base,
 			);
 			mainGroup = 6DC74E882A30C5DF00386680;
+			packageReferences = (
+			);
 			productRefGroup = 6DC74E922A30C5DF00386680 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
