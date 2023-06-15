@@ -82,20 +82,17 @@ struct ContentView: View {
 
     private func addInvoice() -> Invoice {
         let invoice = Invoice(context: context)
-        invoice.id = UUID.init()
         invoice.nr = ""
         invoice.createdAt = Date()
-
-        try? context.save()
         
         let item = InvoiceItem(context: context)
-        item.id = UUID.init()
-        item.invoiceId = invoice.id
         item.name = ""
         item.qty = 1
         item.price = 0
         item.order = 0
         
+        invoice.addToItems(item)
+
         try? context.save()
         
         return invoice

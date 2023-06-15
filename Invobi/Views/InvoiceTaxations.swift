@@ -26,17 +26,12 @@ struct InvoiceTaxations: View {
         .padding(.horizontal, 40)
     }
     
-    private func getItems() -> Array<InvoiceItem> {
-        return items.filter { item in
-            return item.invoiceId == self.invoice.id
-        }
-    }
-    
     private func calculateSubTotal() -> Decimal {
-        return getItems().reduce(0) { result, item in
-            let total: Decimal = (item.qty! as Decimal) * (item.price! as Decimal)
-            
-            return result + total
-        }
+        return 0
+//        return getItems().reduce(0) { result, item in
+//            let total: Decimal = (item.qty! as Decimal) * (item.price! as Decimal)
+//
+//            return result + total
+//        }
     }
 }

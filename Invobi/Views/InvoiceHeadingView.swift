@@ -3,10 +3,6 @@ import SwiftUI
 struct InvoiceHeadingLocationView: View {
     @Environment(\.managedObjectContext) private var context
     @ObservedObject var invoice: Invoice
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \InvoiceField.order, ascending: true)],
-        animation: .default)
-    private var fields: FetchedResults<InvoiceField>
     var location: String
     @State private var draggedField: InvoiceField?
     @State private var name = ""
@@ -42,19 +38,25 @@ struct InvoiceHeadingLocationView: View {
     }
     
     private func getFields() -> Array<InvoiceField> {
+        var fields: Array<InvoiceField> = []
+        
+        if invoice.fields != nil {
+            fields = invoice.fields!.allObjects as! [InvoiceField]
+        }
+        
         return fields.filter { field in
-            return field.location == self.location && field.invoiceId == self.invoice.id
+            return field.location == self.location
         }
     }
     
     private func addField() {
-        let newField = InvoiceField(context: context)
-        newField.id = UUID.init()
-        newField.invoiceId = invoice.id
-        newField.label = ""
-        newField.value = ""
-        newField.location = self.location
-        newField.order = getFields().last != nil ? getFields().last!.order + 1 : 0
+        let field = InvoiceField(context: context)
+        field.label = ""
+        field.value = ""
+        field.location = self.location
+        field.order = getFields().last != nil ? getFields().last!.order + 1 : 0
+        
+        invoice.addToFields(field)
 
         try? context.save()
     }

@@ -34,10 +34,8 @@ struct InvoiceHeadingFieldView: View {
                 
                 TextField("Value", text: $value, axis: .vertical)
                 .onAppear {
-                    DispatchQueue.main.async {
-                        if self.field.value != nil {
-                            self.value = self.field.value!
-                        }
+                    if self.field.value != nil {
+                        self.value = self.field.value!
                     }
                 }
                 .onDebouncedChange(of: $value, debounceFor: 0.25, perform: { _ in
@@ -52,8 +50,6 @@ struct InvoiceHeadingFieldView: View {
             .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).stroke(Color(hex: "#e5e5e5")))
             
             HStack(alignment: .top) {
-                
-                
                 Button(action: {
                     self.context.delete(self.field)
                 }) {

@@ -10,11 +10,7 @@ import SwiftUI
 struct InvoiceSubTotal: View {
     @Environment(\.managedObjectContext) private var context
     @ObservedObject var invoice: Invoice
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \InvoiceItem.order, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<InvoiceItem>
-    
+
     var body: some View {
         HStack {
             Text("Subtotal")
@@ -26,17 +22,17 @@ struct InvoiceSubTotal: View {
         .padding(.horizontal, 40)
     }
     
-    private func getItems() -> Array<InvoiceItem> {
-        return items.filter { item in
-            return item.invoiceId == self.invoice.id
-        }
-    }
-    
     private func calculateSubTotal() -> Decimal {
-        return getItems().reduce(0) { result, item in
-            let total: Decimal = (item.qty! as Decimal) * (item.price! as Decimal)
+        if invoice.items != nil {
+            let items = invoice.items!.allObjects as! [InvoiceItem]
             
-            return result + total
+            return items.reduce(0) { result, item in
+                let total: Decimal = (item.qty! as Decimal) * (item.price! as Decimal)
+                
+                return result + total
+            }
         }
+        
+        return 0
     }
 }

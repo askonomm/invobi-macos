@@ -9,6 +9,7 @@ import SwiftUI
 
 struct InvoiceItemRowView: View {
     @Environment(\.managedObjectContext) private var context
+    @ObservedObject var invoice: Invoice
     @ObservedObject var item: InvoiceItem
     var currency: String
     @State private var itemName = ""
@@ -69,6 +70,7 @@ struct InvoiceItemRowView: View {
     }
     
     private func saveItemQTY() {
+        self.invoice.objectWillChange.send()
         self.item.qty = (self.itemQTY) as NSDecimalNumber
         try? context.save()
         
@@ -76,6 +78,7 @@ struct InvoiceItemRowView: View {
     }
     
     private func saveItemPrice() {
+        self.invoice.objectWillChange.send()
         self.item.price = (self.itemPrice) as NSDecimalNumber
         try? context.save()
         
@@ -89,10 +92,6 @@ struct InvoiceItemRowView: View {
 
 struct InvoiceItemsView: View {
     @Environment(\.managedObjectContext) private var context
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \InvoiceItem.order, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<InvoiceItem>
     @ObservedObject var invoice: Invoice
 
     var body: some View {
@@ -103,6 +102,9 @@ struct InvoiceItemsView: View {
                 .fontWeight(.semibold)
                 
                 Spacer()
+            }
+            .onAppear {
+                print(getItems())
             }
             
             Spacer().frame(height: 15)
@@ -153,12 +155,12 @@ struct InvoiceItemsView: View {
             }
             .frame(maxWidth: .infinity)
             
-            ForEach(getItems()) { item in
+            ForEach(getItems(), id: \.self) { item in
                 ZStack {
                     HStack {
-                        InvoiceItemRowView(item: item, currency: invoice.currency ?? "EUR")
+                        InvoiceItemRowView(invoice: invoice, item: item, currency: invoice.currency ?? "EUR")
                     }
-                    
+
                     HStack {
                         if countItems() > 1 {
                             Button(action: {
@@ -172,7 +174,7 @@ struct InvoiceItemsView: View {
                             .buttonStyle(.plain)
                             .offset(x:-26)
                         }
-                        
+
                         Spacer()
                     }
                 }
@@ -190,9 +192,11 @@ struct InvoiceItemsView: View {
     }
     
     private func getItems() -> Array<InvoiceItem> {
-        return items.filter { item in
-            return item.invoiceId == self.invoice.id
+        if invoice.items != nil {
+            return invoice.items!.allObjects as! [InvoiceItem]
         }
+        
+        return []
     }
     
     private func countItems() -> Int {
@@ -201,12 +205,12 @@ struct InvoiceItemsView: View {
     
     private func addItem() {
         let item = InvoiceItem(context: context)
-        item.id = UUID.init()
-        item.invoiceId = invoice.id
         item.name = ""
         item.qty = 1
         item.price = 0
         item.order = getItems().last != nil ? getItems().last!.order + 1 : 0
+        
+        invoice.addToItems(item)
 
         try? context.save()
     }
