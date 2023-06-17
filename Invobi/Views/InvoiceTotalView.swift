@@ -18,16 +18,30 @@ struct InvoiceTotalView: View {
     }
     
     private func calculateTotal() -> Decimal {
-        if invoice.items != nil {
-            let items = invoice.items!.allObjects as! [InvoiceItem]
+        if invoice.items == nil {
+            return 0
+        }
+
+        let items = invoice.items!.allObjects as! [InvoiceItem]
+        
+        // get subtotal
+        let subTotal: Decimal = items.reduce(0) { result, item in
+            let total: Decimal = (item.qty! as Decimal) * (item.price! as Decimal)
             
-            return items.reduce(0) { result, item in
-                let total: Decimal = (item.qty! as Decimal) * (item.price! as Decimal)
-                
-                return result + total
+            return result + total
+        }
+        
+        // get total taxed
+        var taxedTotal: Decimal = 0
+        
+        if invoice.taxations != nil {
+            let taxations = invoice.taxations!.allObjects as! [InvoiceTaxation]
+            
+            taxedTotal = taxations.reduce(0) { result, item in
+                return result + ((item.percentage! as Decimal / 100) * subTotal)
             }
         }
         
-        return 0
+        return subTotal + taxedTotal
     }
 }

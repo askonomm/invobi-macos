@@ -97,9 +97,8 @@ struct InvoiceItemsView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text("Items".uppercased())
-                .font(.callout)
-                .fontWeight(.semibold)
+                Text("Items")
+                .font(.title3)
                 
                 Spacer()
             }

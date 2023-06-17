@@ -77,9 +77,8 @@ struct InvoiceHeadingView: View {
                 VStack(alignment: .leading) {
                     HStack {
                         VStack(alignment: .leading) {
-                            Text("From".uppercased())
-                            .font(.callout)
-                            .fontWeight(.semibold)
+                            Text("From")
+                            .font(.title3)
                             
                             InvoiceHeadingLocationView(invoice: invoice, location: "FROM")
                             
@@ -92,9 +91,8 @@ struct InvoiceHeadingView: View {
                 VStack(alignment: .leading) {
                     HStack {
                         VStack(alignment: .leading) {
-                            Text("To".uppercased())
-                            .font(.callout)
-                            .fontWeight(.semibold)
+                            Text("To")
+                            .font(.title3)
                             
                             InvoiceHeadingLocationView(invoice: invoice, location: "TO")
                             

@@ -11,33 +11,27 @@ struct InvoiceTaxationView: View {
     @Environment(\.managedObjectContext) private var context
     @ObservedObject var invoice: Invoice
     @ObservedObject var taxation: InvoiceTaxation
-    @State private var val: Decimal = 0
-    @State private var valType = "PERCENTAGE"
+    @State private var percentage: Decimal = 0
     @State private var name = ""
     
     var body: some View {
         HStack {
-            NumberFieldView(value: $val, onAppear: onValAppear, save: saveVal)
+            NumberFieldView(value: $percentage, onAppear: onPercentageAppear, save: savePercentage)
             .fixedSize()
             Text("%")
             .offset(x: -4)
-            Spacer().frame(width: 15)
-            TextFieldView(label: "Name", value: $name, onAppear: onNameAppear, save: saveName)
+            Spacer().frame(width: 10)
+            TextFieldView(label: "Taxation name", value: $name, onAppear: onNameAppear, save: saveName)
             .fixedSize()
             Spacer()
             Text(calculateTaxTotal(), format: .currency(code: invoice.currency ?? "EUR"))
                 .fontWeight(.semibold)
         }
-        .onAppear {
-            if self.taxation.valType != nil {
-                self.valType = self.taxation.valType!
-            }
-        }
     }
     
-    private func onValAppear() {
-        if self.taxation.val != nil {
-            self.val = self.taxation.val! as Decimal
+    private func onPercentageAppear() {
+        if self.taxation.percentage != nil {
+            self.percentage = self.taxation.percentage! as Decimal
         }
     }
     
@@ -47,9 +41,9 @@ struct InvoiceTaxationView: View {
         }
     }
     
-    private func saveVal() {
+    private func savePercentage() {
         self.invoice.objectWillChange.send()
-        self.taxation.val = (self.val) as NSDecimalNumber
+        self.taxation.percentage = (self.percentage) as NSDecimalNumber
         
         try? context.save()
     }
@@ -74,12 +68,7 @@ struct InvoiceTaxationView: View {
             return result + total
         }
         
-        if self.valType == "PERCENTAGE" {
-            // todo: substract discounts from subtotal for future if there are discounts
-            return (self.val / 100) * subTotal
-        }
-        
-        return self.val
+        return (self.percentage / 100) * subTotal
     }
 }
 
@@ -90,7 +79,24 @@ struct InvoiceTaxationsView: View {
     var body: some View {
         VStack {
             ForEach(getTaxations(), id: \.self) { taxation in
-                InvoiceTaxationView(invoice: invoice, taxation: taxation)
+                ZStack {
+                    InvoiceTaxationView(invoice: invoice, taxation: taxation)
+                    
+                    HStack {
+                        Button(action: {
+                            context.delete(taxation)
+                            try? context.save()
+                        }) {
+                            Image(systemName: "minus.circle.fill")
+                                .resizable()
+                                .frame(width: 15, height: 15)
+                        }
+                        .buttonStyle(.plain)
+                        .offset(x:-26)
+                        
+                        Spacer()
+                    }
+                }
             }
             
             if getTaxations().count > 0 {
@@ -119,8 +125,7 @@ struct InvoiceTaxationsView: View {
     private func addTaxation() {
         let taxation = InvoiceTaxation(context: context);
         taxation.name = ""
-        taxation.val = 0
-        taxation.valType = "PERCENTAGE"
+        taxation.percentage = 0
         taxation.order = getTaxations().last != nil ? getTaxations().last!.order + 1 : 0
     
         invoice.addToTaxations(taxation)

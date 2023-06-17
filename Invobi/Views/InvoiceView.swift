@@ -44,7 +44,8 @@ struct InvoiceView: View {
                     Group {
                         Spacer().frame(height: 40)
                         InvoiceTotalView(invoice: invoice)
-                        Spacer().frame(height: 40)
+                        Spacer().frame(height: 15)
+                        InvoicePaymentDetailsView(invoice: invoice)
                     }
                     
                     Spacer()
@@ -52,7 +53,7 @@ struct InvoiceView: View {
             }
             
             if view == "preview" {
-                PDFView(nr: invoice.nr ?? "")
+                InvoicePreviewView(invoice: invoice)
             }
         }
         .background(Color.white)
@@ -68,7 +69,7 @@ struct InvoiceView: View {
             ToolbarItem(placement: .primaryAction) {
                 Picker("", selection: $view) {
                     Text("Edit").tag("edit")
-                    Text("Preview").tag("Preview")
+                    Text("Preview").tag("preview")
                 }
                 .pickerStyle(.inline)
             }
