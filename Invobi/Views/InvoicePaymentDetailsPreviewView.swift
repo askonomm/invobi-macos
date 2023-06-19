@@ -27,39 +27,33 @@ struct InvoicePaymentsDetailPreviewView: View {
 
 struct InvoicePaymentDetailsPreviewView: View {
     @Environment(\.managedObjectContext) private var context
+    @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var invoice: Invoice
     
     var body: some View {
-        VStack {
-            if getFields().count > 0 {
-                Spacer().frame(height: 25)
-                VStack {
-                    HStack {
-                        Text("Payment Details")
-                            .font(.title2)
-                            .fontWeight(.light)
-                            .foregroundColor(Color(hex: "#999"))
-                        
-                        Spacer()
-                    }
+        if getFields().count > 0 {
+            VStack {
+                HStack {
+                    Text("Payment Details")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                        .foregroundColor(colorScheme == .dark ? Color(hex: "#eee") : Color(hex: "#333"))
                     
-                    Spacer().frame(height: 15)
-                    
-                    ForEach(Array(getFields().enumerated()), id: \.element) { index, field in
-                        if index > 0 {
-                            Spacer().frame(height: 15)
-                        }
-                        
-                        InvoicePaymentsDetailPreviewView(invoice: invoice, field: field)
-                    }
+                    Spacer()
                 }
-                .padding(.all, 40)
-                .background(Color(hex: "#fafafa"))
-                .border(width: 1, edges: [.top], color: Color(hex: "#e5e5e5"))
-                .frame(maxWidth: .infinity)
-            } else {
+                
                 Spacer().frame(height: 15)
+                
+                ForEach(Array(getFields().enumerated()), id: \.element) { index, field in
+                    if index > 0 {
+                        Spacer().frame(height: 10)
+                    }
+                    
+                    InvoicePaymentsDetailPreviewView(invoice: invoice, field: field)
+                }
             }
+            .padding(.all, 40)
+            .border(width: 1, edges: [.top], color: colorScheme == .dark ? Color(hex: "333") : Color(hex: "#e5e5e5"))
         }
     }
     

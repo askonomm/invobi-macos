@@ -41,6 +41,7 @@
 		6DC8E5582A3F2B6F00EF6100 /* InvoiceItemsPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC8E5572A3F2B6F00EF6100 /* InvoiceItemsPreviewView.swift */; };
 		6DC8E55A2A40B2B200EF6100 /* InvoiceTaxationsPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC8E5592A40B2B200EF6100 /* InvoiceTaxationsPreviewView.swift */; };
 		6DC8E55C2A40B54D00EF6100 /* InvoicePaymentDetailsPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC8E55B2A40B54D00EF6100 /* InvoicePaymentDetailsPreviewView.swift */; };
+		6DC8E55E2A40F5D100EF6100 /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC8E55D2A40F5D100EF6100 /* SeparatorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,7 @@
 		6DC8E5572A3F2B6F00EF6100 /* InvoiceItemsPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceItemsPreviewView.swift; sourceTree = "<group>"; };
 		6DC8E5592A40B2B200EF6100 /* InvoiceTaxationsPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceTaxationsPreviewView.swift; sourceTree = "<group>"; };
 		6DC8E55B2A40B54D00EF6100 /* InvoicePaymentDetailsPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoicePaymentDetailsPreviewView.swift; sourceTree = "<group>"; };
+		6DC8E55D2A40F5D100EF6100 /* SeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 				6DC8E54D2A3C575500EF6100 /* InvoicePaymentDetailsView.swift */,
 				6DC8E55B2A40B54D00EF6100 /* InvoicePaymentDetailsPreviewView.swift */,
 				6DC74EC62A30EE9D00386680 /* PDFView.swift */,
+				6DC8E55D2A40F5D100EF6100 /* SeparatorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				6D0BE76A2A33DBD700B439FD /* Utils.swift in Sources */,
 				6DC74EC72A30EE9D00386680 /* PDFView.swift in Sources */,
 				6DC8E5452A38F76B00EF6100 /* InvoiceSubTotalView.swift in Sources */,
+				6DC8E55E2A40F5D100EF6100 /* SeparatorView.swift in Sources */,
 				6DC8E5562A3F046200EF6100 /* InvoiceHeadingFieldPreviewView.swift in Sources */,
 				6DC8E54E2A3C575500EF6100 /* InvoicePaymentDetailsView.swift in Sources */,
 				6DC74E952A30C5DF00386680 /* InvobiApp.swift in Sources */,

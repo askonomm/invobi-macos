@@ -2,6 +2,7 @@ import SwiftUI
 
 struct InvoiceTotalView: View {
     @Environment(\.managedObjectContext) private var context
+    @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var invoice: Invoice
     
     var body: some View {
@@ -12,9 +13,8 @@ struct InvoiceTotalView: View {
             Text(calculateTotal(), format: .currency(code: invoice.currency ?? "EUR"))
             .fontWeight(.semibold)
         }
-        .padding(.top, 40)
-        .padding(.horizontal, 40)
-        .border(width: 1, edges: [.top], color: Color(hex: "#e5e5e5"))
+        .padding(.all, 40)
+        .border(width: 1, edges: [.top], color: colorScheme == .dark ? Color(hex: "#333") : Color(hex: "#e5e5e5"))
     }
     
     private func calculateTotal() -> Decimal {

@@ -9,15 +9,12 @@ import SwiftUI
 
 struct InvoiceMetaView: View {
     @Environment(\.managedObjectContext) private var context
+    @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var invoice: Invoice
     private let statuses = ["DRAFT", "PAID", "UNPAID", "OVERDUE"]
     @State private var status = "DRAFT"
     private let currencies = ["EUR", "USD"]
     @State private var showMeta = false
-    @State private var hoveringStatusMenu = false
-    @State private var hoveringCurrencyMenu = false
-    @State private var hoveringDateIssuedMenu = false
-    @State private var hoveringDueDateMenu = false
     @State private var currency = "EUR"
     @State private var dateIssued = Date.now
     @State private var showDateIssued = false
@@ -31,13 +28,13 @@ struct InvoiceMetaView: View {
             }) {
                 Image(systemName: "ellipsis")
                 .resizable()
-                .foregroundColor(Color(hex: "#999"))
+                .foregroundColor(colorScheme == .dark ? Color(hex: "#777") : Color(hex: "#999"))
                 .frame(width: 22, height: 5)
                 .padding(10)
                 .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .background(showMeta ? Color(hex: "#eee") : Color.white)
+            .background(showMeta ? colorScheme == .dark ? Color(hex: "#333") : Color(hex: "#eee") : colorScheme == .dark ? Color(hex: "#272727") : Color.white)
             .cornerRadius(10)
             .popover(isPresented: $showMeta, arrowEdge: .bottom) {
                 VStack(alignment: .leading) {
@@ -58,9 +55,6 @@ struct InvoiceMetaView: View {
                         } label: {
                             Text(currency)
                         }
-                        .onChange(of: hoveringCurrencyMenu) { _ in
-                            self.hoveringCurrencyMenu = false
-                        }
                         .onAppear {
                             if self.invoice.currency != nil {
                                 self.currency = self.invoice.currency!
@@ -68,11 +62,7 @@ struct InvoiceMetaView: View {
                         }
                         .menuStyle(.borderlessButton)
                         .frame(width: 45)
-                        .overlay(RoundedRectangle(cornerRadius: 3, style: .continuous).stroke(hoveringCurrencyMenu ? Color(hex: "#bbb") : Color(hex: "#ccc")))
-                        .onHover { over in
-                            self.hoveringCurrencyMenu = over
-                            
-                        }
+                        .overlay(RoundedRectangle(cornerRadius: 3, style: .continuous).stroke(colorScheme == .dark ? Color(hex: "#777") : Color(hex: "#ccc")))
                         .offset(x: -8)
                         
                         Spacer()
@@ -95,9 +85,6 @@ struct InvoiceMetaView: View {
                         } label: {
                             Text(status.capitalized)
                         }
-                        .onChange(of: hoveringStatusMenu) { _ in
-                            self.hoveringStatusMenu = false
-                        }
                         .onAppear {
                             if self.invoice.status != nil {
                                 self.status = self.invoice.status!
@@ -105,11 +92,7 @@ struct InvoiceMetaView: View {
                         }
                         .menuStyle(.borderlessButton)
                         .frame(width: 70)
-                        .overlay(RoundedRectangle(cornerRadius: 3, style: .continuous).stroke(hoveringStatusMenu ? Color(hex: "#bbb") : Color(hex: "#ccc")))
-                        .onHover { over in
-                            self.hoveringStatusMenu = over
-                            
-                        }
+                        .overlay(RoundedRectangle(cornerRadius: 3, style: .continuous).stroke(colorScheme == .dark ? Color(hex: "#777") : Color(hex: "#ccc")))
                         .offset(x: -8)
                         
                         Spacer()
@@ -138,13 +121,7 @@ struct InvoiceMetaView: View {
                         }
                         .contentShape(Rectangle())
                         .buttonStyle(.plain)
-                        .onChange(of: hoveringDateIssuedMenu) { _ in
-                            self.hoveringDateIssuedMenu = false
-                        }
-                        .overlay(RoundedRectangle(cornerRadius: 3, style: .continuous).stroke(hoveringDateIssuedMenu ? Color(hex: "#bbb") : Color(hex: "#ccc")))
-                        .onHover { over in
-                            self.hoveringDateIssuedMenu = over
-                        }
+                        .overlay(RoundedRectangle(cornerRadius: 3, style: .continuous).stroke(colorScheme == .dark ? Color(hex: "#777") : Color(hex: "#ccc")))
                         .onAppear {
                             DispatchQueue.main.async {
                                 if self.invoice.dateIssued != nil {
@@ -191,13 +168,7 @@ struct InvoiceMetaView: View {
                         }
                         .contentShape(Rectangle())
                         .buttonStyle(.plain)
-                        .onChange(of: hoveringDueDateMenu) { _ in
-                            self.hoveringDueDateMenu = false
-                        }
-                        .overlay(RoundedRectangle(cornerRadius: 3, style: .continuous).stroke(hoveringDueDateMenu ? Color(hex: "#bbb") : Color(hex: "#ccc")))
-                        .onHover { over in
-                            self.hoveringDueDateMenu = over
-                        }
+                        .overlay(RoundedRectangle(cornerRadius: 3, style: .continuous).stroke(colorScheme == .dark ? Color(hex: "#777") : Color(hex: "#ccc")))
                         .onAppear {
                             DispatchQueue.main.async {
                                 if self.invoice.dueDate != nil {

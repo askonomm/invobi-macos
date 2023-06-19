@@ -9,6 +9,7 @@ import SwiftUI
 
 struct InvoiceItemRowView: View {
     @Environment(\.managedObjectContext) private var context
+    @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var invoice: Invoice
     @ObservedObject var item: InvoiceItem
     var currency: String
@@ -92,6 +93,7 @@ struct InvoiceItemRowView: View {
 
 struct InvoiceItemsView: View {
     @Environment(\.managedObjectContext) private var context
+    @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var invoice: Invoice
 
     var body: some View {
@@ -99,8 +101,8 @@ struct InvoiceItemsView: View {
             HStack {
                 Text("Items")
                     .font(.title2)
-                    .fontWeight(.light)
-                    .foregroundColor(Color(hex: "#999"))
+                    .fontWeight(.semibold)
+                    .foregroundColor(colorScheme == .dark ? Color(hex: "#eee") : Color(hex: "#333"))
                 
                 Spacer()
             }
@@ -112,7 +114,7 @@ struct InvoiceItemsView: View {
                     Text("Name".uppercased())
                         .font(.callout)
                         .fontWeight(.regular)
-                        .foregroundColor(Color(hex: "#777"))
+                        .foregroundColor(colorScheme == .dark ? Color(hex: "#999") : Color(hex: "#777"))
                     Spacer()
                 }
                 .frame(minWidth: 200, maxWidth: .infinity)
@@ -123,7 +125,7 @@ struct InvoiceItemsView: View {
                     Text("QTY".uppercased())
                         .font(.callout)
                         .fontWeight(.regular)
-                        .foregroundColor(Color(hex: "#777"))
+                        .foregroundColor(colorScheme == .dark ? Color(hex: "#999") : Color(hex: "#777"))
                     Spacer()
                 }
                 .frame(width: 65)
@@ -134,7 +136,7 @@ struct InvoiceItemsView: View {
                     Text("Price".uppercased())
                         .font(.callout)
                         .fontWeight(.regular)
-                        .foregroundColor(Color(hex: "#777"))
+                        .foregroundColor(colorScheme == .dark ? Color(hex: "#999") : Color(hex: "#777"))
                     Spacer()
                 }
                 .frame(width: 100)
@@ -146,7 +148,7 @@ struct InvoiceItemsView: View {
                     Text("Total".uppercased())
                         .font(.callout)
                         .fontWeight(.regular)
-                        .foregroundColor(Color(hex: "#777"))
+                        .foregroundColor(colorScheme == .dark ? Color(hex: "#999") : Color(hex: "#777"))
                 }
                 .frame(width: 120)
                 
@@ -154,6 +156,8 @@ struct InvoiceItemsView: View {
             .frame(maxWidth: .infinity)
             
             ForEach(getItems(), id: \.self) { item in
+                Spacer().frame(height: 15)
+                
                 ZStack {
                     HStack {
                         InvoiceItemRowView(invoice: invoice, item: item, currency: invoice.currency ?? "EUR")
@@ -170,7 +174,7 @@ struct InvoiceItemsView: View {
                                     .frame(width: 15, height: 15)
                             }
                             .buttonStyle(.plain)
-                            .offset(x:-26)
+                            .offset(x: -8, y: -14)
                         }
 
                         Spacer()
@@ -185,8 +189,7 @@ struct InvoiceItemsView: View {
             }
         }
         .padding(.all, 40)
-        .background(Color(hex: "#fafafa"))
-        .border(width: 1, edges: [.top, .bottom], color: Color(hex: "#e5e5e5"))
+        .border(width: 1, edges: [.top, .bottom], color: colorScheme == .dark ? Color(hex: "#333") : Color(hex: "#e5e5e5"))
     }
     
     private func getItems() -> Array<InvoiceItem> {

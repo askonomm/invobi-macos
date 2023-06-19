@@ -78,7 +78,11 @@ struct InvoiceTaxationsView: View {
 
     var body: some View {
         VStack {
-            ForEach(getTaxations(), id: \.self) { taxation in
+            ForEach(Array(getTaxations().enumerated()), id: \.element) { index, taxation in
+                if index > 0 {
+                    Spacer().frame(height: 15)
+                }
+                
                 ZStack {
                     InvoiceTaxationView(invoice: invoice, taxation: taxation)
                     
@@ -92,7 +96,7 @@ struct InvoiceTaxationsView: View {
                                 .frame(width: 15, height: 15)
                         }
                         .buttonStyle(.plain)
-                        .offset(x:-26)
+                        .offset(x: -8, y: -14)
                         
                         Spacer()
                     }

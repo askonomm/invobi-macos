@@ -10,6 +10,7 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var context
+    @Environment(\.colorScheme) private var colorScheme
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Invoice.createdAt, ascending: false)],
         animation: .none)
@@ -39,7 +40,7 @@ struct ContentView: View {
                     }
                 }.frame(maxWidth: .infinity).padding(40)
             }
-            .background(Color.white)
+            .background(colorScheme == .dark ? Color(hex: "#191919") : Color.white)
             .navigationTitle("Invoices")
             .navigationDestination(for: Invoice.self) { invoice in
                 InvoiceView(invoice: invoice, onDelete: onDelete)

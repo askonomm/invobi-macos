@@ -75,6 +75,7 @@ struct InvoiceItemRowPreviewView: View {
 
 struct InvoiceItemsPreviewView: View {
     @Environment(\.managedObjectContext) private var context
+    @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var invoice: Invoice
 
     var body: some View {
@@ -82,8 +83,8 @@ struct InvoiceItemsPreviewView: View {
             HStack {
                 Text("Items")
                 .font(.title2)
-                .fontWeight(.light)
-                .foregroundColor(Color(hex: "#999"))
+                .fontWeight(.semibold)
+                .foregroundColor(colorScheme == .dark ? Color(hex: "#eee") : Color(hex: "#333"))
                 
                 Spacer()
             }
@@ -95,7 +96,7 @@ struct InvoiceItemsPreviewView: View {
                     Text("Name".uppercased())
                         .font(.callout)
                         .fontWeight(.regular)
-                        .foregroundColor(Color(hex: "#777"))
+                        .foregroundColor(colorScheme == .dark ? Color(hex: "#999") : Color(hex: "#777"))
                     Spacer()
                 }
                 .frame(minWidth: 200, maxWidth: .infinity)
@@ -106,7 +107,7 @@ struct InvoiceItemsPreviewView: View {
                     Text("QTY".uppercased())
                         .font(.callout)
                         .fontWeight(.regular)
-                        .foregroundColor(Color(hex: "#777"))
+                        .foregroundColor(colorScheme == .dark ? Color(hex: "#999") : Color(hex: "#777"))
                     Spacer()
                 }
                 .frame(width: 65)
@@ -117,7 +118,7 @@ struct InvoiceItemsPreviewView: View {
                     Text("Price".uppercased())
                         .font(.callout)
                         .fontWeight(.regular)
-                        .foregroundColor(Color(hex: "#777"))
+                        .foregroundColor(colorScheme == .dark ? Color(hex: "#999") : Color(hex: "#777"))
                     Spacer()
                 }
                 .frame(width: 100)
@@ -129,7 +130,7 @@ struct InvoiceItemsPreviewView: View {
                     Text("Total".uppercased())
                         .font(.callout)
                         .fontWeight(.regular)
-                        .foregroundColor(Color(hex: "#777"))
+                        .foregroundColor(colorScheme == .dark ? Color(hex: "#999") : Color(hex: "#777"))
                 }
                 .frame(width: 120)
                 
@@ -144,8 +145,7 @@ struct InvoiceItemsPreviewView: View {
             }
         }
         .padding(.all, 40)
-        .background(Color(hex: "#fafafa"))
-        .border(width: 1, edges: [.top, .bottom], color: Color(hex: "#e5e5e5"))
+        .border(width: 1, edges: [.top, .bottom], color: colorScheme == .dark ? Color(hex: "#333") : Color(hex: "#e5e5e5"))
     }
     
     private func getItems() -> Array<InvoiceItem> {

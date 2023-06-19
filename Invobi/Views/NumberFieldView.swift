@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NumberFieldView: View {
+    @Environment(\.colorScheme) private var colorScheme
     var label: String = ""
     @Binding var value: Decimal
     var onAppear: () -> Void
@@ -25,8 +26,7 @@ struct NumberFieldView: View {
         .padding(.leading, 10)
         .padding(.trailing, 6)
         .padding(.vertical, 6)
-        .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-        .overlay(RoundedRectangle(cornerRadius: 8, style: .continuous).stroke(Color(hex: "#e5e5e5")))
+        .overlay(RoundedRectangle(cornerRadius: 8, style: .continuous).stroke(colorScheme == .dark ? Color(hex: "#333") : Color(hex: "#e5e5e5")))
     }
 }

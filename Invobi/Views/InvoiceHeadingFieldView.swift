@@ -9,6 +9,7 @@ import SwiftUI
 
 struct InvoiceHeadingFieldView: View {
     @Environment(\.managedObjectContext) private var context
+    @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var field: InvoiceField
     @State private var label = ""
     @State private var value = ""
@@ -47,7 +48,7 @@ struct InvoiceHeadingFieldView: View {
             }
             .padding(.horizontal, 10)
             .padding(.vertical, 6)
-            .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).stroke(Color(hex: "#e5e5e5")))
+            .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).stroke(colorScheme == .dark ? Color(hex: "#333") : Color(hex: "#e5e5e5")))
             
             HStack(alignment: .top) {
                 Button(action: {

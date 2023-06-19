@@ -81,6 +81,7 @@ struct InvoiceHeadingLocationView: View {
 
 struct InvoiceHeadingView: View {
     @Environment(\.managedObjectContext) private var context
+    @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var invoice: Invoice
 
     let columns = [
@@ -96,8 +97,8 @@ struct InvoiceHeadingView: View {
                         VStack(alignment: .leading) {
                             Text("From")
                                 .font(.title2)
-                                .fontWeight(.light)
-                                .foregroundColor(Color(hex: "#999"))
+                                .fontWeight(.semibold)
+                                .foregroundColor(colorScheme == .dark ? Color(hex: "#eee") : Color(hex: "#333"))
                             
                             InvoiceHeadingLocationView(invoice: invoice, location: "FROM")
                             
@@ -112,8 +113,8 @@ struct InvoiceHeadingView: View {
                         VStack(alignment: .leading) {
                             Text("To")
                                 .font(.title2)
-                                .fontWeight(.light)
-                                .foregroundColor(Color(hex: "#999"))
+                                .fontWeight(.semibold)
+                                .foregroundColor(colorScheme == .dark ? Color(hex: "#eee") : Color(hex: "#333"))
                             
                             InvoiceHeadingLocationView(invoice: invoice, location: "TO")
                             

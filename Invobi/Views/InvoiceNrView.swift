@@ -9,6 +9,7 @@ import SwiftUI
 
 struct InvoiceNrView: View {
     @Environment(\.managedObjectContext) private var context
+    @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var invoice: Invoice
     @State private var itemNr = ""
     
@@ -40,7 +41,7 @@ struct InvoiceNrView: View {
             
             HStack {
                 Text(getDueInText(date: invoice.dueDate ?? Date.now))
-                    .foregroundColor(Color(hex: "#999"))
+                    .foregroundColor(colorScheme == .dark ? Color(hex: "#bbb") : Color(hex: "#666"))
                 Spacer()
             }
         }

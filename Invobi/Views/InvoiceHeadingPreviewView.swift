@@ -12,12 +12,12 @@ struct InvoiceHeadingLocationPreviewView: View {
             // Name
             if location == "FROM" && invoice.fromName != nil {
                 Text(invoice.fromName!)
-                    .font(.title2)
+                    .font(.title3)
             }
             
             if location == "TO" && invoice.toName != nil {
                 Text(invoice.toName!)
-                    .font(.title2)
+                    .font(.title3)
             }
             
             // Fields
@@ -47,6 +47,7 @@ struct InvoiceHeadingLocationPreviewView: View {
 
 struct InvoiceHeadingPreviewView: View {
     @Environment(\.managedObjectContext) private var context
+    @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var invoice: Invoice
 
     let columns = [
@@ -62,8 +63,8 @@ struct InvoiceHeadingPreviewView: View {
                         VStack(alignment: .leading) {
                             Text("From")
                             .font(.title2)
-                            .fontWeight(.light)
-                            .foregroundColor(Color(hex: "#999"))
+                            .fontWeight(.semibold)
+                            .foregroundColor(colorScheme == .dark ? Color(hex: "#eee") : Color(hex: "#333"))
                             
                             Spacer().frame(height: 10)
                             
@@ -80,8 +81,8 @@ struct InvoiceHeadingPreviewView: View {
                         VStack(alignment: .leading) {
                             Text("To")
                             .font(.title2)
-                            .fontWeight(.light)
-                            .foregroundColor(Color(hex: "#999"))
+                            .fontWeight(.semibold)
+                            .foregroundColor(colorScheme == .dark ? Color(hex: "#eee") : Color(hex: "#333"))
                             
                             Spacer().frame(height: 10)
                             

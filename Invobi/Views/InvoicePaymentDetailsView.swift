@@ -52,18 +52,18 @@ struct InvoicePaymentsDetailView: View {
 
 struct InvoicePaymentDetailsView: View {
     @Environment(\.managedObjectContext) private var context
+    @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var invoice: Invoice
     
     var body: some View {
         VStack {
             if getFields().count > 0 {
-                Spacer().frame(height: 25)
                 VStack {
                     HStack {
                         Text("Payment Details")
                             .font(.title2)
-                            .fontWeight(.light)
-                            .foregroundColor(Color(hex: "#999"))
+                            .fontWeight(.semibold)
+                            .foregroundColor(colorScheme == .dark ? Color(hex: "#eee") : Color(hex: "#333"))
                         
                         Spacer()
                     }
@@ -84,7 +84,7 @@ struct InvoicePaymentDetailsView: View {
                                         .frame(width: 15, height: 15)
                                 }
                                 .buttonStyle(.plain)
-                                .offset(x:-26)
+                                .offset(x: -8, y: -14)
 
                                 Spacer()
                             }
@@ -103,8 +103,7 @@ struct InvoicePaymentDetailsView: View {
                     
                 }
                 .padding(.all, 40)
-                .background(Color(hex: "#fafafa"))
-                .border(width: 1, edges: [.top], color: Color(hex: "#e5e5e5"))
+                .border(width: 1, edges: [.top, .bottom], color: colorScheme == .dark ? Color(hex: "#333") : Color(hex: "#e5e5e5"))
                 .frame(maxWidth: .infinity)
             } else {
                 HStack {
@@ -114,9 +113,8 @@ struct InvoicePaymentDetailsView: View {
                     
                     Spacer()
                 }
-                .padding(.horizontal, 40)
-                
-                Spacer().frame(height: 40)
+                .padding(.all, 40)
+                .border(width: 1, edges: [.top, .bottom], color: colorScheme == .dark ? Color(hex: "#333") : Color(hex: "#e5e5e5"))
             }
         }
     }

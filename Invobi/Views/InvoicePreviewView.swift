@@ -34,11 +34,8 @@ struct InvoicePreviewView: View {
             Group {
                 Spacer().frame(height: 40)
                 InvoiceTotalView(invoice: invoice)
-                Spacer().frame(height: 20)
                 InvoicePaymentDetailsPreviewView(invoice: invoice)
             }
         }
-        
-        Spacer()
     }
 }

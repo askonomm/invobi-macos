@@ -9,6 +9,7 @@ import SwiftUI
 
 struct InvoiceView: View {
     @Environment(\.managedObjectContext) private var context
+    @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var invoice: Invoice
     var onDelete: (_ invoice: Invoice) -> Void
     @State private var showConfig = false
@@ -16,7 +17,7 @@ struct InvoiceView: View {
     @State private var status = "DRAFT"
     private let currencies = ["EUR", "USD"]
     @State private var currency = "EUR"
-    @State private var view = "preview"
+    @State private var view = "edit"
     
     var body: some View {
         VStack {
@@ -44,23 +45,18 @@ struct InvoiceView: View {
                     Group {
                         Spacer().frame(height: 40)
                         InvoiceTotalView(invoice: invoice)
-                        Spacer().frame(height: 15)
                         InvoicePaymentDetailsView(invoice: invoice)
                     }
-                    
-                    Spacer()
                 }
             }
             
             if view == "preview" {
                 ScrollView {
                     InvoicePreviewView(invoice: invoice)
-                    
-                    Spacer()
                 }
             }
         }
-        .background(Color.white)
+        .background(colorScheme == .dark ? Color(hex: "#191919") : Color.white)
         .toolbar {
             ToolbarItem(placement: .navigation) {
                 Button(action: {

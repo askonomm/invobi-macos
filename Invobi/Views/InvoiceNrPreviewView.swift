@@ -9,6 +9,7 @@ import SwiftUI
 
 struct InvoiceNrPreviewView: View {
     @Environment(\.managedObjectContext) private var context
+    @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var invoice: Invoice
     
     var body: some View {
@@ -33,7 +34,7 @@ struct InvoiceNrPreviewView: View {
             
             HStack {
                 Text("Issued \((invoice.dateIssued != nil ? invoice.dateIssued! : Date.now).formatted(.dateTime.day().month().year()))")
-                    .foregroundColor(Color(hex: "#666"))
+                    .foregroundColor(colorScheme == .dark ? Color(hex: "#bbb") : Color(hex: "#666"))
                 Spacer()
             }
             
@@ -41,7 +42,7 @@ struct InvoiceNrPreviewView: View {
             
             HStack {
                 Text("Due \((invoice.dueDate != nil ? invoice.dueDate! : Date.now).formatted(.dateTime.day().month().year()))")
-                    .foregroundColor(Color(hex: "#666"))
+                    .foregroundColor(colorScheme == .dark ? Color(hex: "#bbb") : Color(hex: "#666"))
                 Spacer()
             }
         }
