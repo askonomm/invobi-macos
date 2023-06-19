@@ -61,7 +61,9 @@ struct InvoicePaymentDetailsView: View {
                 VStack {
                     HStack {
                         Text("Payment Details")
-                        .font(.title3)
+                            .font(.title2)
+                            .fontWeight(.light)
+                            .foregroundColor(Color(hex: "#999"))
                         
                         Spacer()
                     }
@@ -138,8 +140,12 @@ struct InvoicePaymentDetailsView: View {
         
         let fields = self.invoice.fields!.allObjects as! [InvoiceField]
     
-        return fields.filter { field in
+        let filteredFields = fields.filter { field in
             return field.location == "PAYMENT_DETAILS"
+        }
+        
+        return filteredFields.sorted { a, b in
+            a.order < b.order
         }
     }
 }

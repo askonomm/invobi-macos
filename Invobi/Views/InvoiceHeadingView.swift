@@ -29,11 +29,24 @@ struct InvoiceHeadingLocationView: View {
     }
     
     func onAppear() {
-        self.name = self.invoice.fromName != nil ? "\(self.invoice.fromName!)" : ""
+        if self.location == "FROM" {
+            self.name = self.invoice.fromName != nil ? self.invoice.fromName! : ""
+        }
+        
+        if self.location == "TO" {
+            self.name = self.invoice.toName != nil ? self.invoice.toName! : ""
+        }
     }
     
     func save() {
-        self.invoice.fromName = self.name
+        if self.location == "FROM" {
+            self.invoice.fromName = self.name
+        }
+        
+        if self.location == "TO" {
+            self.invoice.toName = self.name
+        }
+        
         try? self.context.save()
     }
     
@@ -44,8 +57,12 @@ struct InvoiceHeadingLocationView: View {
             fields = invoice.fields!.allObjects as! [InvoiceField]
         }
         
-        return fields.filter { field in
+        let filteredFields = fields.filter { field in
             return field.location == self.location
+        }
+        
+        return filteredFields.sorted { a, b in
+            return a.order < b.order
         }
     }
     
@@ -78,7 +95,9 @@ struct InvoiceHeadingView: View {
                     HStack {
                         VStack(alignment: .leading) {
                             Text("From")
-                            .font(.title3)
+                                .font(.title2)
+                                .fontWeight(.light)
+                                .foregroundColor(Color(hex: "#999"))
                             
                             InvoiceHeadingLocationView(invoice: invoice, location: "FROM")
                             
@@ -92,7 +111,9 @@ struct InvoiceHeadingView: View {
                     HStack {
                         VStack(alignment: .leading) {
                             Text("To")
-                            .font(.title3)
+                                .font(.title2)
+                                .fontWeight(.light)
+                                .foregroundColor(Color(hex: "#999"))
                             
                             InvoiceHeadingLocationView(invoice: invoice, location: "TO")
                             

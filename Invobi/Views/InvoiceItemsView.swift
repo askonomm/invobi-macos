@@ -98,7 +98,9 @@ struct InvoiceItemsView: View {
         VStack(alignment: .leading) {
             HStack {
                 Text("Items")
-                .font(.title3)
+                    .font(.title2)
+                    .fontWeight(.light)
+                    .foregroundColor(Color(hex: "#999"))
                 
                 Spacer()
             }
@@ -158,7 +160,7 @@ struct InvoiceItemsView: View {
                     }
 
                     HStack {
-                        if countItems() > 1 {
+                        if getItems().count > 1 {
                             Button(action: {
                                 context.delete(item)
                                 try? context.save()
@@ -189,14 +191,14 @@ struct InvoiceItemsView: View {
     
     private func getItems() -> Array<InvoiceItem> {
         if invoice.items != nil {
-            return invoice.items!.allObjects as! [InvoiceItem]
+            let items = invoice.items!.allObjects as! [InvoiceItem]
+            
+            return items.sorted { a, b in
+                a.order < b.order
+            }
         }
         
         return []
-    }
-    
-    private func countItems() -> Int {
-        return getItems().count
     }
     
     private func addItem() {

@@ -115,11 +115,15 @@ struct InvoiceTaxationsView: View {
     }
     
     private func getTaxations() -> Array<InvoiceTaxation> {
+        var taxations: Array<InvoiceTaxation> = []
+        
         if invoice.taxations != nil {
-            return invoice.taxations!.allObjects as! [InvoiceTaxation]
+            taxations = invoice.taxations!.allObjects as! [InvoiceTaxation]
         }
         
-        return []
+        return taxations.sorted { a, b in
+            return a.order < b.order
+        }
     }
     
     private func addTaxation() {

@@ -16,14 +16,14 @@ struct InvoiceView: View {
     @State private var status = "DRAFT"
     private let currencies = ["EUR", "USD"]
     @State private var currency = "EUR"
-    @State private var view = "edit"
+    @State private var view = "preview"
     
     var body: some View {
         VStack {
             if view == "edit" {
                 ScrollView {
                     Group {
-                        Spacer().frame(height: 40)
+                        Spacer().frame(height: 35)
                         InvoiceNrView(invoice: invoice)
                         Spacer().frame(height: 40)
                         InvoiceHeadingView(invoice: invoice)
@@ -53,7 +53,11 @@ struct InvoiceView: View {
             }
             
             if view == "preview" {
-                InvoicePreviewView(invoice: invoice)
+                ScrollView {
+                    InvoicePreviewView(invoice: invoice)
+                    
+                    Spacer()
+                }
             }
         }
         .background(Color.white)
@@ -76,8 +80,7 @@ struct InvoiceView: View {
             
             ToolbarItem(placement: .primaryAction) {
                 Button(action: {
-                    let view = PDFView(nr: self.invoice.nr!)
-                    self.savePDF(view: view)
+                    self.savePDF(invoice: invoice)
                 }) {
                     Label("Save PDF", systemImage: "square.and.arrow.down").labelStyle(.titleAndIcon)
                 }
@@ -86,7 +89,9 @@ struct InvoiceView: View {
         .navigationTitle("Edit Invoice")
     }
     
-    @MainActor func savePDF(view: PDFView) {
+    @MainActor func savePDF(invoice: Invoice) {
+        let view = InvoicePreviewView(invoice: invoice).frame(width: 800)
+        
         let panel = NSSavePanel()
         panel.allowedContentTypes = [.pdf]
         panel.canCreateDirectories = true

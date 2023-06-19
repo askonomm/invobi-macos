@@ -12,6 +12,33 @@ struct InvoicePreviewView: View {
     @ObservedObject var invoice: Invoice
     
     var body: some View {
-        Text("hello")
+        VStack {
+            Group {
+                Spacer().frame(height: 35)
+                InvoiceNrPreviewView(invoice: invoice)
+                Spacer().frame(height: 40)
+                InvoiceHeadingPreviewView(invoice: invoice)
+            }
+            
+            Group {
+                Spacer().frame(height: 40)
+                InvoiceItemsPreviewView(invoice: invoice)
+                Spacer().frame(height: 40)
+            }
+            
+            Group {
+                InvoiceSubTotalView(invoice: invoice)
+                InvoiceTaxationsPreviewView(invoice: invoice)
+            }
+            
+            Group {
+                Spacer().frame(height: 40)
+                InvoiceTotalView(invoice: invoice)
+                Spacer().frame(height: 20)
+                InvoicePaymentDetailsPreviewView(invoice: invoice)
+            }
+        }
+        
+        Spacer()
     }
 }

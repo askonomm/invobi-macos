@@ -15,7 +15,7 @@ func currencyCodeToSign(currency: String) -> String {
 func getDayDiff(_ a: Date, _ b: Date) -> Int {
     let diffs = Calendar.current.dateComponents([.day], from: a, to: b)
     
-    return diffs.day! - 1
+    return diffs.day!
 }
 
 func getStatusColor(status: String?) -> Color {
@@ -80,19 +80,19 @@ func getDueInText(date: Date) -> String {
     let dueDays = getDayDiff(Date.now, date)
     
     if dueDays > 1 {
-        return "Due in \(dueDays) days".uppercased()
+        return "Due in \(dueDays) days"
     }
     
     if dueDays == 1 {
-        return "Due tomorrow".uppercased()
+        return "Due tomorrow"
     }
     
     if dueDays == 0 {
-        return "Due today".uppercased()
+        return "Due today"
     }
     
     if dueDays == -1 {
-        return "Due yesterday".uppercased()
+        return "Due yesterday"
     }
     
     if dueDays < -1 {
