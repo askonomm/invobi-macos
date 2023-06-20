@@ -103,7 +103,7 @@ struct InvoicePaymentDetailsView: View {
                     
                 }
                 .padding(.all, 40)
-                .border(width: 1, edges: [.top, .bottom], color: colorScheme == .dark ? Color(hex: "#333") : Color(hex: "#e5e5e5"))
+                .border(width: 1, edges: [.top], color: colorScheme == .dark ? Color(hex: "#333") : Color(hex: "#e5e5e5"))
                 .frame(maxWidth: .infinity)
             } else {
                 HStack {
@@ -114,7 +114,7 @@ struct InvoicePaymentDetailsView: View {
                     Spacer()
                 }
                 .padding(.all, 40)
-                .border(width: 1, edges: [.top, .bottom], color: colorScheme == .dark ? Color(hex: "#333") : Color(hex: "#e5e5e5"))
+                .border(width: 1, edges: [.top], color: colorScheme == .dark ? Color(hex: "#333") : Color(hex: "#e5e5e5"))
             }
         }
     }
