@@ -8,43 +8,6 @@
 import SwiftUI
 import CoreData
 
-struct SplashView: View {
-    @Environment(\.colorScheme) private var colorScheme
-    var addInvoice: () -> Void
-    
-    var body: some View {
-        HStack(alignment: .center) {
-            VStack(alignment: .center) {
-                if colorScheme == .dark {
-                    Image("icon")
-                        .resizable()
-                        .frame(width: 100, height: 100)
-                        .opacity(0.5)
-                } else {
-                    Image("icon")
-                        .resizable()
-                        .frame(width: 100, height: 100)
-                }
-                
-                Spacer().frame(height: 10)
-                
-                Text("You have no invoices yet. ")
-                    .font(.title3)
-                    .foregroundColor(colorScheme == .dark ? Color(hex: "#ddd") : Color(hex: "#777"))
-                
-                Spacer().frame(height: 40)
-                
-                Button(action: addInvoice) {
-                    Label("Create Invoice", systemImage: "plus")
-                }
-                .buttonStyle(.borderedProminent)
-            }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(colorScheme == .dark ? Color(hex: "#111") : Color.white)
-    }
-}
-
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var context
     @Environment(\.colorScheme) private var colorScheme
@@ -53,12 +16,6 @@ struct ContentView: View {
         animation: .none)
     private var invoices: FetchedResults<Invoice>
     @State private var navPath = NavigationPath()
-    @State private var editInvoiceView = false
-    @State private var filteredStatus = "ALL"
-    
-    let columns = [
-        GridItem(.adaptive(minimum: 275))
-    ]
 
     var body: some View {
         NavigationStack(path: self.$navPath) {
@@ -67,54 +24,13 @@ struct ContentView: View {
                     onSelect(self.addInvoice())
                 })
             } else {
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: 10) {
-                        ForEach(invoices) { invoice in
-                            if filteredStatus != "ALL" && ((invoice.status == filteredStatus) || (invoice.status == nil && filteredStatus == "DRAFT")) {
-                                ListInvoiceItemView(invoice: invoice, onSelect: onSelect)
-                            }
-                            
-                            else if filteredStatus == "ALL" {
-                                ListInvoiceItemView(invoice: invoice, onSelect: onSelect)
-                            } else {
-                                EmptyView()
-                            }
-                        }
-                    }.frame(maxWidth: .infinity).padding(40)
-                }
-                .background(colorScheme == .dark ? Color(hex: "#191919") : Color.white)
-                .navigationTitle("Invoices")
-                .navigationDestination(for: Invoice.self) { invoice in
-                    InvoiceView(invoice: invoice, onDelete: onDelete)
-                }
-                .toolbar {
-                    if self.navPath.isEmpty {
-                        ToolbarItem(placement: .navigation) {
-                            Button(action: {
-                                let invoice = self.addInvoice()
-                                
-                                onSelect(invoice)
-                            }) {
-                                Label("Create Invoice", systemImage: "plus")
-                            }
-                        }
-                        
-                        ToolbarItem(placement: .secondaryAction) {
-                            Picker(selection: $filteredStatus, label: Text("Sorting options")) {
-                                Text("All").tag("ALL")
-                                Text("Unpaid").tag("UNPAID")
-                                Text("Paid").tag("PAID")
-                                Text("Overdue").tag("OVERDUE")
-                                Text("Draft").tag("DRAFT")
-                            }
-                        }
-                    }
-                }
+                InvoicesView(onSelect: onSelect, onDelete: onDelete, addInvoice: addInvoice, navPath: $navPath)
+                    .id(navPath.count)
             }
         }
         .frame(minWidth: 750)
     }
-    
+
     private func onSelect(_ invoice: Invoice) {
         self.navPath.append(invoice)
     }
@@ -123,11 +39,12 @@ struct ContentView: View {
         self.navPath.removeLast(self.navPath.count)
         context.delete(invoice)
     }
-
+    
     private func addInvoice() -> Invoice {
         let invoice = Invoice(context: context)
         invoice.nr = ""
         invoice.createdAt = Date()
+        invoice.status = "DRAFT"
         
         let item = InvoiceItem(context: context)
         item.name = ""
