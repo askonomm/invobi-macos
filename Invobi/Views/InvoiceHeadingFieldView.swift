@@ -52,7 +52,10 @@ struct InvoiceHeadingFieldView: View {
             
             HStack(alignment: .top) {
                 Button(action: {
-                    self.context.delete(self.field)
+                    withAnimation(.easeInOut(duration: 0.08)) {
+                        self.context.delete(self.field)
+                        try? context.save()
+                    }
                 }) {
                     Label("Delete field", systemImage: "minus.circle.fill")
                     .font(.title3)

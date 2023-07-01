@@ -8,6 +8,16 @@
 import SwiftUI
 import CoreData
 
+enum Views {
+    case invoices
+    case invoice
+}
+
+class AppState: ObservableObject {
+    @Published var selectedInvoice: Invoice?
+    @Published var view: Views = Views.invoices
+}
+
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var context
     @Environment(\.colorScheme) private var colorScheme
@@ -15,48 +25,26 @@ struct ContentView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Invoice.createdAt, ascending: false)],
         animation: .none)
     private var invoices: FetchedResults<Invoice>
-    @State private var navPath = NavigationPath()
+    @StateObject var appState = AppState()
 
     var body: some View {
-        NavigationStack(path: self.$navPath) {
-            if invoices.isEmpty {
-                SplashView(addInvoice: {
-                    onSelect(self.addInvoice())
-                })
-            } else {
-                InvoicesView(onSelect: onSelect, onDelete: onDelete, addInvoice: addInvoice, navPath: $navPath)
-                    .id(navPath.count)
+        VStack {
+            switch appState.view {
+            case .invoice:
+                InvoiceView()
+                    .transition(.move(edge: .trailing))
+            case .invoices:
+                if invoices.isEmpty {
+                    SplashView()
+                        .transition(.move(edge: .leading))
+                } else {
+                    InvoicesView()
+                        .transition(.move(edge: .leading))
+                }
             }
         }
-        .frame(minWidth: 750)
-    }
-
-    private func onSelect(_ invoice: Invoice) {
-        self.navPath.append(invoice)
-    }
-    
-    private func onDelete(invoice: Invoice) {
-        self.navPath.removeLast(self.navPath.count)
-        context.delete(invoice)
-    }
-    
-    private func addInvoice() -> Invoice {
-        let invoice = Invoice(context: context)
-        invoice.nr = ""
-        invoice.createdAt = Date()
-        invoice.status = "DRAFT"
-        
-        let item = InvoiceItem(context: context)
-        item.name = ""
-        item.qty = 1
-        item.price = 0
-        item.order = 0
-        
-        invoice.addToItems(item)
-
-        try? context.save()
-        
-        return invoice
+        .environmentObject(appState)
+        .frame(minWidth: 750, minHeight: 800)
     }
 }
 

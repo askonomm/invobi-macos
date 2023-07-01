@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct InvoicesSectionInvoiceView: View {
+    @EnvironmentObject var appState: AppState
     @Environment(\.managedObjectContext) private var context
     @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var invoice: Invoice
-    var onSelect: (_ invoice: Invoice) -> Void
     
     var body: some View {
         Button(action: {
-            onSelect(invoice)
+            withAnimation(.easeInOut(duration: 0.08)) {
+                appState.selectedInvoice = invoice
+                appState.view = Views.invoice
+            }
         }) {
             VStack {
                 HStack {
@@ -29,9 +32,10 @@ struct InvoicesSectionInvoiceView: View {
                             .font(.title3)
                             .offset(x: -5)
                         
-                        Spacer().frame(width: 15)
+                        Spacer().frame(width: 8)
                         
                         Text(calculateTotal(invoice), format: .currency(code: invoice.currency ?? "EUR"))
+                            .fontWeight(.light)
                             .opacity(0.5)
                     }
                     
@@ -47,6 +51,7 @@ struct InvoicesSectionInvoiceView: View {
         }
         .buttonStyle(.plain)
         .border(width: 1, edges: [.bottom], color: colorScheme == .dark ? Color(hex: "#333") : Color(hex: "#e5e5e5"))
+        .contentShape(Rectangle())
         .onAppear {
             if invoice.dueDate != nil {
                 if getDayDiff(invoice.dueDate!, Date.now) > 0 {
@@ -89,7 +94,6 @@ struct InvoicesSectionInvoiceView: View {
 struct InvoicesSectionView: View {
     var title: String
     var invoices: Array<Invoice>
-    var onSelect: (_ invoice: Invoice) -> Void
     
     var body: some View {
         if invoices.count > 0 {
@@ -110,24 +114,24 @@ struct InvoicesSectionView: View {
                             Spacer().frame(height: 10)
                         }
                         
-                        InvoicesSectionInvoiceView(invoice: invoice, onSelect: onSelect)
+                        InvoicesSectionInvoiceView(invoice: invoice)
                     }
                 }
+                
+                Spacer().frame(height: 40)
             }
         }
     }
 }
 
 struct InvoicesView: View {
+    @EnvironmentObject var appState: AppState
+    @Environment(\.managedObjectContext) private var context
     @Environment(\.colorScheme) private var colorScheme
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Invoice.createdAt, ascending: false)],
         animation: .none)
     private var invoices: FetchedResults<Invoice>
-    var onSelect: (_ invoice: Invoice) -> Void
-    var onDelete: (_ invoice: Invoice) -> Void
-    var addInvoice: () -> Invoice
-    @Binding var navPath: NavigationPath
     
     let columns = [
         GridItem(.adaptive(minimum: 275))
@@ -135,30 +139,21 @@ struct InvoicesView: View {
     
     var body: some View {
         ScrollView {
-            VStack {
-                InvoicesSectionView(title: "Drafts", invoices: getInvoices(status: "DRAFT"), onSelect: onSelect)
-                Spacer().frame(height: 40)
-                InvoicesSectionView(title: "Overdue", invoices: getInvoices(status: "OVERDUE"), onSelect: onSelect)
-                Spacer().frame(height: 40)
-                InvoicesSectionView(title: "Unpaid", invoices: getInvoices(status: "UNPAID"), onSelect: onSelect)
-                Spacer().frame(height: 40)
-                InvoicesSectionView(title: "Paid", invoices: getInvoices(status: "PAID"), onSelect: onSelect)
+            VStack(alignment: .leading) {
+                InvoicesSectionView(title: "Drafts", invoices: getInvoices(status: "DRAFT"))
+                InvoicesSectionView(title: "Overdue", invoices: getInvoices(status: "OVERDUE"))
+                InvoicesSectionView(title: "Unpaid", invoices: getInvoices(status: "UNPAID"))
+                InvoicesSectionView(title: "Paid", invoices: getInvoices(status: "PAID"))
+                Spacer()
             }
             .frame(maxWidth: .infinity).padding(40)
         }
         .background(colorScheme == .dark ? Color(hex: "#191919") : Color.white)
         .navigationTitle("Invoices")
-        .navigationDestination(for: Invoice.self) { invoice in
-            InvoiceView(invoice: invoice, onDelete: onDelete)
-        }
         .toolbar {
-            if self.navPath.isEmpty {
-                ToolbarItem(placement: .navigation) {
-                    Button(action: {
-                        onSelect(self.addInvoice())
-                    }) {
-                        Label("Create Invoice", systemImage: "plus")
-                    }
+            ToolbarItem(placement: .navigation) {
+                Button(action: addInvoice) {
+                    Label("Create Invoice", systemImage: "plus")
                 }
             }
         }
@@ -173,6 +168,26 @@ struct InvoicesView: View {
             return invoice.status == status
         }
     }
+    
+    private func addInvoice() {
+        withAnimation(.easeInOut(duration: 0.08)) {
+            let invoice = Invoice(context: context)
+            invoice.nr = ""
+            invoice.createdAt = Date()
+            invoice.status = "DRAFT"
+            
+            let item = InvoiceItem(context: context)
+            item.name = ""
+            item.qty = 1
+            item.price = 0
+            item.order = 0
+            
+            invoice.addToItems(item)
+            
+            try? context.save()
+            
+            appState.selectedInvoice = invoice
+            appState.view = Views.invoice
+        }
+    }
 }
-
-

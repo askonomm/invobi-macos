@@ -66,28 +66,36 @@ struct InvoiceItemRowView: View {
     }
     
     private func saveItemName() {
-        self.item.name = self.itemName
-        try? context.save()
+        withAnimation(.easeInOut(duration: 0.08)) {
+            self.item.name = self.itemName
+            try? context.save()
+        }
     }
     
     private func saveItemQTY() {
-        self.invoice.objectWillChange.send()
-        self.item.qty = (self.itemQTY) as NSDecimalNumber
-        try? context.save()
-        
-        calculateTotal()
+        withAnimation(.easeInOut(duration: 0.08)) {
+            self.invoice.objectWillChange.send()
+            self.item.qty = (self.itemQTY) as NSDecimalNumber
+            try? context.save()
+            
+            calculateTotal()
+        }
     }
     
     private func saveItemPrice() {
-        self.invoice.objectWillChange.send()
-        self.item.price = (self.itemPrice) as NSDecimalNumber
-        try? context.save()
-        
-        calculateTotal()
+        withAnimation(.easeInOut(duration: 0.08)) {
+            self.invoice.objectWillChange.send()
+            self.item.price = (self.itemPrice) as NSDecimalNumber
+            try? context.save()
+            
+            calculateTotal()
+        }
     }
     
     private func calculateTotal() {
-        self.itemTotal = self.itemQTY * self.itemPrice
+        withAnimation(.easeInOut(duration: 0.08)) {
+            self.itemTotal = self.itemQTY * self.itemPrice
+        }
     }
 }
 
@@ -166,8 +174,10 @@ struct InvoiceItemsView: View {
                     HStack {
                         if getItems().count > 1 {
                             Button(action: {
-                                context.delete(item)
-                                try? context.save()
+                                withAnimation(.easeInOut(duration: 0.08)) {
+                                    context.delete(item)
+                                    try? context.save()
+                                }
                             }) {
                                 Image(systemName: "minus.circle.fill")
                                     .resizable()
@@ -205,14 +215,16 @@ struct InvoiceItemsView: View {
     }
     
     private func addItem() {
-        let item = InvoiceItem(context: context)
-        item.name = ""
-        item.qty = 1
-        item.price = 0
-        item.order = getItems().last != nil ? getItems().last!.order + 1 : 0
-        
-        invoice.addToItems(item)
-
-        try? context.save()
+        withAnimation(.easeInOut(duration: 0.08)) {
+            let item = InvoiceItem(context: context)
+            item.name = ""
+            item.qty = 1
+            item.price = 0
+            item.order = getItems().last != nil ? getItems().last!.order + 1 : 0
+            
+            invoice.addToItems(item)
+            
+            try? context.save()
+        }
     }
 }

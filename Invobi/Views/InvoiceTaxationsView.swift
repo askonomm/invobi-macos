@@ -42,33 +42,39 @@ struct InvoiceTaxationView: View {
     }
     
     private func savePercentage() {
-        self.invoice.objectWillChange.send()
-        self.taxation.percentage = (self.percentage) as NSDecimalNumber
-        
-        try? context.save()
+        withAnimation(.easeInOut(duration: 0.08)) {
+            self.invoice.objectWillChange.send()
+            self.taxation.percentage = (self.percentage) as NSDecimalNumber
+            
+            try? context.save()
+        }
     }
     
     private func saveName() {
-        self.invoice.objectWillChange.send()
-        self.taxation.name = self.name
-        
-        try? context.save()
+        withAnimation(.easeInOut(duration: 0.08)) {
+            self.invoice.objectWillChange.send()
+            self.taxation.name = self.name
+            
+            try? context.save()
+        }
     }
     
     private func calculateTaxTotal() -> Decimal {
-        var items: Array<InvoiceItem> = []
-        
-        if invoice.items != nil {
-            items = invoice.items!.allObjects as! [InvoiceItem]
-        }
-        
-        let subTotal: Decimal = items.reduce(0) { result, item in
-            let total: Decimal = (item.qty! as Decimal) * (item.price! as Decimal)
+        withAnimation(.easeInOut(duration: 0.08)) {
+            var items: Array<InvoiceItem> = []
             
-            return result + total
+            if invoice.items != nil {
+                items = invoice.items!.allObjects as! [InvoiceItem]
+            }
+            
+            let subTotal: Decimal = items.reduce(0) { result, item in
+                let total: Decimal = (item.qty! as Decimal) * (item.price! as Decimal)
+                
+                return result + total
+            }
+            
+            return (self.percentage / 100) * subTotal
         }
-        
-        return (self.percentage / 100) * subTotal
     }
 }
 
@@ -88,8 +94,10 @@ struct InvoiceTaxationsView: View {
                     
                     HStack {
                         Button(action: {
-                            context.delete(taxation)
-                            try? context.save()
+                            withAnimation(.easeInOut(duration: 0.08)) {
+                                context.delete(taxation)
+                                try? context.save()
+                            }
                         }) {
                             Image(systemName: "minus.circle.fill")
                                 .resizable()
@@ -131,13 +139,15 @@ struct InvoiceTaxationsView: View {
     }
     
     private func addTaxation() {
-        let taxation = InvoiceTaxation(context: context);
-        taxation.name = ""
-        taxation.percentage = 0
-        taxation.order = getTaxations().last != nil ? getTaxations().last!.order + 1 : 0
-    
-        invoice.addToTaxations(taxation)
-        
-        try? context.save()
+        withAnimation(.easeInOut(duration: 0.08)) {
+            let taxation = InvoiceTaxation(context: context);
+            taxation.name = ""
+            taxation.percentage = 0
+            taxation.order = getTaxations().last != nil ? getTaxations().last!.order + 1 : 0
+            
+            invoice.addToTaxations(taxation)
+            
+            try? context.save()
+        }
     }
 }

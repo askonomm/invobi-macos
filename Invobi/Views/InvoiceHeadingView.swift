@@ -67,15 +67,17 @@ struct InvoiceHeadingLocationView: View {
     }
     
     private func addField() {
-        let field = InvoiceField(context: context)
-        field.label = ""
-        field.value = ""
-        field.location = self.location
-        field.order = getFields().last != nil ? getFields().last!.order + 1 : 0
-        
-        invoice.addToFields(field)
-
-        try? context.save()
+        withAnimation(.easeInOut(duration: 0.08)) {
+            let field = InvoiceField(context: context)
+            field.label = ""
+            field.value = ""
+            field.location = self.location
+            field.order = getFields().last != nil ? getFields().last!.order + 1 : 0
+            
+            invoice.addToFields(field)
+            
+            try? context.save()
+        }
     }
 }
 

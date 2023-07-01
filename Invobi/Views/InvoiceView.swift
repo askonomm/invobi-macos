@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct InvoiceView: View {
+    @EnvironmentObject var appState: AppState
     @Environment(\.managedObjectContext) private var context
     @Environment(\.colorScheme) private var colorScheme
-    @ObservedObject var invoice: Invoice
-    var onDelete: (_ invoice: Invoice) -> Void
     @State private var showConfig = false
     private let statuses = ["DRAFT", "UNPAID", "PAID", "OVERDUE"]
     @State private var status = "DRAFT"
@@ -25,34 +24,34 @@ struct InvoiceView: View {
                 ScrollView {
                     Group {
                         Spacer().frame(height: 35)
-                        InvoiceNrView(invoice: invoice)
+                        InvoiceNrView(invoice: appState.selectedInvoice!)
                         Spacer().frame(height: 40)
-                        InvoiceHeadingView(invoice: invoice)
+                        InvoiceHeadingView(invoice: appState.selectedInvoice!)
                     }
                     
                     Group {
                         Spacer().frame(height: 40)
-                        InvoiceItemsView(invoice: invoice)
+                        InvoiceItemsView(invoice: appState.selectedInvoice!)
                         Spacer().frame(height: 40)
                     }
                     
                     Group {
-                        InvoiceSubTotalView(invoice: invoice)
+                        InvoiceSubTotalView(invoice: appState.selectedInvoice!)
                         Spacer().frame(height: 15)
-                        InvoiceTaxationsView(invoice: invoice)
+                        InvoiceTaxationsView(invoice: appState.selectedInvoice!)
                     }
                     
                     Group {
                         Spacer().frame(height: 40)
-                        InvoiceTotalView(invoice: invoice)
-                        InvoicePaymentDetailsView(invoice: invoice)
+                        InvoiceTotalView(invoice: appState.selectedInvoice!)
+                        InvoicePaymentDetailsView(invoice: appState.selectedInvoice!)
                     }
                 }
             }
             
             if view == "preview" {
                 ScrollView {
-                    InvoicePreviewView(invoice: invoice)
+                    InvoicePreviewView(invoice: appState.selectedInvoice!)
                 }
             }
         }
@@ -60,14 +59,29 @@ struct InvoiceView: View {
         .toolbar {
             ToolbarItem(placement: .navigation) {
                 Button(action: {
-                    onDelete(self.invoice)
+                    withAnimation(.easeInOut(duration: 0.08)) {
+                        appState.view = Views.invoices
+                    }
+                }) {
+                    Label("Back", systemImage: "chevron.backward")
+                }
+            }
+            
+            ToolbarItem(placement: .navigation) {
+                Button(action: {
+                    withAnimation(.easeInOut(duration: 0.08)) {
+                        appState.view = Views.invoices
+                        
+                        context.delete(appState.selectedInvoice!)
+                        try? context.save()
+                    }
                 }) {
                     Label("Delete Invoice", systemImage: "trash")
                 }
             }
             
             ToolbarItem(placement: .primaryAction) {
-                Picker("", selection: $view) {
+                Picker("", selection: $view.animation(.easeInOut(duration: 0.08))) {
                     Text("Edit").tag("edit")
                     Text("Preview").tag("preview")
                 }
@@ -76,7 +90,7 @@ struct InvoiceView: View {
             
             ToolbarItem(placement: .primaryAction) {
                 Button(action: {
-                    self.savePDF(invoice: invoice)
+                    self.savePDF(invoice: appState.selectedInvoice!)
                 }) {
                     Label("Save PDF", systemImage: "square.and.arrow.down").labelStyle(.titleAndIcon)
                 }

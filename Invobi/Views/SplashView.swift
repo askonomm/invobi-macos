@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SplashView: View {
     @Environment(\.colorScheme) private var colorScheme
-    var addInvoice: () -> Void
     
     var body: some View {
         HStack(alignment: .center) {
@@ -33,7 +32,9 @@ struct SplashView: View {
                 
                 Spacer().frame(height: 40)
                 
-                Button(action: addInvoice) {
+                Button(action: {
+                    
+                }) {
                     Label("Create Invoice", systemImage: "plus")
                 }
                 .buttonStyle(.borderedProminent)

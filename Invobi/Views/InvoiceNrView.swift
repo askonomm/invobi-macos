@@ -54,7 +54,9 @@ struct InvoiceNrView: View {
     }
     
     func save() {
-        self.invoice.nr = self.itemNr
-        try? self.context.save()
+        withAnimation(.easeInOut(duration: 0.08)) {
+            self.invoice.nr = self.itemNr
+            try? self.context.save()
+        }
     }
 }

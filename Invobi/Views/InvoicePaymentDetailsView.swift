@@ -76,8 +76,10 @@ struct InvoicePaymentDetailsView: View {
                             
                             HStack {
                                 Button(action: {
-                                    context.delete(field)
-                                    try? context.save()
+                                    withAnimation(.easeInOut(duration: 0.08)) {
+                                        context.delete(field)
+                                        try? context.save()
+                                    }
                                 }) {
                                     Image(systemName: "minus.circle.fill")
                                         .resizable()
@@ -120,15 +122,17 @@ struct InvoicePaymentDetailsView: View {
     }
     
     private func addField() {
-        let field = InvoiceField(context: context)
-        field.label = ""
-        field.value = ""
-        field.order = getFields().last != nil ? getFields().last!.order + 1 : 0
-        field.location = "PAYMENT_DETAILS"
-        
-        invoice.addToFields(field)
-        
-        try? context.save()
+        withAnimation(.easeInOut(duration: 0.08)) {
+            let field = InvoiceField(context: context)
+            field.label = ""
+            field.value = ""
+            field.order = getFields().last != nil ? getFields().last!.order + 1 : 0
+            field.location = "PAYMENT_DETAILS"
+            
+            invoice.addToFields(field)
+            
+            try? context.save()
+        }
     }
     
     private func getFields() -> Array<InvoiceField> {
