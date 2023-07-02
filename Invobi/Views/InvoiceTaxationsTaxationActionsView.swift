@@ -1,5 +1,5 @@
 //
-//  InvoiceItemActionsView.swift
+//  InvoiceTaxationsTaxationActionsView.swift
 //  Invobi
 //
 //  Created by Asko Nomm on 02.07.2023.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct InvoiceItemsItemActionsView: View {
-    @ObservedObject var item: InvoiceItem
-    var moveUp: (_ item: InvoiceItem) -> Void
-    var moveDown: (_ item: InvoiceItem) -> Void
-    var delete: (_ item: InvoiceItem) -> Void
+struct InvoiceTaxationsTaxationActionsView: View {
+    @ObservedObject var taxation: InvoiceTaxation
+    var moveUp: (_ taxation: InvoiceTaxation) -> Void
+    var moveDown: (_ taxation: InvoiceTaxation) -> Void
+    var delete: (_ taxation: InvoiceTaxation) -> Void
     var isFirst: Bool
     var isLast: Bool
     
@@ -20,33 +20,33 @@ struct InvoiceItemsItemActionsView: View {
             Menu {
                 if !isFirst {
                     Button(action: {
-                        moveUp(item)
+                        moveUp(taxation)
                     }) {
                         Image(systemName: "chevron.up")
                         Text("Move up")
                     }
-                    .accessibilityLabel("Move item up")
+                    .accessibilityLabel("Move taxation up")
                 }
                 
                 if !isLast {
                     Button(action: {
-                        moveDown(item)
+                        moveDown(taxation)
                     }) {
                         Image(systemName: "chevron.down")
                         Text("Move down")
                     }
-                    .accessibilityLabel("Move item down")
+                    .accessibilityLabel("Move taxation down")
                 }
                 
                 Button(action: {
-                    delete(item)
+                    delete(taxation)
                 }) {
                     Image(systemName: "trash")
                     Text("Delete")
                 }
-                .accessibilityLabel("Delete item")
+                .accessibilityLabel("Delete taxation")
             } label: {
-                Label("Item actions", systemImage: "gearshape.fill")
+                Label("Taxation actions", systemImage: "gearshape.fill")
                     .font(.largeTitle)
                     .labelStyle(.iconOnly)
             }

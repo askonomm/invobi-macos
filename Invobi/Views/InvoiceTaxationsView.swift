@@ -7,107 +7,43 @@
 
 import SwiftUI
 
-struct InvoiceTaxationView: View {
-    @Environment(\.managedObjectContext) private var context
-    @ObservedObject var invoice: Invoice
-    @ObservedObject var taxation: InvoiceTaxation
-    @State private var percentage: Decimal = 0
-    @State private var name = ""
-    
-    var body: some View {
-        HStack {
-            NumberFieldView(value: $percentage, onAppear: onPercentageAppear, save: savePercentage)
-            .fixedSize()
-            Text("%")
-            .offset(x: -4)
-            Spacer().frame(width: 10)
-            TextFieldView(label: "Taxation name", value: $name, onAppear: onNameAppear, save: saveName)
-            .fixedSize()
-            Spacer()
-            Text(calculateTaxTotal(), format: .currency(code: invoice.currency ?? "EUR"))
-                .fontWeight(.semibold)
-        }
-    }
-    
-    private func onPercentageAppear() {
-        if self.taxation.percentage != nil {
-            self.percentage = self.taxation.percentage! as Decimal
-        }
-    }
-    
-    private func onNameAppear() {
-        if self.taxation.name != nil {
-            self.name = self.taxation.name!
-        }
-    }
-    
-    private func savePercentage() {
-        withAnimation(.easeInOut(duration: 0.08)) {
-            self.invoice.objectWillChange.send()
-            self.taxation.percentage = (self.percentage) as NSDecimalNumber
-            
-            try? context.save()
-        }
-    }
-    
-    private func saveName() {
-        withAnimation(.easeInOut(duration: 0.08)) {
-            self.invoice.objectWillChange.send()
-            self.taxation.name = self.name
-            
-            try? context.save()
-        }
-    }
-    
-    private func calculateTaxTotal() -> Decimal {
-        withAnimation(.easeInOut(duration: 0.08)) {
-            var items: Array<InvoiceItem> = []
-            
-            if invoice.items != nil {
-                items = invoice.items!.allObjects as! [InvoiceItem]
-            }
-            
-            let subTotal: Decimal = items.reduce(0) { result, item in
-                let total: Decimal = (item.qty! as Decimal) * (item.price! as Decimal)
-                
-                return result + total
-            }
-            
-            return (self.percentage / 100) * subTotal
-        }
-    }
-}
-
 struct InvoiceTaxationsView: View {
     @Environment(\.managedObjectContext) private var context
     @ObservedObject var invoice: Invoice
+    @State private var showActionsForTaxation: InvoiceTaxation?
+    @State private var taxations: Array<InvoiceTaxation> = []
 
     var body: some View {
         VStack {
-            ForEach(Array(getTaxations().enumerated()), id: \.element) { index, taxation in
-                if index > 0 {
-                    Spacer().frame(height: 15)
-                }
-                
-                ZStack {
-                    InvoiceTaxationView(invoice: invoice, taxation: taxation)
-                    
-                    HStack {
-                        Button(action: {
-                            withAnimation(.easeInOut(duration: 0.08)) {
-                                context.delete(taxation)
-                                try? context.save()
-                            }
-                        }) {
-                            Image(systemName: "minus.circle.fill")
-                                .resizable()
-                                .frame(width: 15, height: 15)
-                        }
-                        .buttonStyle(.plain)
-                        .offset(x: -8, y: -14)
-                        
-                        Spacer()
+            ForEach(Array(taxations.enumerated()), id: \.element) { index, taxation in
+                VStack {
+                    if index > 0 {
+                        Spacer().frame(height: 15)
                     }
+                    
+                    ZStack {
+                        InvoiceTaxationsTaxationView(invoice: invoice, taxation: taxation)
+                            .offset(x: 24)
+                        
+                        if showActionsForTaxation == taxation {
+                            InvoiceTaxationsTaxationActionsView(taxation: taxation,
+                                                                moveUp: moveUp,
+                                                                moveDown: moveDown,
+                                                                delete: delete,
+                                                                isFirst: isFirst(taxation),
+                                                                isLast: isLast(taxation))
+                        }
+                    }
+                    .onHover { over in
+                        withAnimation(.easeInOut(duration: 0.08)) {
+                            if over {
+                                showActionsForTaxation = taxation
+                            } else {
+                                showActionsForTaxation = .none
+                            }
+                        }
+                    }
+                    .offset(x: -24)
                 }
             }
             
@@ -124,6 +60,9 @@ struct InvoiceTaxationsView: View {
             }
         }
         .padding(.horizontal, 40)
+        .onAppear {
+            taxations = getTaxations()
+        }
     }
     
     private func getTaxations() -> Array<InvoiceTaxation> {
@@ -146,8 +85,78 @@ struct InvoiceTaxationsView: View {
             taxation.order = getTaxations().last != nil ? getTaxations().last!.order + 1 : 0
             
             invoice.addToTaxations(taxation)
+            taxations.append(taxation)
             
             try? context.save()
         }
+    }
+    
+    private func moveUp(_ taxation: InvoiceTaxation) {
+        withAnimation(.easeInOut(duration: 0.08)) {
+            let currentOrder = taxation.order
+            let newOrder = currentOrder - 1
+            
+            let replacingTaxation = taxations.first { taxation in
+                return taxation.order == newOrder
+            }
+            
+            taxation.order = newOrder
+            taxations[Int(currentOrder)] = replacingTaxation!
+            taxations[Int(newOrder)] = taxation
+            replacingTaxation!.order = currentOrder
+            
+            self.showActionsForTaxation = .none
+            
+            try? context.save()
+        }
+    }
+    
+    private func moveDown(_ taxation: InvoiceTaxation) {
+        withAnimation(.easeInOut(duration: 0.08)) {
+            let currentOrder = taxation.order
+            let newOrder = currentOrder + 1
+            
+            let replacingTaxation = taxations.first { taxation in
+                return taxation.order == newOrder
+            }
+            
+            taxation.order = newOrder
+            taxations[Int(currentOrder)] = replacingTaxation!
+            taxations[Int(newOrder)] = taxation
+            replacingTaxation!.order = currentOrder
+            
+            self.showActionsForTaxation = .none
+            
+            try? context.save()
+        }
+    }
+    
+    private func delete(_ taxation: InvoiceTaxation) {
+        withAnimation(.easeInOut(duration: 0.08)) {
+            self.context.delete(taxation)
+            
+            // Remove taxation
+            self.taxations.removeAll { i in
+                return i.order == taxation.order
+            }
+            
+            // Re-order all taxations because there can now be a gap
+            taxations.indices.forEach { index in
+                let f = taxations[index]
+                f.order = Int32(index)
+            }
+            
+            self.showActionsForTaxation = .none
+            
+            try? context.save()
+        }
+    }
+    
+    private func isFirst(_ item: InvoiceTaxation) -> Bool {
+        return taxations.first == item
+    }
+    
+    private func isLast(_ item: InvoiceTaxation) -> Bool {
+        return taxations.last == item
     }
 }

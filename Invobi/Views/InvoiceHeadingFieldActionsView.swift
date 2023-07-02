@@ -1,5 +1,5 @@
 //
-//  InvoiceItemActionsView.swift
+//  InvoiceHeadingFieldActionsView.swift
 //  Invobi
 //
 //  Created by Asko Nomm on 02.07.2023.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct InvoiceItemsItemActionsView: View {
-    @ObservedObject var item: InvoiceItem
-    var moveUp: (_ item: InvoiceItem) -> Void
-    var moveDown: (_ item: InvoiceItem) -> Void
-    var delete: (_ item: InvoiceItem) -> Void
+struct InvoiceHeadingFieldActionsView: View {
+    @ObservedObject var field: InvoiceField
+    var moveUp: (_ field: InvoiceField) -> Void
+    var moveDown: (_ field: InvoiceField) -> Void
+    var delete: (_ field: InvoiceField) -> Void
     var isFirst: Bool
     var isLast: Bool
     
@@ -20,33 +20,33 @@ struct InvoiceItemsItemActionsView: View {
             Menu {
                 if !isFirst {
                     Button(action: {
-                        moveUp(item)
+                        moveUp(field)
                     }) {
                         Image(systemName: "chevron.up")
                         Text("Move up")
                     }
-                    .accessibilityLabel("Move item up")
+                    .accessibilityLabel("Move field up")
                 }
                 
                 if !isLast {
                     Button(action: {
-                        moveDown(item)
+                        moveDown(field)
                     }) {
                         Image(systemName: "chevron.down")
                         Text("Move down")
                     }
-                    .accessibilityLabel("Move item down")
+                    .accessibilityLabel("Move field down")
                 }
                 
                 Button(action: {
-                    delete(item)
+                    delete(field)
                 }) {
                     Image(systemName: "trash")
                     Text("Delete")
                 }
-                .accessibilityLabel("Delete item")
+                .accessibilityLabel("Delete field")
             } label: {
-                Label("Item actions", systemImage: "gearshape.fill")
+                Label("Field actions", systemImage: "gearshape.fill")
                     .font(.largeTitle)
                     .labelStyle(.iconOnly)
             }
