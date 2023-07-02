@@ -7,57 +7,16 @@
 
 import SwiftUI
 
-struct InvoicePaymentsDetailView: View {
-    @Environment(\.managedObjectContext) private var context
-    @ObservedObject var invoice: Invoice
-    @ObservedObject var field: InvoiceField
-    @State private var label = ""
-    @State private var value = ""
-    
-    var body: some View {
-        HStack {
-            TextFieldView(label: "Field label", value: $label, onAppear: onLabelAppear, save: onLabelSave)
-                .fixedSize()
-            Text(": ")
-                .offset(x: -4)
-            TextFieldView(label: "Field value", value: $value, onAppear: onValueAppear, save: onValueSave)
-                .fixedSize()
-                .offset(x: -4)
-            Spacer()
-        }
-    }
-    
-    private func onLabelAppear() {
-        if self.field.label != nil {
-            self.label = self.field.label!
-        }
-    }
-    
-    private func onValueAppear() {
-        if self.field.value != nil {
-            self.value = self.field.value!
-        }
-    }
-    
-    private func onLabelSave() {
-        self.field.label = self.label
-        try? context.save()
-    }
-    
-    private func onValueSave() {
-        self.field.value = self.value
-        try? context.save()
-    }
-}
-
 struct InvoicePaymentDetailsView: View {
     @Environment(\.managedObjectContext) private var context
     @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var invoice: Invoice
+    @State private var showActionsForField: InvoiceField?
+    @State private var fields: Array<InvoiceField> = []
     
     var body: some View {
         VStack {
-            if getFields().count > 0 {
+            if fields.count > 0 {
                 VStack {
                     HStack {
                         Text("Payment Details")
@@ -70,27 +29,30 @@ struct InvoicePaymentDetailsView: View {
                     
                     Spacer().frame(height: 15)
                     
-                    ForEach(getFields(), id: \.self) { field in
+                    ForEach(fields, id: \.self) { field in
                         ZStack {
-                            InvoicePaymentsDetailView(invoice: invoice, field: field)
+                            InvoicePaymentsDetailsDetailView(invoice: invoice, field: field)
+                                .offset(x: 24)
                             
-                            HStack {
-                                Button(action: {
-                                    withAnimation(.easeInOut(duration: 0.08)) {
-                                        context.delete(field)
-                                        try? context.save()
-                                    }
-                                }) {
-                                    Image(systemName: "minus.circle.fill")
-                                        .resizable()
-                                        .frame(width: 15, height: 15)
-                                }
-                                .buttonStyle(.plain)
-                                .offset(x: -8, y: -14)
-
-                                Spacer()
+                            if showActionsForField == field {
+                                InvoicePaymentDetailsDetailActionsView(field: field,
+                                                                       moveUp: moveUp,
+                                                                       moveDown: moveDown,
+                                                                       delete: delete,
+                                                                       isFirst: isFirst(field),
+                                                                       isLast: isLast(field))
                             }
                         }
+                        .onHover { over in
+                            withAnimation(.easeInOut(duration: 0.08)) {
+                                if over {
+                                    showActionsForField = field
+                                } else {
+                                    showActionsForField = .none
+                                }
+                            }
+                        }
+                        .offset(x: -24)
                     }
                     
                     Spacer().frame(height: 15)
@@ -119,6 +81,9 @@ struct InvoicePaymentDetailsView: View {
                 .border(width: 1, edges: [.top], color: colorScheme == .dark ? Color(hex: "#333") : Color(hex: "#e5e5e5"))
             }
         }
+        .onAppear {
+            self.fields = getFields()
+        }
     }
     
     private func addField() {
@@ -130,6 +95,7 @@ struct InvoicePaymentDetailsView: View {
             field.location = "PAYMENT_DETAILS"
             
             invoice.addToFields(field)
+            fields.append(field)
             
             try? context.save()
         }
@@ -149,5 +115,74 @@ struct InvoicePaymentDetailsView: View {
         return filteredFields.sorted { a, b in
             a.order < b.order
         }
+    }
+    
+    private func moveUp(_ field: InvoiceField) {
+        withAnimation(.easeInOut(duration: 0.08)) {
+            let currentOrder = field.order
+            let newOrder = currentOrder - 1
+            
+            let replacingField = fields.first { field in
+                return field.order == newOrder
+            }
+            
+            field.order = newOrder
+            fields[Int(currentOrder)] = replacingField!
+            fields[Int(newOrder)] = field
+            replacingField!.order = currentOrder
+            
+            self.showActionsForField = .none
+            
+            try? context.save()
+        }
+    }
+    
+    private func moveDown(_ field: InvoiceField) {
+        withAnimation(.easeInOut(duration: 0.08)) {
+            let currentOrder = field.order
+            let newOrder = currentOrder + 1
+            
+            let replacingField = fields.first { field in
+                return field.order == newOrder
+            }
+            
+            field.order = newOrder
+            fields[Int(currentOrder)] = replacingField!
+            fields[Int(newOrder)] = field
+            replacingField!.order = currentOrder
+            
+            self.showActionsForField = .none
+            
+            try? context.save()
+        }
+    }
+    
+    private func delete(_ field: InvoiceField) {
+        withAnimation(.easeInOut(duration: 0.08)) {
+            self.context.delete(field)
+            
+            // Remove field
+            self.fields.removeAll { f in
+                return f.order == field.order
+            }
+            
+            // Re-order all fields because there can now be a gap
+            fields.indices.forEach { index in
+                let f = fields[index]
+                f.order = Int32(index)
+            }
+            
+            self.showActionsForField = .none
+            
+            try? context.save()
+        }
+    }
+    
+    private func isFirst(_ field: InvoiceField) -> Bool {
+        return fields.first == field
+    }
+    
+    private func isLast(_ field: InvoiceField) -> Bool {
+        return fields.last == field
     }
 }

@@ -92,7 +92,6 @@ struct InvoiceHeadingLocationView: View {
             field.order = fields.last != nil ? fields.last!.order + 1 : 0
             
             invoice.addToFields(field)
-            
             fields.append(field)
             
             try? context.save()
