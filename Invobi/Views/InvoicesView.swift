@@ -42,8 +42,8 @@ struct InvoicesSectionInvoiceView: View {
                     Spacer()
                     
                     if invoice.status != "DRAFT" && invoice.status != "PAID" {
-                        Text(getDueInText(date: invoice.dueDate ?? Date.now).lowercased())
-                            .opacity(0.7)
+                        Text("Due \(displayDate(invoice.dueDate ?? Date.now))")
+                            .opacity(0.5)
                     }
                 }
                 Spacer().frame(height: 10)

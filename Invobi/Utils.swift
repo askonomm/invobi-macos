@@ -14,28 +14,11 @@ func getDayDiff(_ a: Date, _ b: Date) -> Int {
     return diffs.day!
 }
 
-func getDueInText(date: Date) -> String {
-    let dueDays = getDayDiff(Date.now, date)
+func displayDate(_ date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .medium
+    dateFormatter.timeStyle = .none
+    dateFormatter.locale = Locale(identifier: "en_US")
     
-    if dueDays > 1 {
-        return "Due in \(dueDays) days"
-    }
-    
-    if dueDays == 1 {
-        return "Due tomorrow"
-    }
-    
-    if dueDays == 0 {
-        return "Due today"
-    }
-    
-    if dueDays == -1 {
-        return "Due yesterday"
-    }
-    
-    if dueDays < -1 {
-        return "Due \(abs(dueDays)) days ago"
-    }
-    
-    return ""
+    return dateFormatter.string(from: date)
 }

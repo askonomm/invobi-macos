@@ -1,34 +1,45 @@
 import SwiftUI
+import ReordableViews
 
 struct InvoiceHeadingLocationView: View {
     @Environment(\.managedObjectContext) private var context
     @ObservedObject var invoice: Invoice
     var location: String
-    @State private var draggedField: InvoiceField?
+    @Binding var showActionsForField: InvoiceField?
     @State private var name = ""
+    @State private var fields: Array<InvoiceField> = []
     
     var body: some View {
         VStack(alignment: .leading) {
             // Name
-            TextFieldView(label: "Name", value: $name, onAppear: onAppear, save: save)
+            TextFieldView(label: "Name", value: $name, onAppear: onNameAppear, save: saveName)
             
             Spacer().frame(height: 15)
             
             // Fields
-            ForEach(getFields()) { field in
-                InvoiceHeadingFieldView(field: field)
+            ForEach(fields) { field in
+                InvoiceHeadingFieldView(fields: getFields(),
+                                        field: field,
+                                        showActionsForField: $showActionsForField,
+                                        moveUp: moveUp,
+                                        moveDown: moveDown,
+                                        delete: delete)
                 Spacer().frame(height: 10)
             }
-            
+        
             Button(action: {
                 addField()
             }) {
                 Text("Add field")
             }
+            
+            .onAppear {
+                self.fields = getFields()
+            }
         }
     }
     
-    func onAppear() {
+    func onNameAppear() {
         if self.location == "FROM" {
             self.name = self.invoice.fromName != nil ? self.invoice.fromName! : ""
         }
@@ -38,7 +49,7 @@ struct InvoiceHeadingLocationView: View {
         }
     }
     
-    func save() {
+    func saveName() {
         if self.location == "FROM" {
             self.invoice.fromName = self.name
         }
@@ -76,6 +87,61 @@ struct InvoiceHeadingLocationView: View {
             
             invoice.addToFields(field)
             
+            fields.append(field)
+            
+            try? context.save()
+        }
+    }
+    
+    private func moveUp(_ field: InvoiceField) {
+        withAnimation(.easeInOut(duration: 0.08)) {
+            let currentOrder = field.order
+            let newOrder = currentOrder - 1
+            
+            let replacingField = fields.first { field in
+                return field.order == newOrder
+            }
+            
+            field.order = newOrder
+            fields[Int(currentOrder)] = replacingField!
+            fields[Int(newOrder)] = field
+            replacingField!.order = currentOrder
+            
+            self.showActionsForField = .none
+            
+            try? context.save()
+        }
+    }
+    
+    private func moveDown(_ field: InvoiceField) {
+        withAnimation(.easeInOut(duration: 0.08)) {
+            let currentOrder = field.order
+            let newOrder = currentOrder + 1
+            
+            let replacingField = fields.first { field in
+                return field.order == newOrder
+            }
+            
+            field.order = newOrder
+            fields[Int(currentOrder)] = replacingField!
+            fields[Int(newOrder)] = field
+            replacingField!.order = currentOrder
+            
+            self.showActionsForField = .none
+            
+            try? context.save()
+        }
+    }
+    
+    private func delete(_ field: InvoiceField) {
+        withAnimation(.easeInOut(duration: 0.08)) {
+            self.context.delete(field)
+            self.fields.removeAll { f in
+                return f.order == field.order
+            }
+            
+            self.showActionsForField = .none
+            
             try? context.save()
         }
     }
@@ -85,10 +151,11 @@ struct InvoiceHeadingView: View {
     @Environment(\.managedObjectContext) private var context
     @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var invoice: Invoice
+    @State private var showActionsForField: InvoiceField?
 
     let columns = [
-        GridItem(.flexible(), spacing: 15),
-        GridItem(.flexible(), spacing: 15)
+        GridItem(.flexible(), spacing: 30),
+        GridItem(.flexible(), spacing: 30)
     ]
     
     var body: some View {
@@ -102,7 +169,7 @@ struct InvoiceHeadingView: View {
                                 .fontWeight(.semibold)
                                 .foregroundColor(colorScheme == .dark ? Color(hex: "#eee") : Color(hex: "#333"))
                             
-                            InvoiceHeadingLocationView(invoice: invoice, location: "FROM")
+                            InvoiceHeadingLocationView(invoice: invoice, location: "FROM", showActionsForField: $showActionsForField)
                             
                             Spacer()
                         }
@@ -118,7 +185,7 @@ struct InvoiceHeadingView: View {
                                 .fontWeight(.semibold)
                                 .foregroundColor(colorScheme == .dark ? Color(hex: "#eee") : Color(hex: "#333"))
                             
-                            InvoiceHeadingLocationView(invoice: invoice, location: "TO")
+                            InvoiceHeadingLocationView(invoice: invoice, location: "TO", showActionsForField: $showActionsForField)
                             
                             Spacer()
                         }

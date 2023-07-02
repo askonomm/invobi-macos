@@ -40,7 +40,7 @@ struct InvoiceNrView: View {
             Spacer().frame(height: 10)
             
             HStack {
-                Text(getDueInText(date: invoice.dueDate ?? Date.now))
+                Text("Due \(displayDate(invoice.dueDate ?? Date.now))")
                     .foregroundColor(colorScheme == .dark ? Color(hex: "#bbb") : Color(hex: "#666"))
                 Spacer()
             }
