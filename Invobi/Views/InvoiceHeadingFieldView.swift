@@ -7,6 +7,55 @@
 
 import SwiftUI
 
+struct InvoiceHeadingFieldActionsView: View {
+    @ObservedObject var field: InvoiceField
+    var moveUp: (_ field: InvoiceField) -> Void
+    var moveDown: (_ field: InvoiceField) -> Void
+    var delete: (_ field: InvoiceField) -> Void
+    var isFirst: Bool
+    var isLast: Bool
+    
+    var body: some View {
+        HStack {
+            Menu {
+                if !isFirst {
+                    Button(action: {
+                        moveUp(field)
+                    }) {
+                        Image(systemName: "chevron.up")
+                        Text("Move field up")
+                    }
+                }
+                
+                if !isLast {
+                    Button(action: {
+                        moveDown(field)
+                    }) {
+                        Image(systemName: "chevron.down")
+                        Text("Move field down")
+                    }
+                }
+                
+                Button(action: {
+                    delete(field)
+                }) {
+                    Image(systemName: "trash")
+                    Text("Delete field")
+                }
+            } label: {
+                Label("Actions", systemImage: "gearshape.fill")
+                    .font(.largeTitle)
+                    .labelStyle(.iconOnly)
+            }
+            .menuStyle(.borderlessButton)
+            .menuIndicator(.hidden)
+            .frame(width: 30)
+            
+            Spacer()
+        }
+    }
+}
+
 struct InvoiceHeadingFieldView: View {
     @Environment(\.managedObjectContext) private var context
     @Environment(\.colorScheme) private var colorScheme
@@ -16,6 +65,8 @@ struct InvoiceHeadingFieldView: View {
     var moveUp: (_ field: InvoiceField) -> Void
     var moveDown: (_ field: InvoiceField) -> Void
     var delete: (_ field: InvoiceField) -> Void
+    var isFirst: Bool
+    var isLast: Bool
     @State private var label = ""
     @State private var value = ""
     
@@ -57,53 +108,12 @@ struct InvoiceHeadingFieldView: View {
             .offset(x: 24)
             
             if showActionsForField == field {
-                VStack {
-                    HStack(alignment: .top) {
-                        Button(action: {
-                            delete(field)
-                        }) {
-                            Label("Delete field", systemImage: "minus.circle.fill")
-                                .foregroundColor(Color.red)
-                                .font(.title3)
-                                .labelStyle(.iconOnly)
-                        }
-                        .buttonStyle(.plain)
-                        
-                        Spacer()
-                    }
-                    
-                    if !isFirst(field) {
-                        HStack(alignment: .top) {
-                            Button(action: {
-                                moveUp(field)
-                            }) {
-                                Label("Move field up", systemImage: "chevron.up.circle.fill")
-                                    .foregroundColor(Color.gray)
-                                    .font(.title3)
-                                    .labelStyle(.iconOnly)
-                            }
-                            .buttonStyle(.plain)
-                            
-                            Spacer()
-                        }
-                    }
-                    
-                    if !isLast(field) {
-                        HStack(alignment: .top) {
-                            Button(action: {
-                                moveDown(field)
-                            }) {
-                                Label("Move field down", systemImage: "chevron.down.circle.fill")
-                                    .foregroundColor(Color.gray)
-                                    .font(.title3)
-                                    .labelStyle(.iconOnly)
-                            }
-                            .buttonStyle(.plain)
-                            
-                            Spacer()
-                        }
-                    }
-                }
+                InvoiceHeadingFieldActionsView(field: field,
+                                               moveUp: moveUp,
+                                               moveDown: moveDown,
+                                               delete: delete,
+                                               isFirst: isFirst,
+                                               isLast: isLast)
             }
         }
         .onHover { over in
@@ -116,13 +126,5 @@ struct InvoiceHeadingFieldView: View {
             }
         }
         .offset(x: -24)
-    }
-    
-    private func isFirst(_ field: InvoiceField) -> Bool {
-        return fields.first == field
-    }
-    
-    private func isLast(_ field: InvoiceField) -> Bool {
-        return fields.last == field
     }
 }

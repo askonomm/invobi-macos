@@ -23,13 +23,13 @@ struct InvoiceHeadingLocationView: View {
                                         showActionsForField: $showActionsForField,
                                         moveUp: moveUp,
                                         moveDown: moveDown,
-                                        delete: delete)
+                                        delete: delete,
+                                        isFirst: isFirst(field),
+                                        isLast: isLast(field))
                 Spacer().frame(height: 10)
             }
         
-            Button(action: {
-                addField()
-            }) {
+            Button(action: addField) {
                 Text("Add field")
             }
             
@@ -83,7 +83,7 @@ struct InvoiceHeadingLocationView: View {
             field.label = ""
             field.value = ""
             field.location = self.location
-            field.order = getFields().last != nil ? getFields().last!.order + 1 : 0
+            field.order = fields.last != nil ? fields.last!.order + 1 : 0
             
             invoice.addToFields(field)
             
@@ -136,14 +136,30 @@ struct InvoiceHeadingLocationView: View {
     private func delete(_ field: InvoiceField) {
         withAnimation(.easeInOut(duration: 0.08)) {
             self.context.delete(field)
+            
+            // Remove field
             self.fields.removeAll { f in
                 return f.order == field.order
+            }
+            
+            // Re-order all fields because there can now be a gap
+            fields.indices.forEach { index in
+                let f = fields[index]
+                f.order = Int32(index)
             }
             
             self.showActionsForField = .none
             
             try? context.save()
         }
+    }
+    
+    private func isFirst(_ field: InvoiceField) -> Bool {
+        return fields.first == field
+    }
+    
+    private func isLast(_ field: InvoiceField) -> Bool {
+        return fields.last == field
     }
 }
 
