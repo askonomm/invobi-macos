@@ -38,6 +38,8 @@ struct InvoiceView: View {
                     Group {
                         InvoiceSubTotalView(invoice: appState.selectedInvoice!)
                         Spacer().frame(height: 15)
+                        InvoiceDiscountsView(invoice: appState.selectedInvoice!)
+                        Spacer().frame(height: 15)
                         InvoiceTaxationsView(invoice: appState.selectedInvoice!)
                     }
                     

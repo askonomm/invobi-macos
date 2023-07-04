@@ -17,16 +17,16 @@ struct SplashView: View {
             VStack(alignment: .center) {
                 Image("Icon")
                     .resizable()
-                    .cornerRadius(colorScheme == .dark ? 35 : 10)
-                    .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.25), radius: colorScheme == .dark ? 35 : 10, y: 2)
-                    .overlay(RoundedRectangle(cornerRadius: colorScheme == .dark ? 35 : 10).stroke(colorScheme == .dark ? .white : Color(red: 0, green: 0, blue: 0, opacity: 0), lineWidth: 2))
+                    .cornerRadius(15)
+                    .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.25), radius: 15, y: 2)
+                    .overlay(RoundedRectangle(cornerRadius: 15).stroke(colorScheme == .dark ? Color(red: 255, green: 255, blue: 255, opacity: 0.3) : Color(red: 0, green: 0, blue: 0, opacity: 0), lineWidth: 1))
                     .frame(width: 60, height: 60)
                 
                 Spacer().frame(height: 15)
                 
                 Group {
                     Circle()
-                        .fill(.white)
+                        .fill(colorScheme == .dark ? .black : .white)
                         .frame(width: 8, height: 8)
                         .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.05), radius: 1, y: 1)
                         .offset(x: 0)
@@ -34,7 +34,7 @@ struct SplashView: View {
                     Spacer().frame(height: 5)
                     
                     Circle()
-                        .fill(.white)
+                        .fill(colorScheme == .dark ? .black : .white)
                         .frame(width: 11, height: 11)
                         .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.05), radius: 1, y: 1)
                         .offset(x: -14)
@@ -42,7 +42,7 @@ struct SplashView: View {
                     Spacer().frame(height: 5)
                     
                     Circle()
-                        .fill(.white)
+                        .fill(colorScheme == .dark ? .black : .white)
                         .frame(width: 15, height: 15)
                         .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.05), radius: 1, y: 1)
                         .offset(x: -4)
@@ -52,10 +52,10 @@ struct SplashView: View {
                 
                 Text("Oh-no! There are no invoices!")
                     .font(.body)
-                    .foregroundColor(.black)
+                    .foregroundColor(colorScheme == .dark ? .white : .black)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 5)
-                    .background(.white)
+                    .background(colorScheme == .dark ? .black : .white)
                     .cornerRadius(10)
                     .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.05), radius: 1, y: 1)
                 
@@ -68,8 +68,9 @@ struct SplashView: View {
                         .foregroundColor(.white)
                         .padding(.horizontal, 20)
                         .padding(.vertical, 10)
-                        .background(getGradient("button-bg"))
+                        .background(LinearGradient(colors: [Color(hex: "#8E66FF"), Color(hex: "#7544FF")], startPoint: .top, endPoint: .bottom))
                         .cornerRadius(25)
+                        .overlay(RoundedRectangle(cornerRadius: colorScheme == .dark ? 35 : 10).stroke(colorScheme == .dark ? Color(red: 255, green: 255, blue: 255, opacity: 0.3) : Color(red: 0, green: 0, blue: 0, opacity: 0), lineWidth: 1))
                         .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.25), radius: 20, y: 2)
                 }
                 .buttonStyle(.plain)

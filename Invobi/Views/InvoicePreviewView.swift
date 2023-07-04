@@ -28,6 +28,7 @@ struct InvoicePreviewView: View {
             
             Group {
                 InvoiceSubTotalPreviewView(invoice: invoice)
+                InvoiceDiscountsPreviewView(invoice: invoice)
                 InvoiceTaxationsPreviewView(invoice: invoice)
             }
             
