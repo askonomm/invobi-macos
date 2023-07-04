@@ -13,7 +13,7 @@ struct InvoicesSectionView: View {
     
     var body: some View {
         if invoices.count > 0 {
-            VStack {
+            VStack(spacing: 0) {
                 HStack {
                     Text(title.uppercased())
                         .font(.callout)
@@ -24,14 +24,8 @@ struct InvoicesSectionView: View {
                 
                 Spacer().frame(height: 10)
                 
-                ForEach(Array(invoices.enumerated()), id: \.element) { index, invoice in
-                    VStack {
-                        if index > 0 {
-                            Spacer().frame(height: 10)
-                        }
-                        
-                        InvoicesSectionInvoiceView(invoice: invoice)
-                    }
+                ForEach(invoices, id: \.self) { invoice in
+                    InvoicesSectionInvoiceView(invoice: invoice)
                 }
                 
                 Spacer().frame(height: 40)

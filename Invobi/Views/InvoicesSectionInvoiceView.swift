@@ -20,7 +20,8 @@ struct InvoicesSectionInvoiceView: View {
                 appState.view = Views.invoice
             }
         }) {
-            VStack {
+            VStack(spacing: 0) {
+                Spacer().frame(height: 8)
                 HStack {
                     HStack {
                         Text("#")
@@ -48,19 +49,20 @@ struct InvoicesSectionInvoiceView: View {
                 }
                 Spacer().frame(height: 10)
             }
-        }
-        .accessibilityLabel("Invoice \(invoice.nr ?? "")")
-        .buttonStyle(.plain)
-        .border(width: 1, edges: [.bottom], color: colorScheme == .dark ? Color(hex: "#333") : Color(hex: "#e5e5e5"))
-        .contentShape(Rectangle())
-        .onAppear {
-            if invoice.dueDate != nil {
-                if getDayDiff(invoice.dueDate!, Date.now) > 0 {
-                    self.invoice.status = "OVERDUE"
-                    try? context.save()
+            
+            .accessibilityLabel("Invoice \(invoice.nr ?? "")")
+            .border(width: 1, edges: [.bottom], color: colorScheme == .dark ? Color(hex: "#333") : Color(hex: "#e5e5e5"))
+            .contentShape(Rectangle())
+            .onAppear {
+                if invoice.dueDate != nil {
+                    if getDayDiff(invoice.dueDate!, Date.now) > 0 {
+                        self.invoice.status = "OVERDUE"
+                        try? context.save()
+                    }
                 }
             }
         }
+        .buttonStyle(.plain)
     }
     
     private func calculateTotal(_ invoice: Invoice) -> Decimal {
