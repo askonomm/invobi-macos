@@ -49,6 +49,7 @@ struct InvoicesSectionInvoiceView: View {
                 Spacer().frame(height: 10)
             }
         }
+        .accessibilityLabel("Invoice \(invoice.nr ?? "")")
         .buttonStyle(.plain)
         .border(width: 1, edges: [.bottom], color: colorScheme == .dark ? Color(hex: "#333") : Color(hex: "#e5e5e5"))
         .contentShape(Rectangle())
