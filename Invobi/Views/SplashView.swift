@@ -17,9 +17,9 @@ struct SplashView: View {
             VStack(alignment: .center) {
                 Image("Icon")
                     .resizable()
-                    .cornerRadius(35)
-                    .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.25), radius: 25, y: 2)
-                    .overlay(RoundedRectangle(cornerRadius: 35).stroke(.white, lineWidth: 2))
+                    .cornerRadius(colorScheme == .dark ? 35 : 10)
+                    .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.25), radius: colorScheme == .dark ? 35 : 10, y: 2)
+                    .overlay(RoundedRectangle(cornerRadius: colorScheme == .dark ? 35 : 10).stroke(colorScheme == .dark ? .white : Color(red: 0, green: 0, blue: 0, opacity: 0), lineWidth: 2))
                     .frame(width: 60, height: 60)
                 
                 Spacer().frame(height: 15)
@@ -50,7 +50,7 @@ struct SplashView: View {
                 
                 Spacer().frame(height: 20)
                 
-                Text("Oh-no! There's no invoices!")
+                Text("Oh-no! There are no invoices!")
                     .font(.body)
                     .foregroundColor(.black)
                     .padding(.horizontal, 8)
@@ -89,7 +89,7 @@ struct SplashView: View {
         case "button-bg":
             return colorScheme == .dark ?
                 LinearGradient(colors: [Color(hex: "#2E005F"), Color(hex: "#110041")], startPoint: .top, endPoint: .bottom) :
-                LinearGradient(colors: [Color(hex: "#B775FF"), Color(hex: "#8E66FF")], startPoint: .top, endPoint: .bottom)
+                LinearGradient(colors: [Color(hex: "#8E66FF"), Color(hex: "#7544FF")], startPoint: .top, endPoint: .bottom)
         default:
             return LinearGradient(colors: [Color(hex: "#AFFFA1"), Color(hex: "#85FF91")], startPoint: .top, endPoint: .bottom)
         }
