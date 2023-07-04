@@ -27,13 +27,13 @@ struct InvoicePreviewView: View {
             }
             
             Group {
-                InvoiceSubTotalView(invoice: invoice)
+                InvoiceSubTotalPreviewView(invoice: invoice)
                 InvoiceTaxationsPreviewView(invoice: invoice)
             }
             
             Group {
                 Spacer().frame(height: 40)
-                InvoiceTotalView(invoice: invoice)
+                InvoiceTotalPreviewView(invoice: invoice)
                 InvoicePaymentDetailsPreviewView(invoice: invoice)
             }
         }

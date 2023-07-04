@@ -15,9 +15,11 @@ struct InvoicePaymentsDetailPreviewView: View {
     var body: some View {
         HStack {
             Text((field.label ?? "") + ": ")
+                .font(.title3)
                 .fontWeight(.semibold)
                 .fixedSize()
             Text(field.value ?? "")
+                .font(.title3)
                 .fixedSize()
                 .offset(x: -8)
             Spacer()
