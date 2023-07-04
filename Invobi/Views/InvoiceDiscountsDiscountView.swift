@@ -44,7 +44,7 @@ struct InvoiceDiscountsDiscountView: View {
     
     private func savePercentage() {
         withAnimation(.easeInOut(duration: 0.08)) {
-            self.discount.objectWillChange.send()
+            self.invoice.objectWillChange.send()
             self.discount.percentage = (self.percentage) as NSDecimalNumber
             
             try? context.save()
