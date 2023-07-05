@@ -52,7 +52,7 @@ struct InvoiceEditView: View {
                     VStack {
                         InvoiceMetaView(invoice: invoice)
                     }
-                    .frame(width: 200)
+                    .frame(width: 175)
                     .padding()
                     .background(colorScheme == .dark ? Color(hex: "#272727") : Color(hex: "#fafafa"))
                     .border(width: 1, edges: [.leading], color: colorScheme == .dark ? Color(hex: "#444") : Color(hex: "#e5e5e5"))

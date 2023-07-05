@@ -33,9 +33,10 @@ struct InvoiceMetaView: View {
                 
                 Spacer().frame(height: 10)
                 
-                Picker("Select currency", selection: $currency) {
-                    Text("USD").tag("USD")
-                    Text("EUR").tag("EUR")
+                Picker("Choose a currency", selection: $currency) {
+                    ForEach(getCurrencies(), id: \.self) { currency in
+                        Text(currency).tag(currency)
+                    }
                 }
                 .onChange(of: currency) { _ in
                     withAnimation(.easeInOut(duration: 0.08)) {

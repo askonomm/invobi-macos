@@ -46,7 +46,7 @@ struct InvoiceNrView: View {
                             .labelStyle(.iconOnly)
                     }
                     .buttonStyle(.plain)
-                    .offset(x: -210)
+                    .offset(x: -185)
                 }
             }
             
