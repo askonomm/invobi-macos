@@ -11,17 +11,13 @@ struct InvoiceView: View {
     @EnvironmentObject var appState: AppState
     @Environment(\.managedObjectContext) private var context
     @Environment(\.colorScheme) private var colorScheme
-    @State private var showConfig = false
-    private let statuses = ["DRAFT", "UNPAID", "PAID", "OVERDUE"]
-    @State private var status = "DRAFT"
-    private let currencies = ["EUR", "USD"]
-    @State private var currency = "EUR"
+    @State private var showMetaView = false
     @State private var view = "edit"
     
     var body: some View {
         VStack {
             if view == "edit" {
-                InvoiceEditView(invoice: appState.selectedInvoice!)
+                InvoiceEditView(invoice: appState.selectedInvoice!, showMetaView: $showMetaView)
             }
             
             if view == "preview" {
@@ -61,6 +57,21 @@ struct InvoiceView: View {
                     Text("Preview").tag("preview")
                 }
                 .pickerStyle(.inline)
+            }
+            
+            ToolbarItem(placement: .primaryAction) {
+                Button(action: {
+                    withAnimation(.easeInOut(duration: 0.08)) {
+                        view = "edit"
+                        showMetaView = !showMetaView
+                    }
+                }) {
+                    if showMetaView {
+                        Label("Toggle settings", systemImage: "gearshape")
+                    } else {
+                        Label("Toggle settings", systemImage: "gearshape")
+                    }
+                }
             }
             
             ToolbarItem(placement: .primaryAction) {

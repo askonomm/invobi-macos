@@ -35,23 +35,19 @@ struct InvoiceNrView: View {
                 
                 Spacer()
                 
-                Button(action: {
-                    withAnimation(.easeInOut(duration: 0.08)) {
-                        showMetaView = !showMetaView
-                    }
-                }) {
-                    if showMetaView {
-                        Label("Settings", systemImage: "arrow.forward.to.line")
+                if showMetaView {
+                    Button(action: {
+                        withAnimation(.easeInOut(duration: 0.08)) {
+                            showMetaView = false
+                        }
+                    }) {
+                        Label("Close settings", systemImage: "arrow.forward.to.line")
                             .font(.title)
                             .labelStyle(.iconOnly)
-                    } else {
-                        Label("Settings", systemImage: "gearshape")
-                            .font(.title3)
-                            .labelStyle(.titleAndIcon)
                     }
+                    .buttonStyle(.plain)
+                    .offset(x: -210)
                 }
-                .buttonStyle(.plain)
-                .offset(x: showMetaView ? -210 : 0)
             }
             
             Spacer().frame(height: 10)

@@ -10,7 +10,7 @@ import SwiftUI
 struct InvoiceEditView: View {
     @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var invoice: Invoice
-    @State private var showMetaView = false
+    @Binding var showMetaView: Bool
     
     var body: some View {
         ZStack(alignment: .topLeading) {
