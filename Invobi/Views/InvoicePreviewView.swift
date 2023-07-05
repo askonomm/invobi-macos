@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct InvoicePreviewView: View {
-    @Environment(\.managedObjectContext) private var context
     @ObservedObject var invoice: Invoice
     
     var body: some View {

@@ -70,7 +70,7 @@ struct SplashView: View {
                         .padding(.vertical, 10)
                         .background(LinearGradient(colors: [Color(hex: "#8E66FF"), Color(hex: "#7544FF")], startPoint: .top, endPoint: .bottom))
                         .cornerRadius(25)
-                        .overlay(RoundedRectangle(cornerRadius: colorScheme == .dark ? 35 : 10).stroke(colorScheme == .dark ? Color(red: 255, green: 255, blue: 255, opacity: 0.3) : Color(red: 0, green: 0, blue: 0, opacity: 0), lineWidth: 1))
+                        .overlay(RoundedRectangle(cornerRadius: 25).stroke(colorScheme == .dark ? Color(red: 255, green: 255, blue: 255, opacity: 0.3) : Color(red: 0, green: 0, blue: 0, opacity: 0.55), lineWidth: 1))
                         .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.25), radius: 20, y: 2)
                 }
                 .buttonStyle(.plain)

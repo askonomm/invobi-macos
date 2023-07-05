@@ -11,6 +11,7 @@ struct InvoiceNrView: View {
     @Environment(\.managedObjectContext) private var context
     @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var invoice: Invoice
+    @Binding var showMetaView: Bool
     @State private var itemNr = ""
     
     var body: some View {
@@ -32,16 +33,56 @@ struct InvoiceNrView: View {
                     })
                     .onAppear(perform: onAppear)
                 
-                Spacer().frame(width: 10)
-                InvoiceMetaView(invoice: invoice)
                 Spacer()
+                
+                Button(action: {
+                    withAnimation(.easeInOut(duration: 0.08)) {
+                        showMetaView = !showMetaView
+                    }
+                }) {
+                    if showMetaView {
+                        Label("Settings", systemImage: "arrow.forward.to.line")
+                            .font(.title)
+                            .labelStyle(.iconOnly)
+                    } else {
+                        Label("Settings", systemImage: "gearshape")
+                            .font(.title3)
+                            .labelStyle(.titleAndIcon)
+                    }
+                }
+                .buttonStyle(.plain)
+                .offset(x: showMetaView ? -210 : 0)
             }
             
             Spacer().frame(height: 10)
             
             HStack {
-                Text("Due \(displayDate(invoice.dueDate ?? Date.now))")
-                    .foregroundColor(colorScheme == .dark ? Color(hex: "#bbb") : Color(hex: "#666"))
+                Button(action: {
+                    withAnimation(.easeInOut(duration: 0.08)) {
+                        showMetaView = !showMetaView
+                    }
+                }) {
+                    Text("Issued \(displayDate(invoice.dateIssued ?? Date.now))")
+                        .foregroundColor(colorScheme == .dark ? Color(hex: "#bbb") : Color(hex: "#666"))
+                }
+                .buttonStyle(.plain)
+                
+                Spacer()
+            }
+            
+            Spacer().frame(height: 5)
+            
+            HStack {
+                Button(action: {
+                    withAnimation(.easeInOut(duration: 0.08)) {
+                        showMetaView = !showMetaView
+                    }
+                }) {
+                    Text("Due \(displayDate(invoice.dueDate ?? Date.now))")
+                        .foregroundColor(colorScheme == .dark ? Color(hex: "#bbb") : Color(hex: "#666"))
+                }
+                .buttonStyle(.plain)
+                
                 Spacer()
             }
         }

@@ -21,34 +21,7 @@ struct InvoiceView: View {
     var body: some View {
         VStack {
             if view == "edit" {
-                ScrollView {
-                    Group {
-                        Spacer().frame(height: 35)
-                        InvoiceNrView(invoice: appState.selectedInvoice!)
-                        Spacer().frame(height: 40)
-                        InvoiceHeadingView(invoice: appState.selectedInvoice!)
-                    }
-                    
-                    Group {
-                        Spacer().frame(height: 40)
-                        InvoiceItemsView(invoice: appState.selectedInvoice!)
-                        Spacer().frame(height: 40)
-                    }
-                    
-                    Group {
-                        InvoiceSubTotalView(invoice: appState.selectedInvoice!)
-                        Spacer().frame(height: 15)
-                        InvoiceDiscountsView(invoice: appState.selectedInvoice!)
-                        Spacer().frame(height: 15)
-                        InvoiceTaxationsView(invoice: appState.selectedInvoice!)
-                    }
-                    
-                    Group {
-                        Spacer().frame(height: 40)
-                        InvoiceTotalView(invoice: appState.selectedInvoice!)
-                        InvoicePaymentDetailsView(invoice: appState.selectedInvoice!)
-                    }
-                }
+                InvoiceEditView(invoice: appState.selectedInvoice!)
             }
             
             if view == "preview" {
