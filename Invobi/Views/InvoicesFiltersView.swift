@@ -149,7 +149,7 @@ struct InvoicesFiltersView: View {
                 Spacer()
             }
             
-            Spacer().frame(height: 20)
+            Spacer().frame(height: 15)
             
             HStack {
                 InvoicesFiltersDueDateFilterView(filterByDueDate: $filterByDueDate, dueDate: $dueDate)
