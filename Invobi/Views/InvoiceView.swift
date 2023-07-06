@@ -68,6 +68,7 @@ struct InvoiceView: View {
                 }) {
                     if showMetaView {
                         Label("Toggle settings", systemImage: "gearshape")
+                            .foregroundColor(Color.blue)
                     } else {
                         Label("Toggle settings", systemImage: "gearshape")
                     }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InvoicesSectionInvoiceView: View {
+struct InvoicesInvoiceView: View {
     @EnvironmentObject var appState: AppState
     @Environment(\.managedObjectContext) private var context
     @Environment(\.colorScheme) private var colorScheme

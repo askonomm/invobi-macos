@@ -33,23 +33,28 @@ struct InvoiceMetaView: View {
                 
                 Spacer().frame(height: 10)
                 
-                Picker("Choose a currency", selection: $currency) {
-                    ForEach(getCurrencies(), id: \.self) { currency in
-                        Text(currency).tag(currency)
+                HStack {
+                    Picker("Choose a currency", selection: $currency) {
+                        ForEach(getCurrencies(), id: \.self) { currency in
+                            Text(currency).tag(currency)
+                        }
                     }
-                }
-                .onChange(of: currency) { _ in
-                    withAnimation(.easeInOut(duration: 0.08)) {
-                        self.invoice.currency = currency
-                        try? context.save()
+                    .onChange(of: currency) { _ in
+                        withAnimation(.easeInOut(duration: 0.08)) {
+                            self.invoice.currency = currency
+                            try? context.save()
+                        }
                     }
-                }
-                .onAppear {
-                    if self.invoice.currency != nil {
-                        self.currency = self.invoice.currency!
+                    .onAppear {
+                        if self.invoice.currency != nil {
+                            self.currency = self.invoice.currency!
+                        }
                     }
+                    .labelsHidden()
+                    .frame(width: 65)
+                    
+                    Spacer()
                 }
-                .labelsHidden()
             }
             
             Spacer().frame(height: 20)
@@ -64,24 +69,29 @@ struct InvoiceMetaView: View {
                 
                 Spacer().frame(height: 10)
                 
-                Picker("Select status", selection: $status) {
-                    Text("Draft").tag("DRAFT")
-                    Text("Paid").tag("PAID")
-                    Text("Unpaid").tag("UNPAID")
-                    Text("Overdue").tag("OVERDUE")
-                }
-                .onChange(of: status) { _ in
-                    withAnimation(.easeInOut(duration: 0.08)) {
-                        self.invoice.status = status
-                        try? context.save()
+                HStack {
+                    Picker("Select status", selection: $status) {
+                        Text("Draft").tag("DRAFT")
+                        Text("Paid").tag("PAID")
+                        Text("Unpaid").tag("UNPAID")
+                        Text("Overdue").tag("OVERDUE")
                     }
-                }
-                .onAppear {
-                    if self.invoice.status != nil {
-                        self.status = self.invoice.status!
+                    .onChange(of: status) { _ in
+                        withAnimation(.easeInOut(duration: 0.08)) {
+                            self.invoice.status = status
+                            try? context.save()
+                        }
                     }
+                    .onAppear {
+                        if self.invoice.status != nil {
+                            self.status = self.invoice.status!
+                        }
+                    }
+                    .labelsHidden()
+                    .frame(width: 90)
+                    
+                    Spacer()
                 }
-                .labelsHidden()
             }
             
             Spacer().frame(height: 20)

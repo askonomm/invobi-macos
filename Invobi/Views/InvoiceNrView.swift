@@ -34,20 +34,6 @@ struct InvoiceNrView: View {
                     .onAppear(perform: onAppear)
                 
                 Spacer()
-                
-                if showMetaView {
-                    Button(action: {
-                        withAnimation(.easeInOut(duration: 0.08)) {
-                            showMetaView = false
-                        }
-                    }) {
-                        Label("Close settings", systemImage: "arrow.forward.to.line")
-                            .font(.title)
-                            .labelStyle(.iconOnly)
-                    }
-                    .buttonStyle(.plain)
-                    .offset(x: -185)
-                }
             }
             
             Spacer().frame(height: 10)
