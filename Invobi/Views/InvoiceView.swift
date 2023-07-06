@@ -56,6 +56,11 @@ struct InvoiceView: View {
                     Text("Edit").tag("edit")
                     Text("Preview").tag("preview")
                 }
+                .onChange(of: view) { _ in
+                    if view == "preview" {
+                        showMetaView = false
+                    }
+                }
                 .pickerStyle(.inline)
             }
             
