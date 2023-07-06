@@ -8,10 +8,16 @@
 import SwiftUI
 
 struct InvoicesFiltersDueDateFilterView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @Binding var filterByDueDate: Bool
     @Binding var dueDate: Date
     
     var body: some View {
+        let colorA = colorScheme == .dark ? "#373737" : "#fff"
+        let colorB = colorScheme == .dark ? "#373737" : "#fbfbfb"
+        let colorC = colorScheme == .dark ? "#555" : "#ccc"
+        let colorD = colorScheme == .dark ? "#272727" : "#fafafa"
+        
         HStack {
             if filterByDueDate {
                 HStack {
@@ -55,18 +61,24 @@ struct InvoicesFiltersDueDateFilterView: View {
                 .frame(height: 29)
             }
         }
-        .background(LinearGradient(colors: [Color(hex: filterByDueDate ? "#fbfbfb" : "#fff"), Color(hex: filterByDueDate ? "#fbfbfb" : "#fafafa")], startPoint: .top, endPoint: .bottom))
-        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(hex: "#ccc"), lineWidth: 1))
+        .background(LinearGradient(colors: [Color(hex: filterByDueDate ? colorB : colorA), Color(hex: filterByDueDate ? colorB : colorD)], startPoint: .top, endPoint: .bottom))
+        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(hex: colorC), lineWidth: 1))
         .cornerRadius(8)
         .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: filterByDueDate ? 0 : 0.05), radius: 5, y: 2)
     }
 }
 
 struct InvoicesFiltersStatusFilterView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @Binding var filterByStatus: Bool
     @Binding var status: String
     
     var body: some View {
+        let colorA = colorScheme == .dark ? "#373737" : "#fff"
+        let colorB = colorScheme == .dark ? "#373737" : "#fbfbfb"
+        let colorC = colorScheme == .dark ? "#555" : "#ccc"
+        let colorD = colorScheme == .dark ? "#272727" : "#fafafa"
+        
         HStack {
             if filterByStatus {
                 HStack {
@@ -115,8 +127,8 @@ struct InvoicesFiltersStatusFilterView: View {
                 .frame(height: 29)
             }
         }
-        .background(LinearGradient(colors: [Color(hex: filterByStatus ? "#fbfbfb" : "#fff"), Color(hex: filterByStatus ? "#fbfbfb" : "#fafafa")], startPoint: .top, endPoint: .bottom))
-        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(hex: "#ccc"), lineWidth: 1))
+        .background(LinearGradient(colors: [Color(hex: filterByStatus ? colorB : colorA), Color(hex: filterByStatus ? colorB : colorD)], startPoint: .top, endPoint: .bottom))
+        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(hex: colorC), lineWidth: 1))
         .cornerRadius(8)
         .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: filterByStatus ? 0 : 0.05), radius: 5, y: 2)
     }
