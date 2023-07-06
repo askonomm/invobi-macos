@@ -42,10 +42,23 @@ struct InvoicesInvoiceView: View {
                     
                     Spacer()
                     
-                    if invoice.status != "DRAFT" && invoice.status != "PAID" {
-                        Text("Due \(displayDate(invoice.dueDate ?? Date.now))")
-                            .opacity(0.5)
+                    Text((displayDate(invoice.dueDate ?? Date.now)))
+                        .opacity(0.5)
+                    
+                    Spacer().frame(width: 10)
+                    
+                    HStack {
+                        Spacer()
+                        Text(invoice.status ?? "DRAFT")
+                            .font(.caption)
+                            .fontWeight(.semibold)
+                            .foregroundColor(getInvoiceStatusForegroundColor(invoice.status))
+                        Spacer()
                     }
+                    .padding(.vertical, 3)
+                    .background(getInvoiceStatusBackgroundColor(invoice.status))
+                    .cornerRadius(8)
+                    .frame(width: 70)
                 }
                 Spacer().frame(height: 10)
             }
@@ -63,6 +76,30 @@ struct InvoicesInvoiceView: View {
             }
         }
         .buttonStyle(.plain)
+    }
+    
+    private func getInvoiceStatusForegroundColor(_ status: String?) -> Color {
+        if status == nil || status == "DRAFT" || status == "UNPAID" {
+            return colorScheme == .dark ? .white : Color(hex: "#333")
+        }
+        
+        return Color.white
+    }
+    
+    private func getInvoiceStatusBackgroundColor(_ status: String?) -> Color {
+        if status == nil || status == "DRAFT" {
+            return colorScheme == .dark ? Color(hex: "#373737") : Color(hex: "#eee")
+        }
+        
+        if status == "PAID" {
+            return colorScheme == .dark ? Color(hex: "#05a47b") : Color(hex: "#06d6a0")
+        }
+        
+        if status == "UNPAID" {
+            return colorScheme == .dark ? Color(hex: "#ffb711") : Color(hex: "#ffd166")
+        }
+        
+        return Color(hex: "#ef476f")
     }
     
     private func calculateTotal(_ invoice: Invoice) -> Decimal {
