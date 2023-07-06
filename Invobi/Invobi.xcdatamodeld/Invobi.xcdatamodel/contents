@@ -5,10 +5,12 @@
         <attribute name="currency" optional="YES" attributeType="String"/>
         <attribute name="dateIssued" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dueDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="fromImage" optional="YES" attributeType="Binary"/>
         <attribute name="fromName" optional="YES" attributeType="String"/>
         <attribute name="nr" optional="YES" attributeType="String"/>
         <attribute name="showPaymentDetails" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="toImage" optional="YES" attributeType="Binary"/>
         <attribute name="toName" optional="YES" attributeType="String"/>
         <relationship name="discounts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InvoiceDiscount" inverseName="invoice" inverseEntity="InvoiceDiscount"/>
         <relationship name="fields" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InvoiceField" inverseName="invoice" inverseEntity="InvoiceField"/>

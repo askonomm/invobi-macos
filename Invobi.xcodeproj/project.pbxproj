@@ -60,6 +60,7 @@
 		6DE9D8612A54D8B3005218CC /* InvoiceTaxationsTaxationPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE9D8602A54D8B3005218CC /* InvoiceTaxationsTaxationPreviewView.swift */; };
 		6DE9D8632A54DDCC005218CC /* InvoiceEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE9D8622A54DDCC005218CC /* InvoiceEditView.swift */; };
 		6DE9D8652A55C095005218CC /* InvoicesFiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE9D8642A55C095005218CC /* InvoicesFiltersView.swift */; };
+		6DE9D8672A5761DD005218CC /* InvoiceHeadingLocationPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE9D8662A5761DD005218CC /* InvoiceHeadingLocationPreviewView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +138,7 @@
 		6DE9D8602A54D8B3005218CC /* InvoiceTaxationsTaxationPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceTaxationsTaxationPreviewView.swift; sourceTree = "<group>"; };
 		6DE9D8622A54DDCC005218CC /* InvoiceEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceEditView.swift; sourceTree = "<group>"; };
 		6DE9D8642A55C095005218CC /* InvoicesFiltersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoicesFiltersView.swift; sourceTree = "<group>"; };
+		6DE9D8662A5761DD005218CC /* InvoiceHeadingLocationPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceHeadingLocationPreviewView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 				6DC8E5512A3E5A1400EF6100 /* InvoiceNrPreviewView.swift */,
 				6D0BE76E2A34DAB400B439FD /* InvoiceHeadingView.swift */,
 				6D73CD692A51E2BD00C7C6D1 /* InvoiceHeadingLocationView.swift */,
+				6DE9D8662A5761DD005218CC /* InvoiceHeadingLocationPreviewView.swift */,
 				6D0BE7762A35DD8300B439FD /* InvoiceHeadingFieldView.swift */,
 				6D73CD712A51E8EF00C7C6D1 /* InvoiceHeadingFieldActionsView.swift */,
 				6DC8E5532A3F03FB00EF6100 /* InvoiceHeadingPreviewView.swift */,
@@ -446,6 +449,7 @@
 				6DC8E55A2A40B2B200EF6100 /* InvoiceTaxationsPreviewView.swift in Sources */,
 				6DC8E5602A42108700EF6100 /* InvoicesView.swift in Sources */,
 				6D73CD6A2A51E2BD00C7C6D1 /* InvoiceHeadingLocationView.swift in Sources */,
+				6DE9D8672A5761DD005218CC /* InvoiceHeadingLocationPreviewView.swift in Sources */,
 				6DC8E5542A3F03FB00EF6100 /* InvoiceHeadingPreviewView.swift in Sources */,
 				6D0BE7752A353C3A00B439FD /* TextFieldView.swift in Sources */,
 				6DC74ECF2A31CC1200386680 /* HexColor.swift in Sources */,
