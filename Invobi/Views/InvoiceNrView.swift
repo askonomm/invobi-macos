@@ -17,7 +17,7 @@ struct InvoiceNrView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Invoice #")
+                Text("\(Text("Invoice")) #")
                     .font(.largeTitle)
                     .foregroundColor(Color.gray)
                     .fontWeight(.light)
@@ -44,7 +44,7 @@ struct InvoiceNrView: View {
                         showMetaView = !showMetaView
                     }
                 }) {
-                    Text("Issued \(displayDate(invoice.dateIssued ?? Date.now))")
+                    Text("\(Text("Issued")) \((invoice.dateIssued != nil ? invoice.dateIssued! : Date.now).formatted(.dateTime.day().month().year()))")
                         .foregroundColor(colorScheme == .dark ? Color(hex: "#bbb") : Color(hex: "#666"))
                 }
                 .buttonStyle(.plain)
@@ -60,7 +60,7 @@ struct InvoiceNrView: View {
                         showMetaView = !showMetaView
                     }
                 }) {
-                    Text("Due \(displayDate(invoice.dueDate ?? Date.now))")
+                    Text("\(Text("Due")) \((invoice.dueDate != nil ? invoice.dueDate! : Date.now).formatted(.dateTime.day().month().year()))")
                         .foregroundColor(colorScheme == .dark ? Color(hex: "#bbb") : Color(hex: "#666"))
                 }
                 .buttonStyle(.plain)

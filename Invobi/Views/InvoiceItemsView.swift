@@ -29,7 +29,7 @@ struct InvoiceItemsView: View {
             
             HStack(alignment: .top) {
                 HStack {
-                    Text("Name".uppercased())
+                    Text(String(localized: "Name").uppercased())
                         .font(.callout)
                         .fontWeight(.regular)
                         .foregroundColor(colorScheme == .dark ? Color(hex: "#999") : Color(hex: "#777"))
@@ -40,7 +40,7 @@ struct InvoiceItemsView: View {
                 Spacer().frame(width: 20)
                 
                 HStack {
-                    Text("QTY".uppercased())
+                    Text(String(localized: "QTY").uppercased())
                         .font(.callout)
                         .fontWeight(.regular)
                         .foregroundColor(colorScheme == .dark ? Color(hex: "#999") : Color(hex: "#777"))
@@ -51,7 +51,7 @@ struct InvoiceItemsView: View {
                 Spacer().frame(width: 20)
                 
                 HStack {
-                    Text("Price".uppercased())
+                    Text(String(localized: "Price").uppercased())
                         .font(.callout)
                         .fontWeight(.regular)
                         .foregroundColor(colorScheme == .dark ? Color(hex: "#999") : Color(hex: "#777"))
@@ -63,7 +63,7 @@ struct InvoiceItemsView: View {
                 
                 HStack {
                     Spacer()
-                    Text("Total".uppercased())
+                    Text(String(localized: "Total").uppercased())
                         .font(.callout)
                         .fontWeight(.regular)
                         .foregroundColor(colorScheme == .dark ? Color(hex: "#999") : Color(hex: "#777"))

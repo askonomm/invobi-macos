@@ -16,7 +16,7 @@ struct TextFieldView: View {
     var numberField: Bool = false
     
     var body: some View {
-        TextField(label, text: $value)
+        TextField(LocalizedStringKey(label), text: $value)
         .onAppear(perform: {
             onAppear()
         })

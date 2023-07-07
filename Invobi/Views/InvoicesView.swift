@@ -64,7 +64,7 @@ struct InvoicesView: View {
             filterInvoices()
         }
         .background(colorScheme == .dark ? Color(hex: "#191919") : Color.white)
-        .navigationTitle("Invoices")
+        .navigationTitle(Text("Invoices"))
         .toolbar {
             ToolbarItem(placement: .navigation) {
                 Button(action: addInvoice) {
@@ -82,7 +82,7 @@ struct InvoicesView: View {
                         Label("Show filters", systemImage: "slider.horizontal.3")
                             .foregroundColor(Color.blue)
                     } else {
-                        Label("Show filters", systemImage: "slider.horizontal.3")
+                        Label("Hide filters", systemImage: "slider.horizontal.3")
                     }
                 }
             }

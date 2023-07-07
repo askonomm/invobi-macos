@@ -25,7 +25,7 @@ struct InvoiceMetaView: View {
         VStack {
             Group {
                 HStack {
-                    Text("Currency".uppercased())
+                    Text(String(localized: "Currency").uppercased())
                         .font(.subheadline)
                         //.fontWeight(.semibold)
                     Spacer()
@@ -61,7 +61,7 @@ struct InvoiceMetaView: View {
             
             Group {
                 HStack {
-                    Text("Status".uppercased())
+                    Text(String(localized: "Status").uppercased())
                         .font(.subheadline)
                         //.fontWeight(.semibold)
                     Spacer()
@@ -98,7 +98,7 @@ struct InvoiceMetaView: View {
             
             Group {
                 HStack {
-                    Text("Date issued".uppercased())
+                    Text(String(localized: "Date issued").uppercased())
                         .font(.subheadline)
                         //.fontWeight(.semibold)
                     Spacer()
@@ -125,7 +125,7 @@ struct InvoiceMetaView: View {
             
             Group {
                 HStack {
-                    Text("Due date".uppercased())
+                    Text(String(localized: "Due date").uppercased())
                         .font(.subheadline)
                         //.fontWeight(.semibold)
                     Spacer()

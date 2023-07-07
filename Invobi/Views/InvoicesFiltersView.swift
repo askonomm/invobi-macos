@@ -143,7 +143,7 @@ struct InvoicesFiltersView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Filters".uppercased())
+                Text(String(localized: "Filters").uppercased())
                     .font(.callout)
                 
                 Spacer()

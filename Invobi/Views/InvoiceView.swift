@@ -72,10 +72,10 @@ struct InvoiceView: View {
                     }
                 }) {
                     if showMetaView {
-                        Label("Toggle settings", systemImage: "gearshape")
+                        Label("Hide settings", systemImage: "gearshape")
                             .foregroundColor(Color.blue)
                     } else {
-                        Label("Toggle settings", systemImage: "gearshape")
+                        Label("Show settings", systemImage: "gearshape")
                     }
                 }
             }
@@ -88,7 +88,7 @@ struct InvoiceView: View {
                 }
             }
         }
-        .navigationTitle("Edit Invoice")
+        .navigationTitle(Text("Edit Invoice"))
     }
     
     @MainActor func savePDF(invoice: Invoice) {
@@ -98,9 +98,9 @@ struct InvoiceView: View {
         panel.allowedContentTypes = [.pdf]
         panel.canCreateDirectories = true
         panel.isExtensionHidden = false
-        panel.title = "Save PDF"
-        panel.message = "Choose a folder and a name to store the invoice"
-        panel.nameFieldLabel = "PDF name:"
+        panel.title = String(localized: "Save PDF")
+        panel.message = String(localized:"Choose a folder and a name to store the invoice")
+        panel.nameFieldLabel = String(localized:"PDF name:")
         
         if panel.runModal() == .OK {
             let renderer = ImageRenderer(content: view)

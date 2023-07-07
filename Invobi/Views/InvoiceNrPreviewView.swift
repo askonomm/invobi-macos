@@ -15,7 +15,7 @@ struct InvoiceNrPreviewView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Invoice #")
+                Text("\(Text("Invoice")) #")
                     .font(.largeTitle)
                     .foregroundColor(Color.gray)
                     .fontWeight(.light)
@@ -33,7 +33,7 @@ struct InvoiceNrPreviewView: View {
             Spacer().frame(height: 10)
             
             HStack {
-                Text("Issued \((invoice.dateIssued != nil ? invoice.dateIssued! : Date.now).formatted(.dateTime.day().month().year()))")
+                Text("\(Text("Issued")) \((invoice.dateIssued != nil ? invoice.dateIssued! : Date.now).formatted(.dateTime.day().month().year()))")
                     .foregroundColor(colorScheme == .dark ? Color(hex: "#bbb") : Color(hex: "#666"))
                 Spacer()
             }
@@ -41,7 +41,7 @@ struct InvoiceNrPreviewView: View {
             Spacer().frame(height: 5)
             
             HStack {
-                Text("Due \((invoice.dueDate != nil ? invoice.dueDate! : Date.now).formatted(.dateTime.day().month().year()))")
+                Text("\(Text("Due")) \((invoice.dueDate != nil ? invoice.dueDate! : Date.now).formatted(.dateTime.day().month().year()))")
                     .foregroundColor(colorScheme == .dark ? Color(hex: "#bbb") : Color(hex: "#666"))
                 Spacer()
             }

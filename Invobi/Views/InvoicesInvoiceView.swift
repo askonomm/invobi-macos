@@ -42,14 +42,14 @@ struct InvoicesInvoiceView: View {
                     
                     Spacer()
                     
-                    Text((displayDate(invoice.dueDate ?? Date.now)))
+                    Text((invoice.dueDate != nil ? invoice.dueDate! : Date.now).formatted(.dateTime.day().month().year()))
                         .opacity(0.5)
                     
                     Spacer().frame(width: 10)
                     
                     HStack {
                         Spacer()
-                        Text(invoice.status ?? "DRAFT")
+                        Text(NSLocalizedString(invoice.status!.capitalized, comment: "").uppercased())
                             .font(.caption)
                             .fontWeight(.semibold)
                             .foregroundColor(getInvoiceStatusForegroundColor(invoice.status))
@@ -58,12 +58,12 @@ struct InvoicesInvoiceView: View {
                     .padding(.vertical, 3)
                     .background(getInvoiceStatusBackgroundColor(invoice.status))
                     .cornerRadius(8)
-                    .frame(width: 70)
+                    .frame(width: 80)
                 }
                 Spacer().frame(height: 10)
             }
             
-            .accessibilityLabel("Invoice \(invoice.nr ?? "")")
+            .accessibilityLabel("\(Text("Invoice")) \(invoice.nr ?? "")")
             .border(width: 1, edges: [.bottom], color: colorScheme == .dark ? Color(hex: "#333") : Color(hex: "#e5e5e5"))
             .contentShape(Rectangle())
             .onAppear {
@@ -100,33 +100,5 @@ struct InvoicesInvoiceView: View {
         }
         
         return Color(hex: "#ef476f")
-    }
-    
-    private func calculateTotal(_ invoice: Invoice) -> Decimal {
-        if invoice.items == nil {
-            return 0
-        }
-
-        let items = invoice.items!.allObjects as! [InvoiceItem]
-        
-        // get subtotal
-        let subTotal: Decimal = items.reduce(0) { result, item in
-            let total: Decimal = (item.qty! as Decimal) * (item.price! as Decimal)
-            
-            return result + total
-        }
-        
-        // get total taxed
-        var taxedTotal: Decimal = 0
-        
-        if invoice.taxations != nil {
-            let taxations = invoice.taxations!.allObjects as! [InvoiceTaxation]
-            
-            taxedTotal = taxations.reduce(0) { result, item in
-                return result + ((item.percentage! as Decimal / 100) * subTotal)
-            }
-        }
-        
-        return subTotal + taxedTotal
     }
 }
