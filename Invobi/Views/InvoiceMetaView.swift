@@ -57,7 +57,11 @@ struct InvoiceMetaView: View {
                 }
             }
             
-            Spacer().frame(height: 20)
+            Group {
+                Spacer().frame(height: 20)
+                Divider()
+                Spacer().frame(height: 20)
+            }
             
             Group {
                 HStack {
@@ -94,7 +98,11 @@ struct InvoiceMetaView: View {
                 }
             }
             
-            Spacer().frame(height: 20)
+            Group {
+                Spacer().frame(height: 20)
+                Divider()
+                Spacer().frame(height: 20)
+            }
             
             Group {
                 HStack {
@@ -121,7 +129,11 @@ struct InvoiceMetaView: View {
                     .labelsHidden()
             }
             
-            Spacer().frame(height: 20)
+            Group {
+                Spacer().frame(height: 20)
+                Divider()
+                Spacer().frame(height: 20)
+            }
             
             Group {
                 HStack {

@@ -144,6 +144,7 @@
 		6DE9D86B2A57651A005218CC /* et */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = et; path = et.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6DE9D86D2A57652E005218CC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6DE9D86E2A578EBF005218CC /* InvoiceItemsItemPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceItemsItemPreviewView.swift; sourceTree = "<group>"; };
+		6DE9D8702A5792D4005218CC /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -374,6 +375,7 @@
 				en,
 				Base,
 				et,
+				es,
 			);
 			mainGroup = 6DC74E882A30C5DF00386680;
 			packageReferences = (
@@ -512,6 +514,7 @@
 			children = (
 				6DE9D86B2A57651A005218CC /* et */,
 				6DE9D86D2A57652E005218CC /* en */,
+				6DE9D8702A5792D4005218CC /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

@@ -44,7 +44,6 @@ struct ContentView: View {
             }
         }
         .environmentObject(appState)
-        .environment(\.locale, .init(identifier: "et"))
         .frame(minWidth: 750, minHeight: 800)
     }
 }

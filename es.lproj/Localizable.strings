@@ -1,0 +1,83 @@
+/* 
+  Localizable.strings
+  Invobi
+
+  Created by Asko Nomm on 07.07.2023.
+  
+*/
+
+"Oh-no! There are no invoices!" = "¡Oh no! ¡No hay facturas!";
+"Create Invoice" = "Crear factura";
+"Couldn't find any matching invoices." = "No se encontraron facturas coincidentes.";
+"Show filters" = "Mostrar filtros";
+"Hide filters" = "Ocultar filtros";
+"Filters" = "Filtros";
+"Due date" = "Fecha de vencimiento";
+"Remove due date filter" = "Eliminar filtro de fecha de vencimiento";
+"Status" = "Estado";
+"Draft" = "Borrador";
+"Unpaid" = "Sin pagar";
+"Paid" = "Pagado";
+"Overdue" = "Vencido";
+"Remove status filter" = "Eliminar filtro de estado";
+"Invoice" = "Factura";
+"Back" = "Atrás";
+"Delete Invoice" = "Borrar factura";
+"Edit" = "Editar";
+"Preview" = "Vista previa";
+"Hide settings" = "Ocultar configuración";
+"Show settings" = "Mostrar configuración";
+"Save PDF" = "Guardar PDF";
+"Edit Invoice" = "Editar factura";
+"Choose a folder and a name to store the invoice" = "Elija una carpeta y un nombre para guardar la factura";
+"PDF name:" = "Nombre del PDF:";
+"Currency" = "Moneda";
+"Choose a currency" = "Elija una moneda";
+"Select status" = "Seleccionar estado";
+"Date issued" = "Fecha de emisión";
+"Select issued date" = "Seleccionar fecha de emisión";
+"Select due date" = "Seleccionar fecha de vencimiento";
+"Invoice number" = "Número de factura";
+"Issued" = "Emitido";
+"Due" = "Vencimiento";
+"From" = "De";
+"To" = "Para";
+"Select image" = "Seleccionar imagen";
+"Remove image" = "Eliminar imagen";
+"Name" = "Nombre";
+"Add field" = "Agregar campo";
+"Field label (optional)" = "Etiqueta del campo (opcional)";
+"Move up" = "Mover hacia arriba";
+"Move field up" = "Mover campo hacia arriba";
+"Move down" = "Mover hacia abajo";
+"Move field down" = "Mover campo hacia abajo";
+"Delete" = "Borrar";
+"Delete field" = "Borrar campo";
+"Field actions" = "Acciones del campo";
+"Items" = "Artículos";
+"QTY" = "Cant.";
+"Price" = "Precio";
+"Add item" = "Agregar artículo";
+"Move item up" = "Mover artículo hacia arriba";
+"Move item down" = "Mover artículo hacia abajo";
+"Delete item" = "Borrar artículo";
+"Item actions" = "Acciones del artículo";
+"Subtotal" = "Subtotal";
+"Add discount" = "Agregar descuento";
+"Discount name" = "Nombre del descuento";
+"Move discount up" = "Mover descuento hacia arriba";
+"Move discount down" = "Mover descuento hacia abajo";
+"Delete discount" = "Borrar descuento";
+"Discount actions" = "Acciones del descuento";
+"Add taxation" = "Agregar impuesto";
+"Taxation name" = "Nombre del impuesto";
+"Move taxation up" = "Mover impuesto hacia arriba";
+"Move taxation down" = "Mover impuesto hacia abajo";
+"Delete taxation" = "Borrar impuesto";
+"Taxation actions" = "Acciones del impuesto";
+"Total" = "Total";
+"Payment Details" = "Detalles de pago";
+"Add payment details" = "Agregar detalles de pago";
+"Field label" = "Etiqueta del campo";
+"Field value" = "Valor del campo";
+"Invoices" = "Facturas";
