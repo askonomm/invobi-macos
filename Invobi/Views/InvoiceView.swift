@@ -112,6 +112,7 @@ struct InvoiceView: View {
                                 Text("A4").tag("A4")
                                 Text("US Letter").tag("Letter")
                             }
+                            .labelsHidden()
                             
                             Spacer().frame(height: 15)
                             
@@ -126,7 +127,7 @@ struct InvoiceView: View {
                             Text("Save PDF")
                         }
                     }
-                    .frame(width: 150)
+                    .frame(width: 175)
                     .padding()
                 }
             }
@@ -183,8 +184,7 @@ struct InvoiceView: View {
                         
                         /// Basically, since it goes from bottom to top, we're reversing our way from 0
                         /// which is the last page all the way to the top, which is negative `totalHeight`.
-                        let y = -(((Double(pageCount - 1) - Double(page)) * pageHeight) - emptyOffset)
-                        
+                        let y = -(((Double(pageCount - 1) - Double(page)) * pageHeight) - emptyOffset)         
                         
                         pdf.translateBy(x: 0, y: CGFloat(y))
                         context(pdf)

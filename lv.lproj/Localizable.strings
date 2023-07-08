@@ -1,0 +1,87 @@
+/* 
+  Localizable.strings
+  Invobi
+
+  Created by Asko Nomm on 07.07.2023.
+  
+*/
+
+"Oh-no! There are no invoices!" = "O, nē! Nav nevienas rēķina!";
+"Create Invoice" = "Izveidot rēķinu";
+"Couldn't find any matching invoices." = "Nav atrasts neviens atbilstošs rēķins.";
+"Show filters" = "Rādīt filtrus";
+"Hide filters" = "Paslēpt filtrus";
+"Filters" = "Filtri";
+"Due date" = "Samaksas termiņš";
+"Remove due date filter" = "Noņemt samaksas termiņa filtru";
+"Status" = "Statuss";
+"Draft" = "Melnraksts";
+"Unpaid" = "Nesamaksāts";
+"Paid" = "Samaksāts";
+"Overdue" = "Nokavēts";
+"Remove status filter" = "Noņemt statusa filtru";
+"Invoice" = "Rēķins";
+"Back" = "Atpakaļ";
+"Delete Invoice" = "Dzēst rēķinu";
+"Edit" = "Rediģēt";
+"Preview" = "Priekšskatījums";
+"Hide settings" = "Paslēpt iestatījumus";
+"Show settings" = "Rādīt iestatījumus";
+"Save PDF" = "Saglabāt PDF";
+"Edit Invoice" = "Rediģēt rēķinu";
+"Choose a folder and a name to store the invoice" = "Izvēlieties mapi un nosaukumu, lai saglabātu rēķinu";
+"PDF name:" = "PDF nosaukums:";
+"Currency" = "Valūta";
+"Choose a currency" = "Izvēlieties valūtu";
+"Select status" = "Atlasīt statusu";
+"Date issued" = "Izdrukas datums";
+"Select issued date" = "Atlasīt izdrukas datumu";
+"Select due date" = "Atlasīt samaksas termiņu";
+"Invoice number" = "Rēķina numurs";
+"Issued" = "Izdots";
+"Due" = "Samaksai";
+"From" = "No";
+"To" = "Uz";
+"Select image" = "Atlasīt attēlu";
+"Remove image" = "Noņemt attēlu";
+"Name" = "Nosaukums";
+"Add field" = "Pievienot lauku";
+"Field label (optional)" = "Lauka nosaukums (neobligāti)";
+"Move up" = "Pārvietot augšup";
+"Move field up" = "Pārvietot lauku augšup";
+"Move down" = "Pārvietot lejup";
+"Move field down" = "Pārvietot lauku lejup";
+"Delete" = "Dzēst";
+"Delete field" = "Dzēst lauku";
+"Field actions" = "Lauka darbības";
+"Items" = "Vienības";
+"QTY" = "Daudzums";
+"Price" = "Cena";
+"Add item" = "Pievienot vienību";
+"Move item up" = "Pārvietot vienību augšup";
+"Move item down" = "Pārvietot vienību lejup";
+"Delete item" = "Dzēst vienību";
+"Item actions" = "Vienības darbības";
+"Subtotal" = "Starpsumma";
+"Add discount" = "Pievienot atlaidi";
+"Discount name" = "Atlaides nosaukums";
+"Move discount up" = "Pārvietot atlaidi augšup";
+"Move discount down" = "Pārvietot atlaidi lejup";
+"Delete discount" = "Dzēst atlaidi";
+"Discount actions" = "Atlaides darbības";
+"Add taxation" = "Pievienot nodokli";
+"Taxation name" = "Nodokļa nosaukums";
+"Move taxation up" = "Pārvietot nodokli augšup";
+"Move taxation down" = "Pārvietot nodokli lejup";
+"Delete taxation" = "Dzēst nodokli";
+"Taxation actions" = "Nodokļa darbības";
+"Total" = "Kopsumma";
+"Payment Details" = "Maksājuma informācija";
+"Add payment details" = "Pievienot maksājuma informāciju";
+"Field label" = "Lauka nosaukums";
+"Field value" = "Lauka vērtība";
+"Invoices" = "Rēķini";
+"Fixed format" = "Lapas formāts";
+"Page format" = "Atlasīt lapas formātu";
+"PDF" = "PDF";
+"US Letter" = "ASV vēstule";

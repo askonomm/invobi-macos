@@ -1,0 +1,87 @@
+/* 
+  Localizable.strings
+  Invobi
+
+  Created by Asko Nomm on 07.07.2023.
+  
+*/
+
+"Oh-no! There are no invoices!" = "Oi, ne! Nėra jokių sąskaitų!";
+"Create Invoice" = "Sukurti sąskaitą";
+"Couldn't find any matching invoices." = "Nepavyko rasti jokių atitinkamų sąskaitų.";
+"Show filters" = "Rodyti filtrus";
+"Hide filters" = "Slėpti filtrus";
+"Filters" = "Filtrai";
+"Due date" = "Mokėjimo data";
+"Remove due date filter" = "Pašalinti mokėjimo datos filtrą";
+"Status" = "Būsena";
+"Draft" = "Projektas";
+"Unpaid" = "Nemokėta";
+"Paid" = "Apmokėta";
+"Overdue" = "Vėluojama";
+"Remove status filter" = "Pašalinti būsenos filtrą";
+"Invoice" = "Sąskaita";
+"Back" = "Atgal";
+"Delete Invoice" = "Ištrinti sąskaitą";
+"Edit" = "Redaguoti";
+"Preview" = "Peržiūra";
+"Hide settings" = "Slėpti nustatymus";
+"Show settings" = "Rodyti nustatymus";
+"Save PDF" = "Išsaugoti PDF";
+"Edit Invoice" = "Redaguoti sąskaitą";
+"Choose a folder and a name to store the invoice" = "Pasirinkite aplanką ir pavadinimą, kuriame saugoti sąskaitą";
+"PDF name:" = "PDF pavadinimas:";
+"Currency" = "Valiuta";
+"Choose a currency" = "Pasirinkite valiutą";
+"Select status" = "Pasirinkti būseną";
+"Date issued" = "Išrašymo data";
+"Select issued date" = "Pasirinkite išrašymo datą";
+"Select due date" = "Pasirinkite mokėjimo datą";
+"Invoice number" = "Sąskaitos numeris";
+"Issued" = "Išrašyta";
+"Due" = "Mokėti iki";
+"From" = "Nuo";
+"To" = "Kam";
+"Select image" = "Pasirinkite vaizdą";
+"Remove image" = "Pašalinti vaizdą";
+"Name" = "Vardas";
+"Add field" = "Pridėti lauką";
+"Field label (optional)" = "Lauko pavadinimas (neprivalomas)";
+"Move up" = "Perkelti aukštyn";
+"Move field up" = "Perkelti lauką aukštyn";
+"Move down" = "Perkelti žemyn";
+"Move field down" = "Perkelti lauką žemyn";
+"Delete" = "Ištrinti";
+"Delete field" = "Ištrinti lauką";
+"Field actions" = "Lauko veiksmai";
+"Items" = "Prekės";
+"QTY" = "Kiekis";
+"Price" = "Kaina";
+"Add item" = "Pridėti prekę";
+"Move item up" = "Perkelti prekę aukštyn";
+"Move item down" = "Perkelti prekę žemyn";
+"Delete item" = "Ištrinti prekę";
+"Item actions" = "Prekės veiksmai";
+"Subtotal" = "Tarpinė suma";
+"Add discount" = "Pridėti nuolaidą";
+"Discount name" = "Nuolaidos pavadinimas";
+"Move discount up" = "Perkelti nuolaidą aukštyn";
+"Move discount down" = "Perkelti nuolaidą žemyn";
+"Delete discount" = "Ištrinti nuolaidą";
+"Discount actions" = "Nuolaidos veiksmai";
+"Add taxation" = "Pridėti apmokestinimą";
+"Taxation name" = "Apmokestinimo pavadinimas";
+"Move taxation up" = "Perkelti apmokestinimą aukštyn";
+"Move taxation down" = "Perkelti apmokestinimą žemyn";
+"Delete taxation" = "Ištrinti apmokestinimą";
+"Taxation actions" = "Apmokestinimo veiksmai";
+"Total" = "Viso";
+"Payment Details" = "Mokėjimo informacija";
+"Add payment details" = "Pridėti mokėjimo informaciją";
+"Field label" = "Lauko pavadinimas";
+"Field value" = "Lauko reikšmė";
+"Invoices" = "Sąskaitos";
+"Fixed format" = "Puslapio formatas";
+"Page format" = "Pasirinkite puslapio formatą";
+"PDF" = "PDF";
+"US Letter" = "JAV laiško formato";

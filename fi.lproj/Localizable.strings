@@ -1,0 +1,88 @@
+/* 
+  Localizable.strings
+  Invobi
+
+  Created by Asko Nomm on 07.07.2023.
+  
+*/
+
+
+"Oh-no! There are no invoices!" = "Voi ei! Laskuja ei löytynyt!";
+"Create Invoice" = "Luo lasku";
+"Couldn't find any matching invoices." = "Ei löytynyt vastaavia laskuja.";
+"Show filters" = "Näytä suodattimet";
+"Hide filters" = "Piilota suodattimet";
+"Filters" = "Suodattimet";
+"Due date" = "Eräpäivä";
+"Remove due date filter" = "Poista eräpäivän suodatin";
+"Status" = "Tila";
+"Draft" = "Luonnos";
+"Unpaid" = "Maksamatta";
+"Paid" = "Maksettu";
+"Overdue" = "Erääntynyt";
+"Remove status filter" = "Poista tilan suodatin";
+"Invoice" = "Lasku";
+"Back" = "Takaisin";
+"Delete Invoice" = "Poista lasku";
+"Edit" = "Muokkaa";
+"Preview" = "Esikatselu";
+"Hide settings" = "Piilota asetukset";
+"Show settings" = "Näytä asetukset";
+"Save PDF" = "Tallenna PDF";
+"Edit Invoice" = "Muokkaa laskua";
+"Choose a folder and a name to store the invoice" = "Valitse kansio ja nimi tallentaaksesi laskun";
+"PDF name:" = "PDF-nimi:";
+"Currency" = "Valuutta";
+"Choose a currency" = "Valitse valuutta";
+"Select status" = "Valitse tila";
+"Date issued" = "Laskun päiväys";
+"Select issued date" = "Valitse päiväys";
+"Select due date" = "Valitse eräpäivä";
+"Invoice number" = "Laskun numero";
+"Issued" = "Päiväys";
+"Due" = "Eräpäivä";
+"From" = "Lähettäjä";
+"To" = "Vastaanottaja";
+"Select image" = "Valitse kuva";
+"Remove image" = "Poista kuva";
+"Name" = "Nimi";
+"Add field" = "Lisää kenttä";
+"Field label (optional)" = "Kentän nimi (valinnainen)";
+"Move up" = "Siirrä ylös";
+"Move field up" = "Siirrä kenttää ylös";
+"Move down" = "Siirrä alas";
+"Move field down" = "Siirrä kenttää alas";
+"Delete" = "Poista";
+"Delete field" = "Poista kenttä";
+"Field actions" = "Kentän toiminnot";
+"Items" = "Tuotteet";
+"QTY" = "Määrä";
+"Price" = "Hinta";
+"Add item" = "Lisää tuote";
+"Move item up" = "Siirrä tuotetta ylös";
+"Move item down" = "Siirrä tuotetta alas";
+"Delete item" = "Poista tuote";
+"Item actions" = "Tuotteen toiminnot";
+"Subtotal" = "Välisumma";
+"Add discount" = "Lisää alennus";
+"Discount name" = "Alennuksen nimi";
+"Move discount up" = "Siirrä alennusta ylös";
+"Move discount down" = "Siirrä alennusta alas";
+"Delete discount" = "Poista alennus";
+"Discount actions" = "Alennuksen toiminnot";
+"Add taxation" = "Lisää verotus";
+"Taxation name" = "Verotuksen nimi";
+"Move taxation up" = "Siirrä verotusta ylös";
+"Move taxation down" = "Siirrä verotusta alas";
+"Delete taxation" = "Poista verotus";
+"Taxation actions" = "Verotuksen toiminnot";
+"Total" = "Yhteensä";
+"Payment Details" = "Maksutiedot";
+"Add payment details" = "Lisää maksutiedot";
+"Field label" = "Kentän nimi";
+"Field value" = "Kentän arvo";
+"Invoices" = "Laskut";
+"Fixed format" = "Sivun muoto";
+"Page format" = "Valitse sivun muoto";
+"PDF" = "PDF";
+"US Letter" = "USA kirjekoko";
