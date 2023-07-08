@@ -13,6 +13,9 @@ struct InvoiceView: View {
     @Environment(\.colorScheme) private var colorScheme
     @State private var showMetaView = false
     @State private var view = "edit"
+    @State private var showSavePDFPopover = false
+    @State private var savePDFWithFixedFormat = false
+    @State private var savePDFFormat = "A4"
     
     var body: some View {
         VStack {
@@ -82,17 +85,71 @@ struct InvoiceView: View {
             
             ToolbarItem(placement: .primaryAction) {
                 Button(action: {
-                    self.savePDF(invoice: appState.selectedInvoice!)
+                    withAnimation(.easeInOut(duration: 0.08)) {
+                        showSavePDFPopover = !showSavePDFPopover
+                    }
                 }) {
-                    Label("Save PDF", systemImage: "square.and.arrow.down").labelStyle(.titleAndIcon)
+                    Label("PDF", systemImage: "square.and.arrow.down").labelStyle(.titleAndIcon)
+                }
+                .popover(isPresented: $showSavePDFPopover, arrowEdge: .bottom) {
+                    VStack {
+                        HStack {
+                            Text("Fixed format")
+                            Spacer()
+                            Toggle("Fixed format", isOn: $savePDFWithFixedFormat)
+                                .labelsHidden()
+                                .toggleStyle(.switch)
+                        }
+                        
+                        Spacer().frame(height: 15)
+                        
+                        Divider()
+                        
+                        Spacer().frame(height: 15)
+                        
+                        if savePDFWithFixedFormat {
+                            Picker("Page format", selection: $savePDFFormat) {
+                                Text("A4").tag("A4")
+                                Text("US Letter").tag("Letter")
+                            }
+                            
+                            Spacer().frame(height: 15)
+                            
+                            Divider()
+                            
+                            Spacer().frame(height: 15)
+                        }
+                        
+                        Button(action: {
+                            self.savePDF(invoice: appState.selectedInvoice!, format: savePDFWithFixedFormat ? savePDFFormat : "none")
+                        }) {
+                            Text("Save PDF")
+                        }
+                    }
+                    .frame(width: 150)
+                    .padding()
                 }
             }
         }
         .navigationTitle(Text("Edit Invoice"))
     }
     
-    @MainActor func savePDF(invoice: Invoice) {
-        let view = InvoicePreviewView(invoice: invoice).frame(width: 800)
+    @MainActor func savePDF(invoice: Invoice, format: String) {
+        var pageWidth: Double = 0
+        var pageHeight: Double = 0
+        let dpi = Double(90)
+        
+        if format == "A4" {
+            pageWidth = 8.27 * dpi
+            pageHeight = 11.69 * dpi
+        }
+        
+        if format == "Letter" {
+            pageWidth = 8.5 * dpi
+            pageHeight = 11 * dpi
+        }
+        
+        let view = InvoicePreviewView(invoice: invoice).frame(width: format == "none" ? 800 : pageWidth)
         
         let panel = NSSavePanel()
         panel.allowedContentTypes = [.pdf]
@@ -106,22 +163,35 @@ struct InvoiceView: View {
             let renderer = ImageRenderer(content: view)
             
             renderer.render { size, context in
-                // 4: Tell SwiftUI our PDF should be the same size as the views we're rendering
-                var box = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+                var box = CGRect(x: 0, y: 0, width: format == "none" ? size.width : pageWidth, height: format == "none" ? size.height : pageHeight)
                 
-                // 5: Create the CGContext for our PDF pages
                 guard let pdf = CGContext(panel.url! as CFURL, mediaBox: &box, nil) else {
                     return
                 }
                 
-                // 6: Start a new PDF page
-                pdf.beginPDFPage(nil)
+                if format == "none" {
+                    pdf.beginPDFPage(nil)
+                    context(pdf)
+                    pdf.endPDFPage()
+                } else {
+                    let totalHeight = size.height
+                    let pageCount = Int(ceil(totalHeight / pageHeight))
+                    let emptyOffset = (Double(pageCount) * pageHeight) - totalHeight
+                    
+                    for page in 0...(pageCount - 1) {
+                        pdf.beginPDFPage(nil)
+                        
+                        /// Basically, since it goes from bottom to top, we're reversing our way from 0
+                        /// which is the last page all the way to the top, which is negative `totalHeight`.
+                        let y = -(((Double(pageCount - 1) - Double(page)) * pageHeight) - emptyOffset)
+                        
+                        
+                        pdf.translateBy(x: 0, y: CGFloat(y))
+                        context(pdf)
+                        pdf.endPDFPage()
+                    }
+                }
                 
-                // 7: Render the SwiftUI view data onto the page
-                context(pdf)
-                
-                // 8: End the page and close the file
-                pdf.endPDFPage()
                 pdf.closePDF()
             }
         }
