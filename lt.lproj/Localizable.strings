@@ -55,7 +55,7 @@
 "Delete field" = "Ištrinti lauką";
 "Field actions" = "Lauko veiksmai";
 "Items" = "Prekės";
-"QTY" = "Kiekis";
+"QTY" = "KIEKIS";
 "Price" = "Kaina";
 "Add item" = "Pridėti prekę";
 "Move item up" = "Perkelti prekę aukštyn";
@@ -85,3 +85,4 @@
 "Page format" = "Pasirinkite puslapio formatą";
 "PDF" = "PDF";
 "US Letter" = "JAV laiško formato";
+"HRS" = "VALANDAS";

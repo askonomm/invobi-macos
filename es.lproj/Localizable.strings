@@ -55,7 +55,7 @@
 "Delete field" = "Borrar campo";
 "Field actions" = "Acciones del campo";
 "Items" = "Artículos";
-"QTY" = "Cant.";
+"QTY" = "CANT.";
 "Price" = "Precio";
 "Add item" = "Agregar artículo";
 "Move item up" = "Mover artículo hacia arriba";
@@ -85,3 +85,4 @@
 "Page format" = "Seleccionar formato de página";
 "PDF" = "PDF";
 "US Letter" = "Carta de EE. UU.";
+"HRS" = "HORAS";

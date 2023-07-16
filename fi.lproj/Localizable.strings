@@ -56,7 +56,7 @@
 "Delete field" = "Poista kenttä";
 "Field actions" = "Kentän toiminnot";
 "Items" = "Tuotteet";
-"QTY" = "Määrä";
+"QTY" = "MÄÄRÄ";
 "Price" = "Hinta";
 "Add item" = "Lisää tuote";
 "Move item up" = "Siirrä tuotetta ylös";
@@ -86,3 +86,4 @@
 "Page format" = "Valitse sivun muoto";
 "PDF" = "PDF";
 "US Letter" = "USA kirjekoko";
+"HRS" = "TUNTIA";

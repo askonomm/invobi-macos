@@ -8,6 +8,7 @@
         <attribute name="fromImage" optional="YES" attributeType="Binary"/>
         <attribute name="fromName" optional="YES" attributeType="String"/>
         <attribute name="nr" optional="YES" attributeType="String"/>
+        <attribute name="qtyType" optional="YES" attributeType="String"/>
         <attribute name="showPaymentDetails" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="status" optional="YES" attributeType="String"/>
         <attribute name="toImage" optional="YES" attributeType="Binary"/>

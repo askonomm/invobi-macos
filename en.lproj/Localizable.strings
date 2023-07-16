@@ -81,7 +81,8 @@
 "Field label" = "Field label";
 "Field value" = "Field value";
 "Invoices" = "Invoices";
-"Fixed format" = "Page format";
+"Fixed format" = "Format";
 "Page format" = "Select page format";
 "PDF" = "PDF";
-"US Letter" = "USA Letter";
+"US Letter" = "US Letter";
+"HRS" = "HRS";

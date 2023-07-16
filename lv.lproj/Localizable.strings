@@ -55,7 +55,7 @@
 "Delete field" = "Dzēst lauku";
 "Field actions" = "Lauka darbības";
 "Items" = "Vienības";
-"QTY" = "Daudzums";
+"QTY" = "DAUDZUMS";
 "Price" = "Cena";
 "Add item" = "Pievienot vienību";
 "Move item up" = "Pārvietot vienību augšup";
@@ -85,3 +85,4 @@
 "Page format" = "Atlasīt lapas formātu";
 "PDF" = "PDF";
 "US Letter" = "ASV vēstule";
+"HRS" = "STUNDAS";

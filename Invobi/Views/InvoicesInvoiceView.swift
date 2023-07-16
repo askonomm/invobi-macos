@@ -68,7 +68,7 @@ struct InvoicesInvoiceView: View {
             .contentShape(Rectangle())
             .onAppear {
                 if invoice.dueDate != nil {
-                    if getDayDiff(invoice.dueDate!, Date.now) > 0 {
+                    if getDayDiff(invoice.dueDate!, Date.now) > 0 && invoice.status != "PAID" {
                         self.invoice.status = "OVERDUE"
                         try? context.save()
                     }

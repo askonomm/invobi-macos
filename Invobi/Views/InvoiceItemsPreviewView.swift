@@ -38,7 +38,7 @@ struct InvoiceItemsPreviewView: View {
                 Spacer().frame(width: 20)
                 
                 HStack {
-                    Text(String(localized: "QTY").uppercased())
+                    Text(LocalizedStringKey(invoice.qtyType != nil ? invoice.qtyType! : "QTY"))
                         .font(.callout)
                         .fontWeight(.regular)
                         .foregroundColor(colorScheme == .dark ? Color(hex: "#999") : Color(hex: "#777"))

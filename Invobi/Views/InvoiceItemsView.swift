@@ -13,6 +13,7 @@ struct InvoiceItemsView: View {
     @ObservedObject var invoice: Invoice
     @State private var showActionsForItem: InvoiceItem?
     @State private var items: Array<InvoiceItem> = []
+    @State private var qtyType = "QTY"
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -40,10 +41,33 @@ struct InvoiceItemsView: View {
                 Spacer().frame(width: 20)
                 
                 HStack {
-                    Text(String(localized: "QTY").uppercased())
-                        .font(.callout)
-                        .fontWeight(.regular)
-                        .foregroundColor(colorScheme == .dark ? Color(hex: "#999") : Color(hex: "#777"))
+                    Menu {
+                        Button(action: {
+                            withAnimation(.easeInOut(duration: 0.08)) {
+                                qtyType = "QTY"
+                                invoice.qtyType = "QTY"
+                                try? context.save()
+                            }
+                        }) {
+                            Text("QTY")
+                        }
+                        
+                        Button(action: {
+                            withAnimation(.easeInOut(duration: 0.08)) {
+                                qtyType = "HRS"
+                                invoice.qtyType = "HRS"
+                                try? context.save()
+                            }
+                        }) {
+                            Text("HRS")
+                        }
+                    } label: {
+                        Text(LocalizedStringKey(qtyType))
+                            .font(.callout)
+                            .fontWeight(.regular)
+                    }
+                    .menuStyle(.borderlessButton)
+                    
                     Spacer()
                 }
                 .frame(width: 65)
@@ -110,6 +134,10 @@ struct InvoiceItemsView: View {
         .border(width: 1, edges: [.top, .bottom], color: colorScheme == .dark ? Color(hex: "#333") : Color(hex: "#e5e5e5"))
         .onAppear {
             self.items = getItems()
+            
+            if invoice.qtyType != nil {
+                self.qtyType = invoice.qtyType!
+            }
         }
     }
     

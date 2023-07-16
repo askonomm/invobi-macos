@@ -55,7 +55,7 @@
 "Delete field" = "Kustuta väli";
 "Field actions" = "Välja toimingud";
 "Items" = "Teenused / kaubad";
-"QTY" = "Kogus";
+"QTY" = "KOGUS";
 "Price" = "Hind";
 "Total" = "Kokku";
 "Add item" = "Lisa";
@@ -85,3 +85,4 @@
 "Page format" = "Vali lehe formaat";
 "PDF" = "PDF";
 "US Letter" = "USA kiri";
+"HRS" = "TUNDE";
