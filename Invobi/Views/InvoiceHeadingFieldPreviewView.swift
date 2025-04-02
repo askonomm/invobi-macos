@@ -13,7 +13,7 @@ struct InvoiceHeadingFieldPreviewView: View {
     
     var body: some View {
         VStack {
-            if field.label != nil {
+            if field.label != nil && !field.label!.isEmpty {
                 HStack {
                     Text(field.label!.uppercased())
                         .font(.callout)

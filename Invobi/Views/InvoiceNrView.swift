@@ -11,12 +11,13 @@ struct InvoiceNrView: View {
     @Environment(\.managedObjectContext) private var context
     @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var invoice: Invoice
+    @Binding var showMetaView: Bool
     @State private var itemNr = ""
     
     var body: some View {
         VStack {
             HStack {
-                Text("Invoice #")
+                Text("\(Text("Invoice")) #")
                     .font(.largeTitle)
                     .foregroundColor(Color.gray)
                     .fontWeight(.light)
@@ -32,16 +33,38 @@ struct InvoiceNrView: View {
                     })
                     .onAppear(perform: onAppear)
                 
-                Spacer().frame(width: 10)
-                InvoiceMetaView(invoice: invoice)
                 Spacer()
             }
             
             Spacer().frame(height: 10)
             
             HStack {
-                Text("Due \(displayDate(invoice.dueDate ?? Date.now))")
-                    .foregroundColor(colorScheme == .dark ? Color(hex: "#bbb") : Color(hex: "#666"))
+                Button(action: {
+                    withAnimation(.easeInOut(duration: 0.08)) {
+                        showMetaView = !showMetaView
+                    }
+                }) {
+                    Text("\(Text("Issued")) \((invoice.dateIssued != nil ? invoice.dateIssued! : Date.now).formatted(.dateTime.day().month().year()))")
+                        .foregroundColor(colorScheme == .dark ? Color(hex: "#bbb") : Color(hex: "#666"))
+                }
+                .buttonStyle(.plain)
+                
+                Spacer()
+            }
+            
+            Spacer().frame(height: 5)
+            
+            HStack {
+                Button(action: {
+                    withAnimation(.easeInOut(duration: 0.08)) {
+                        showMetaView = !showMetaView
+                    }
+                }) {
+                    Text("\(Text("Due")) \((invoice.dueDate != nil ? invoice.dueDate! : Date.now).formatted(.dateTime.day().month().year()))")
+                        .foregroundColor(colorScheme == .dark ? Color(hex: "#bbb") : Color(hex: "#666"))
+                }
+                .buttonStyle(.plain)
+                
                 Spacer()
             }
         }

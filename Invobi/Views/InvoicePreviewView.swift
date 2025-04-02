@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct InvoicePreviewView: View {
-    @Environment(\.managedObjectContext) private var context
     @ObservedObject var invoice: Invoice
     
     var body: some View {
@@ -27,13 +26,14 @@ struct InvoicePreviewView: View {
             }
             
             Group {
-                InvoiceSubTotalView(invoice: invoice)
+                InvoiceSubTotalPreviewView(invoice: invoice)
+                InvoiceDiscountsPreviewView(invoice: invoice)
                 InvoiceTaxationsPreviewView(invoice: invoice)
             }
             
             Group {
                 Spacer().frame(height: 40)
-                InvoiceTotalView(invoice: invoice)
+                InvoiceTotalPreviewView(invoice: invoice)
                 InvoicePaymentDetailsPreviewView(invoice: invoice)
             }
         }

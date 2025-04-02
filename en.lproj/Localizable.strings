@@ -1,0 +1,88 @@
+/* 
+  Localizable.strings
+  Invobi
+
+  Created by Asko Nomm on 07.07.2023.
+  
+*/
+
+"Oh-no! There are no invoices!" = "Oh-no! There are no invoices!";
+"Create Invoice" = "Create Invoice";
+"Couldn't find any matching invoices." = "Couldn't find any matching invoices.";
+"Show filters" = "Show filters";
+"Hide filters" = "Hide filters";
+"Filters" = "Filters";
+"Due date" = "Due date";
+"Remove due date filter" = "Remove due date filter";
+"Status" = "Status";
+"Draft" = "Draft";
+"Unpaid" = "Unpaid";
+"Paid" = "Paid";
+"Overdue" = "Overdue";
+"Remove status filter" = "Remove status filter";
+"Invoice" = "Invoice";
+"Back" = "Back";
+"Delete Invoice" = "Delete Invoice";
+"Edit" = "Edit";
+"Preview" = "Preview";
+"Hide settings" = "Hide settings";
+"Show settings" = "Show settings";
+"Save PDF" = "Save PDF";
+"Edit Invoice" = "Edit Invoice";
+"Choose a folder and a name to store the invoice" = "Choose a folder and a name to store the invoice";
+"PDF name:" = "PDF name:";
+"Currency" = "Currency";
+"Choose a currency" = "Choose a currency";
+"Select status" = "Select status";
+"Date issued" = "Date issued";
+"Select issued date" = "Select issued date";
+"Select due date" = "Select due date";
+"Invoice number" = "Invoice number";
+"Issued" = "Issued";
+"Due" = "Due";
+"From" = "From";
+"To" = "To";
+"Select image" = "Select image";
+"Remove image" = "Remove image";
+"Name" = "Name";
+"Add field" = "Add field";
+"Field label (optional)" = "Field label (optional)";
+"Move up" = "Move up";
+"Move field up" = "Move field up";
+"Move down" = "Move down";
+"Move field down" = "Move field down";
+"Delete" = "Delete";
+"Delete field" = "Delete field";
+"Field actions" = "Field actions";
+"Items" = "Items";
+"QTY" = "QTY";
+"Price" = "Price";
+"Add item" = "Add item";
+"Move item up" = "Move item up";
+"Move item down" = "Move item down";
+"Delete item" = "Delete item";
+"Item actions" = "Item actions";
+"Subtotal" = "Subtotal";
+"Add discount" = "Add discount";
+"Discount name" = "Discount name";
+"Move discount up" = "Move discount up";
+"Move discount down" = "Move discount down";
+"Delete discount" = "Delete discount";
+"Discount actions" = "Discount actions";
+"Add taxation" = "Add taxation";
+"Taxation name" = "Taxation name";
+"Move taxation up" = "Move taxation up";
+"Move taxation down" = "Move taxation down";
+"Delete taxation" = "Delete taxation";
+"Taxation actions" = "Taxation actions";
+"Total" = "Total";
+"Payment Details" = "Payment Details";
+"Add payment details" = "Add payment details";
+"Field label" = "Field label";
+"Field value" = "Field value";
+"Invoices" = "Invoices";
+"Fixed format" = "Format";
+"Page format" = "Select page format";
+"PDF" = "PDF";
+"US Letter" = "US Letter";
+"HRS" = "HRS";

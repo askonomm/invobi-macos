@@ -1,0 +1,88 @@
+/* 
+  Localizable.strings
+  Invobi
+
+  Created by Asko Nomm on 07.07.2023.
+  
+*/
+
+"Oh-no! There are no invoices!" = "Oh ei! Sul ei ole ühtegi arvet!";
+"Create Invoice" = "Loo Arve";
+"Couldn't find any matching invoices." = "Ei leidnud ühtegi arvet.";
+"Show filters" = "Näita filtreid";
+"Hide filters" = "Peida filtrid";
+"Filters" = "Filtrid";
+"Due date" = "Tähtaeg";
+"Remove due date filter" = "Eemalda tähtaja filter";
+"Status" = "Staatus";
+"Draft" = "Mustand";
+"Unpaid" = "Maksmata";
+"Paid" = "Makstud";
+"Overdue" = "Hilinenud";
+"Remove status filter" = "Eemalda staatuse filter";
+"Invoice" = "Arve";
+"Back" = "Tagasi";
+"Delete Invoice" = "Kustuta arve";
+"Edit" = "Muuda";
+"Preview" = "Eelvaade";
+"Hide settings" = "Peida seaded";
+"Show settings" = "Näita seadeid";
+"Save PDF" = "Salvesta PDF";
+"Edit Invoice" = "Muuda arvet";
+"Choose a folder and a name to store the invoice" = "Vali kaust kuhu salvestada arve PDF";
+"PDF name:" = "PDF nimi:";
+"Currency" = "Valuuta";
+"Choose a currency" = "Vali valuuta";
+"Select status" = "Vali staatus";
+"Date issued" = "Kuupäev";
+"Select issued date" = "Vali kuupäev";
+"Select due date" = "Vali tähtaeg";
+"Invoice number" = "Arve number";
+"Issued" = "Kuupäev";
+"Due" = "Tähtaeg";
+"From" = "Kellelt";
+"To" = "Kellele";
+"Select image" = "Vali pilt";
+"Remove image" = "Eemalda pilt";
+"Name" = "Nimi";
+"Add field" = "Lisa väli";
+"Field label (optional)" = "Välja nimi (valikuline)";
+"Move up" = "Liiguta üles";
+"Move field up" = "Liiguta väli üles";
+"Move down" = "Liiguta alla";
+"Move field down" = "Liiguta väli alla";
+"Delete" = "Kustuta";
+"Delete field" = "Kustuta väli";
+"Field actions" = "Välja toimingud";
+"Items" = "Teenused / kaubad";
+"QTY" = "KOGUS";
+"Price" = "Hind";
+"Total" = "Kokku";
+"Add item" = "Lisa";
+"Move item up" = "Liiguta üles";
+"Move item down" = "Liiguta alla";
+"Delete item" = "Kustuta";
+"Item actions" = "Toimingud";
+"Subtotal" = "Netosumma";
+"Add discount" = "Lisa allahindlus";
+"Discount name" = "Allahindluse nimi";
+"Move discount up" = "Liiguta allahindlus üles";
+"Move discount down" = "Liiguta allahindlus alla";
+"Delete discount" = "Kustuta allahindlus";
+"Discount actions" = "Allahindluse toimingud";
+"Add taxation" = "Lisa takseering";
+"Taxation name" = "Takseeringu nimi";
+"Move taxation up" = "Liiguta takseering üles";
+"Move taxation down" = "Liiguta takseering alla";
+"Delete taxation" = "Kustuta takseering";
+"Taxation actions" = "Takseeringu toimingud";
+"Payment Details" = "Makse info";
+"Add payment details" = "Lisa makse info";
+"Field label" = "Välja nimi";
+"Field value" = "Välja väärtus";
+"Invoices" = "Arved";
+"Fixed format" = "Formaat";
+"Page format" = "Vali lehe formaat";
+"PDF" = "PDF";
+"US Letter" = "USA kiri";
+"HRS" = "TUNDE";

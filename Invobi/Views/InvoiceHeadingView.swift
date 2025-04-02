@@ -1,5 +1,4 @@
 import SwiftUI
-import ReordableViews
 
 struct InvoiceHeadingView: View {
     @Environment(\.managedObjectContext) private var context

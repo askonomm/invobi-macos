@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F66" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F82" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Invoice" representedClassName="Invoice" syncable="YES" codeGenerationType="class">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="currency" optional="YES" attributeType="String"/>
         <attribute name="dateIssued" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dueDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="fromImage" optional="YES" attributeType="Binary"/>
         <attribute name="fromName" optional="YES" attributeType="String"/>
         <attribute name="nr" optional="YES" attributeType="String"/>
+        <attribute name="qtyType" optional="YES" attributeType="String"/>
         <attribute name="showPaymentDetails" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="toImage" optional="YES" attributeType="Binary"/>
         <attribute name="toName" optional="YES" attributeType="String"/>
+        <relationship name="discounts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InvoiceDiscount" inverseName="invoice" inverseEntity="InvoiceDiscount"/>
         <relationship name="fields" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InvoiceField" inverseName="invoice" inverseEntity="InvoiceField"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InvoiceItem" inverseName="invoice" inverseEntity="InvoiceItem"/>
         <relationship name="taxations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InvoiceTaxation" inverseName="invoice" inverseEntity="InvoiceTaxation"/>
+    </entity>
+    <entity name="InvoiceDiscount" representedClassName="InvoiceDiscount" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="order" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="percentage" optional="YES" attributeType="Decimal" defaultValueString="0"/>
+        <attribute name="useValue" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="value" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <relationship name="invoice" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Invoice" inverseName="discounts" inverseEntity="Invoice"/>
     </entity>
     <entity name="InvoiceField" representedClassName="InvoiceField" syncable="YES" codeGenerationType="class">
         <attribute name="label" optional="YES" attributeType="String"/>

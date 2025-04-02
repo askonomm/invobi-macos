@@ -24,7 +24,7 @@ struct InvoiceHeadingFieldView: View {
     var body: some View {
         ZStack(alignment: .center) {
             VStack {
-                TextField("Label (optional)", text: $label, axis: .vertical)
+                TextField("Field label (optional)", text: $label, axis: .vertical)
                 .onAppear {
                     if self.field.label != nil {
                         self.label = self.field.label!
@@ -40,7 +40,7 @@ struct InvoiceHeadingFieldView: View {
                 .textCase(.uppercase)
                 .offset(y: 1)
                 
-                TextField("Value", text: $value, axis: .vertical)
+                TextField("Field value", text: $value, axis: .vertical)
                 .onAppear {
                     if self.field.value != nil {
                         self.value = self.field.value!
